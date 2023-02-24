@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestTuples(t *testing.T) {
+func TestTuple(t *testing.T) {
 	t.Run("A tuple with w=1 is a point", func(t *testing.T) {
 		tup := tuple(4.3, -4.2, 3.1, 1.0)
 		require.Equal(t, tup.x, 4.3)
@@ -35,7 +35,7 @@ func TestTuples(t *testing.T) {
 	})
 }
 
-func TestAddTuples(t *testing.T) {
+func TestTupleAdd(t *testing.T) {
 	a1 := tuple(3, -2, 5, 1)
 	a2 := tuple(-2, 3, 1, 0)
 	require.Equal(t, tuple(1, 1, 6, 1), a1.add(a2))
