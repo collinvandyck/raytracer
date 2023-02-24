@@ -8,7 +8,7 @@ import (
 
 func TestTuples(t *testing.T) {
 	t.Run("A tuple with w=1 is a point", func(t *testing.T) {
-		tup := tuple{4.3, -4.2, 3.1, 1.0}
+		tup := tuple(4.3, -4.2, 3.1, 1.0)
 		require.Equal(t, tup.x, 4.3)
 		require.Equal(t, tup.y, -4.2)
 		require.Equal(t, tup.z, 3.1)
@@ -18,10 +18,10 @@ func TestTuples(t *testing.T) {
 	})
 	t.Run("A point creates a tuple with w=1", func(t *testing.T) {
 		point := point(4, -4, 3)
-		require.Equal(t, tuple{4, -4, 3, 1}, point)
+		require.Equal(t, tuple4{4, -4, 3, 1}, point)
 	})
 	t.Run("A tuple with w=0 is a vector", func(t *testing.T) {
-		tup := tuple{4.3, -4.2, 3.1, 0.0}
+		tup := tuple(4.3, -4.2, 3.1, 0.0)
 		require.Equal(t, tup.x, 4.3)
 		require.Equal(t, tup.y, -4.2)
 		require.Equal(t, tup.z, 3.1)
@@ -31,6 +31,9 @@ func TestTuples(t *testing.T) {
 	})
 	t.Run("A vector creates a tuple with w=0", func(t *testing.T) {
 		vector := vector(4, -4, 3)
-		require.Equal(t, tuple{4, -4, 3, 0}, vector)
+		require.Equal(t, tuple4{4, -4, 3, 0}, vector)
 	})
+}
+
+func TestAddTuples(t *testing.T) {
 }
