@@ -9,11 +9,11 @@ type tuple struct {
 	w float
 }
 
-func newPoint(x, y, z float) tuple {
+func point(x, y, z float) tuple {
 	return tuple{x, y, z, 1}
 }
 
-func newVector(x, y, z float) tuple {
+func vector(x, y, z float) tuple {
 	return tuple{x, y, z, 0}
 }
 
