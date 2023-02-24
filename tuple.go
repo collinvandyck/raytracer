@@ -9,6 +9,15 @@ type tuple4 struct {
 	w float
 }
 
+func (t tuple4) add(o tuple4) tuple4 {
+	return tuple4{
+		t.x + o.x,
+		t.y + o.y,
+		t.z + o.z,
+		t.w + o.w,
+	}
+}
+
 func tuple(x, y, z, w float) tuple4 {
 	return tuple4{x, y, z, w}
 }

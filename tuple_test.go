@@ -36,4 +36,7 @@ func TestTuples(t *testing.T) {
 }
 
 func TestAddTuples(t *testing.T) {
+	a1 := tuple(3, -2, 5, 1)
+	a2 := tuple(-2, 3, 1, 0)
+	require.Equal(t, tuple(1, 1, 6, 1), a1.add(a2))
 }
