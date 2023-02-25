@@ -87,4 +87,9 @@ func TestTupleSubtract(t *testing.T) {
 		re := point(-2, -4, -6)
 		require.Equal(t, re, p1.subtract(v1))
 	})
+	t.Run("Subtracing a vector from the zero vector", func(t *testing.T) {
+		v1 := vector(1, -2, -3)
+		z1 := zeroVector
+		require.Equal(t, vector(-1, 2, 3), z1.subtract(v1))
+	})
 }

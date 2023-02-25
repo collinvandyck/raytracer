@@ -2,6 +2,8 @@ package raytracer
 
 type float = float64
 
+var zeroVector = vector(0, 0, 0)
+
 type tuple4 struct {
 	x float
 	y float
