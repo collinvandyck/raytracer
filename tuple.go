@@ -18,6 +18,15 @@ func (t tuple4) add(o tuple4) tuple4 {
 	}
 }
 
+func (t tuple4) subtract(o tuple4) tuple4 {
+	return tuple4{
+		t.x - o.x,
+		t.y - o.y,
+		t.z - o.z,
+		t.w - o.w,
+	}
+}
+
 func (t tuple4) Equal(o tuple4) bool {
 	return floatsEqual(t.x, o.x) &&
 		floatsEqual(t.y, o.y) &&
