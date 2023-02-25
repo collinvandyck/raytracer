@@ -26,19 +26,19 @@ func tick(env env, p projectile) projectile {
 }
 
 func main() {
-	proj := projectile{
-		point: rt.NewPoint(0, 1, 0),
-		veloc: rt.NewVector(1, 1.8, 0).Normalize().MultiplyBy(11.25),
-	}
-	env := env{
-		grav: rt.NewVector(0, -0.1, 0),
-		wind: rt.NewVector(-0.01, 0, 0),
-	}
+	var (
+		start   = rt.NewPoint(0, 1, 0)
+		veloc   = rt.NewVector(1, 1.8, 0).Normalize().MultiplyBy(11.25)
+		gravity = rt.NewVector(0, -0.1, 0)
+		wind    = rt.NewVector(-0.01, 0, 0)
+		proj    = projectile{start, veloc}
+		env     = env{grav: gravity, wind: wind}
+	)
 	cv := rt.NewCanvas(900, 550)
 	report := func() {
 		pjp := proj.point
 		plp := rt.NewPoint(pjp.X(), 550-pjp.Y(), 0)
-		color := rt.NewColor(1, 0, 0)
+		color := rt.NewColor(255, 0, 0)
 		cv.WritePixel(int(plp.X()), int(plp.Y()), color)
 	}
 	for {
