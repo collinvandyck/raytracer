@@ -1,6 +1,7 @@
 package raytracer
 
 import (
+	"math"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -122,5 +123,17 @@ func TestVectorMagnitude(t *testing.T) {
 	t.Run("Computing the magnitude of vector(1, 0, 0)", func(t *testing.T) {
 		v1 := newVector(1, 0, 0)
 		require.EqualValues(t, 1, v1.magnitude())
+	})
+	t.Run("Computing the magnitude of vector(0, 1, 0)", func(t *testing.T) {
+		v1 := newVector(0, 1, 0)
+		require.EqualValues(t, 1, v1.magnitude())
+	})
+	t.Run("Computing the magnitude of vector(1, 2, 3)", func(t *testing.T) {
+		v1 := newVector(1, 2, 3)
+		require.EqualValues(t, math.Sqrt(14), v1.magnitude())
+	})
+	t.Run("Computing the magnitude of vector(-1, -2, -3)", func(t *testing.T) {
+		v1 := newVector(1, 2, 3)
+		require.EqualValues(t, math.Sqrt(14), v1.magnitude())
 	})
 }
