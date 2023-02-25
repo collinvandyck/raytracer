@@ -1,6 +1,7 @@
 package rt
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -27,4 +28,18 @@ func TestMatrix(t *testing.T) {
 		`)
 		require.Equal(t, 1.0, m.Get(0, 0))
 	})
+}
+
+func TestSplit(t *testing.T) {
+	val := "  | 1 | 2 | 3 | "
+	val = strings.TrimSpace(val)
+	split := strings.Split(val, "|")
+	t.Logf("%#v (%d)", split, len(split))
+}
+
+func TestSplitScanner(t *testing.T) {
+	val := "  | 1 | 2 | 3 | "
+	val = strings.TrimSpace(val)
+	split := strings.Split(val, "|")
+	t.Logf("%#v (%d)", split, len(split))
 }
