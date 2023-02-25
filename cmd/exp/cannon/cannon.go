@@ -48,11 +48,7 @@ func main() {
 			break
 		}
 	}
-	f, err := os.Create("cannon.ppm")
-	check(err)
-	err = rt.WritePPM(cv, f)
-	check(err)
-	err = f.Close()
+	err := rt.WritePPMTo(cv, "cannon.ppm")
 	check(err)
 }
 

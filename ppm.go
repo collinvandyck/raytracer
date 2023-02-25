@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"math"
+	"os"
 )
 
 func WritePPM(canvas Canvas, dst io.Writer) error {
@@ -16,6 +17,17 @@ func WritePPM(canvas Canvas, dst io.Writer) error {
 	}
 	defer bw.Flush()
 	return writer.write()
+}
+
+func WritePPMTo(canvas Canvas, filename string) error {
+	f, err := os.Create(filename)
+	if err != nil {
+		return err
+	}
+	if err = WritePPM(canvas, f); err != nil {
+		return err
+	}
+	return f.Close()
 }
 
 type ppmWriter struct {

@@ -9,11 +9,7 @@ import (
 func main() {
 	cv := rt.NewCanvas(900, 550)
 	cv.Fill(rt.NewColor(0, 0, 1))
-	f, err := os.Create("fill.ppm")
-	check(err)
-	err = rt.WritePPM(cv, f)
-	check(err)
-	err = f.Close()
+	err := rt.WritePPMTo(cv, "fill.ppm")
 	check(err)
 }
 func check(err error) {
