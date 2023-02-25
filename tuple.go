@@ -29,6 +29,11 @@ func (t tuple4) subtract(o tuple4) tuple4 {
 	}
 }
 
+func (t tuple4) negate() tuple4 {
+	zero := tuple4{0, 0, 0, 0}
+	return zero.subtract(t)
+}
+
 func (t tuple4) Equal(o tuple4) bool {
 	return floatsEqual(t.x, o.x) &&
 		floatsEqual(t.y, o.y) &&

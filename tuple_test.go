@@ -93,4 +93,9 @@ func TestTupleSubtract(t *testing.T) {
 		re := vector(-1, 2, 3)
 		require.Equal(t, re, v1.subtract(v2))
 	})
+	t.Run("Negating a vector", func(t *testing.T) {
+		v1 := vector(1, -2, -3)
+		re := vector(-1, 2, 3)
+		require.Equal(t, re, v1.negate())
+	})
 }
