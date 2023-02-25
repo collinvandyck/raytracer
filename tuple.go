@@ -1,6 +1,9 @@
 package raytracer
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 type (
 	float = float64
@@ -66,9 +69,9 @@ func (v vector) magnitude() float {
 
 func (v vector) normalize() vector {
 	m := v.magnitude()
-	x2 := v.x * m
-	y2 := v.y * m
-	z2 := v.z * m
+	x2 := v.x / m
+	y2 := v.y / m
+	z2 := v.z / m
 	return newVector(x2, y2, z2)
 }
 
