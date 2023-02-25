@@ -15,8 +15,10 @@ func WritePPM(canvas Canvas, dst io.Writer) error {
 		writer: bw,
 		max:    255,
 	}
-	defer bw.Flush()
-	return writer.write()
+	if err := writer.write(); err != nil {
+		return err
+	}
+	return bw.Flush()
 }
 
 func WritePPMTo(canvas Canvas, filename string) error {
