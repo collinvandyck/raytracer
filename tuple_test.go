@@ -53,8 +53,9 @@ func TestTupleAdd(t *testing.T) {
 	t.Run("Adding vector and a point results in a point", func(t *testing.T) {
 		p1 := newPoint(3, -2, 5)
 		v1 := newVector(-2, 3, 1)
-		require.Equal(t, newPoint(1, 1, 6), p1.addVector(v1))
-		require.Equal(t, newPoint(1, 1, 6), v1.addPoint(p1))
+		re := newPoint(1, 1, 6)
+		require.Equal(t, re, p1.addVector(v1))
+		require.Equal(t, re, v1.addPoint(p1))
 	})
 }
 
