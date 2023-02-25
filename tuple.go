@@ -122,6 +122,10 @@ func (p point) subtractVector(o vector) point {
 	return point(tuple4(p).subtract(tuple4(o)))
 }
 
+func (p point) equal(o point) bool {
+	return tuple4(p).equal(tuple4(o))
+}
+
 type vector tuple4
 
 func newVector(x, y, z float) vector {
@@ -164,4 +168,8 @@ func (v vector) cross(o vector) vector {
 	y1 := v.z*o.x - v.x*o.z
 	z1 := v.x*o.y - v.y*o.x
 	return newVector(x1, y1, z1)
+}
+
+func (v vector) equal(o vector) bool {
+	return tuple4(v).equal(tuple4(o))
 }

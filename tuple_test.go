@@ -178,13 +178,19 @@ func TestVectorCrossProduct(t *testing.T) {
 }
 
 func equalTuple(t *testing.T, t1, t2 tuple4) {
+	t.Helper()
 	require.EqualValues(t, t1, t2)
+	require.True(t, t1.equal(t2))
 }
 
 func equalVector(t *testing.T, v1, v2 vector) {
+	t.Helper()
 	require.EqualValues(t, v1, v2)
+	require.True(t, v1.equal(v2))
 }
 
 func equalPoint(t *testing.T, p1, p2 point) {
+	t.Helper()
 	require.EqualValues(t, p1, p2)
+	require.True(t, p1.equal(p2))
 }
