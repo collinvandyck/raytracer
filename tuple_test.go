@@ -94,7 +94,6 @@ func TestTupleSubtract(t *testing.T) {
 	})
 }
 
-/*
 func TestTupleMultiply(t *testing.T) {
 	t.Run("Multiplying a tuple by a scalar", func(t *testing.T) {
 		const factor float = 3.5
@@ -109,6 +108,8 @@ func TestTupleMultiply(t *testing.T) {
 		require.Equal(t, re, t1.multiply(factor))
 	})
 }
+
+/*
 
 func TestTupleDivide(t *testing.T) {
 	t.Run("Dividing a tuple by a scalar", func(t *testing.T) {
