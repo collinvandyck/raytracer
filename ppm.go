@@ -36,15 +36,31 @@ func (w *ppmWriter) writeHeader() {
 
 func (w *ppmWriter) writeBody() {
 	for ri := 0; ri < w.canvas.Height(); ri++ {
+		l := 0
+		write := func(ps string) {
+			w.writeString(ps)
+			l += len(ps)
+		}
+		writePixel := func(vi int) {
+			vs := fmt.Sprintf("%d", vi)
+			switch {
+			// first value, we should be fine to write it
+			case l == 0:
+				write(vs)
+			case 1+l+len(vs) > 70:
+				l = 0
+				write("\n")
+				write(vs)
+			default:
+				write(" ")
+				write(vs)
+			}
+		}
 		for ci := 0; ci < w.canvas.Width(); ci++ {
 			px := w.canvas.PixelAt(ci, ri)
-			r := w.scale(px.Red())
-			g := w.scale(px.Green())
-			b := w.scale(px.Blue())
-			w.writeString(fmt.Sprintf("%d %d %d", r, g, b))
-			if ci < w.canvas.Width()-1 {
-				w.writeString(" ")
-			}
+			writePixel(w.scale(px.Red()))
+			writePixel(w.scale(px.Green()))
+			writePixel(w.scale(px.Blue()))
 		}
 		w.writeString("\n")
 	}
