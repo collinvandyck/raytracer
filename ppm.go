@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-func WritePPM(canvas Canvas, dst io.Writer) error {
+func WritePPM(canvas *Canvas, dst io.Writer) error {
 	writer := ppmWriter{
 		canvas: canvas,
 		writer: dst,
@@ -17,7 +17,7 @@ func WritePPM(canvas Canvas, dst io.Writer) error {
 	return writer.write()
 }
 
-func WritePPMTo(canvas Canvas, filename string) error {
+func WritePPMTo(canvas *Canvas, filename string) error {
 	f, err := os.Create(filename)
 	if err != nil {
 		return err
@@ -33,7 +33,7 @@ func WritePPMTo(canvas Canvas, filename string) error {
 }
 
 type ppmWriter struct {
-	canvas Canvas
+	canvas *Canvas
 	writer io.Writer
 	max    int
 	err    error

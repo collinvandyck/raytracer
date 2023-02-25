@@ -1,29 +1,50 @@
 package rt
 
+import "fmt"
+
 type Canvas struct {
-	pixels [][]Color
+	pixels    [][]Color
+	pointSize int
 }
 
-func NewCanvas(width int, height int) Canvas {
+func NewCanvas(width int, height int) *Canvas {
 	if width <= 0 || height <= 0 {
 		panic("dimensions must be positive")
 	}
-	res := Canvas{pixels: make([][]Color, height)}
+	res := &Canvas{
+		pixels:    make([][]Color, height),
+		pointSize: 1,
+	}
 	for i := range res.pixels {
 		res.pixels[i] = make([]Color, width)
 	}
 	return res
 }
 
+func (c *Canvas) SetPointSize(val int) {
+	if val < 1 {
+		panic(fmt.Sprintf("invalid point size: %v", val))
+	}
+	c.pointSize = val
+}
+
 func (c *Canvas) Fill(color Color) {
 	for ri := 0; ri < c.Height(); ri++ {
 		for ci := 0; ci < c.Width(); ci++ {
-			c.WritePixel(ci, ri, color)
+			c.write(ci, ri, color)
 		}
 	}
 }
 
 func (c *Canvas) WritePixel(x, y int, color Color) {
+	for xi := x; xi < x+c.pointSize; xi++ {
+		for yi := y; yi < y+c.pointSize; yi++ {
+			c.write(xi, yi, color)
+		}
+	}
+}
+
+func (c *Canvas) write(x, y int, color Color) {
 	if y < 0 || y >= len(c.pixels) {
 		return
 	}
@@ -33,14 +54,14 @@ func (c *Canvas) WritePixel(x, y int, color Color) {
 	c.pixels[y][x] = color
 }
 
-func (c Canvas) PixelAt(x, y int) Color {
+func (c *Canvas) PixelAt(x, y int) Color {
 	return c.pixels[y][x]
 }
 
-func (c Canvas) Width() int {
+func (c *Canvas) Width() int {
 	return len(c.pixels[0])
 }
 
-func (c Canvas) Height() int {
+func (c *Canvas) Height() int {
 	return len(c.pixels)
 }

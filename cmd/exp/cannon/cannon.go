@@ -36,6 +36,7 @@ func main() {
 		color   = rt.NewColor(1, 1, 0)
 	)
 	cv := rt.NewCanvas(900, 550)
+	cv.SetPointSize(4)
 	report := func() {
 		pjp := proj.point
 		plp := rt.NewPoint(pjp.X(), 550-pjp.Y(), 0)
