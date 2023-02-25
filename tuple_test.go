@@ -147,7 +147,7 @@ func TestVectorNormalize(t *testing.T) {
 		equalVector(t, re, v1.normalize())
 	})
 	t.Run("Normalizing vector(1, 2, 3)", func(t *testing.T) {
-		v1 := newVector(4, 0, 0)
+		v1 := newVector(1, 2, 3)
 		ex := 1.0 / math.Sqrt(14)
 		ey := 2.0 / math.Sqrt(14)
 		ez := 3.0 / math.Sqrt(14)

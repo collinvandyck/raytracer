@@ -1,7 +1,6 @@
 package raytracer
 
 import (
-	"fmt"
 	"math"
 )
 
