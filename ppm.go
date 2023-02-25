@@ -61,6 +61,7 @@ func (w *ppmWriter) writeBody() {
 		}
 		w.writeString("\n")
 	}
+	w.writeString("\n")
 }
 
 func (w *ppmWriter) writeString(v string) {

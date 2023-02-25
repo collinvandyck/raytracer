@@ -52,6 +52,7 @@ func TestPPM(t *testing.T) {
 		require.True(t, br.Scan())
 		require.Equal(t, "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255", br.Text())
 
+		require.True(t, br.Scan())
 		require.False(t, br.Scan())
 	})
 	t.Run("Splitting long lines in PPM files", func(t *testing.T) {
@@ -75,5 +76,15 @@ func TestPPM(t *testing.T) {
 		require.Equal(t, "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204", br.Text())
 		require.True(t, br.Scan())
 		require.Equal(t, "153 255 204 153 255 204 153 255 204 153 255 204 153", br.Text())
+	})
+	t.Run("PPM files are terminated by a newline character", func(t *testing.T) {
+		cv := NewCanvas(5, 3)
+
+		buf := new(bytes.Buffer)
+		err := writePPM(cv, buf)
+		require.NoError(t, err)
+		data := buf.String()
+		runes := []rune(data)
+		require.Equal(t, '\n', runes[len(runes)-1])
 	})
 }
