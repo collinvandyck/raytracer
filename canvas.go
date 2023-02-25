@@ -15,6 +15,14 @@ func NewCanvas(width int, height int) *Canvas {
 	return res
 }
 
+func (c *Canvas) WritePixel(x, y int, color Color) {
+	c.colors[y][x] = color
+}
+
+func (c *Canvas) PixelAt(x, y int) Color {
+	return c.colors[y][x]
+}
+
 func (c *Canvas) Width() int {
 	return len(c.colors[0])
 }
