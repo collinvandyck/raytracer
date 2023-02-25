@@ -117,3 +117,10 @@ func TestTupleDivide(t *testing.T) {
 		require.Equal(t, re, t1.divide(factor))
 	})
 }
+
+func TestVectorMagnitude(t *testing.T) {
+	t.Run("Computing the magnitude of vector(1, 0, 0)", func(t *testing.T) {
+		v1 := newVector(1, 0, 0)
+		require.EqualValues(t, 1, v1.magnitude())
+	})
+}

@@ -1,5 +1,7 @@
 package raytracer
 
+import "math"
+
 type (
 	float = float64
 )
@@ -53,6 +55,10 @@ func (v vector) subtractVector(v2 vector) vector {
 
 func (v vector) negate() vector {
 	return vector(tuple4(v).negate())
+}
+
+func (v vector) magnitude() float {
+	return math.Abs(v.x) + math.Abs(v.y) + math.Abs(v.z)
 }
 
 func (t tuple4) add(o tuple4) tuple4 {
