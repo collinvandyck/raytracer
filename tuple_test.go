@@ -101,9 +101,16 @@ func TestTupleSubtract(t *testing.T) {
 }
 
 func TestTupleMultiply(t *testing.T) {
-	t.Run("Multiplying a tuple by a scalaer", func(t *testing.T) {
+	t.Run("Multiplying a tuple by a scalar", func(t *testing.T) {
+		const factor = 3.5
 		t1 := tuple(1, -2, 3, -4)
-		re := tuple(1*3.5, -2*3.5, 3*3.5, -4*3.5)
-		require.Equal(t, re, t1.multiply(3.5))
+		re := tuple(1*factor, -2*factor, 3*factor, -4*factor)
+		require.Equal(t, re, t1.multiply(factor))
+	})
+	t.Run("Multiplying a tuple by a fraction", func(t *testing.T) {
+		const factor = 0.5
+		t1 := tuple(1, -2, 3, -4)
+		re := tuple(1*factor, -2*factor, 3*factor, -4*factor)
+		require.Equal(t, re, t1.multiply(factor))
 	})
 }

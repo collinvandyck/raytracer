@@ -43,6 +43,15 @@ func (t tuple4) multiply(val float) tuple4 {
 	}
 }
 
+func (t tuple4) divide(val float) tuple4 {
+	return tuple4{
+		t.x / val,
+		t.y / val,
+		t.z / val,
+		t.w / val,
+	}
+}
+
 func (t tuple4) Equal(o tuple4) bool {
 	return floatsEqual(t.x, o.x) &&
 		floatsEqual(t.y, o.y) &&
