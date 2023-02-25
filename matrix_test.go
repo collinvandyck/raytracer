@@ -2,7 +2,6 @@ package rt
 
 import (
 	"bufio"
-	"fmt"
 	"strings"
 	"testing"
 
@@ -10,15 +9,6 @@ import (
 )
 
 func TestMatrix(t *testing.T) {
-	t.Run("Constructing and testing a 4x4 matrix", func(t *testing.T) {
-		m := Matrix{
-			[]float{1, 2, 3, 4},
-			[]float{5.5, 6.5, 7.5, 8.5},
-			[]float{9, 10, 11, 12},
-			[]float{13.5, 14.5, 15.5, 16.5},
-		}
-		require.Equal(t, 1.0, m.Get(0, 0))
-	})
 	t.Run("Constructing and testing a 4x4 matrix from table", func(t *testing.T) {
 		m := NewMatrixFromTable(`
 		    +---------------------------+
@@ -32,28 +22,12 @@ func TestMatrix(t *testing.T) {
 	})
 }
 
-func TestSplit(t *testing.T) {
-	val := "  | 1 | 2 | 3 | "
-	val = strings.TrimSpace(val)
-	split := strings.Split(val, "|")
-	t.Logf("%#v (%d)", split, len(split))
-}
-
 func TestSplitScanner(t *testing.T) {
 	val := "  | 1 | 2 | 3 | "
 	s := bufio.NewScanner(strings.NewReader(val))
 	s.Buffer(make([]byte, 2), bufio.MaxScanTokenSize)
-	s.Split(SplitCells())
+	s.Split(splitCells())
 	for s.Scan() {
 		t.Log(s.Text())
 	}
 }
-
-func SplitCells() bufio.SplitFunc {
-	return func(data []byte, atEOF bool) (advance int, token []byte, err error) {
-		fmt.Printf("%t\t%d\t%s\n", atEOF, len(data), data)
-		return
-	}
-}
-
-type SplitFunc func(data []byte, atEOF bool) (advance int, token []byte, err error)

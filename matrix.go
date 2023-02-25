@@ -45,3 +45,17 @@ func NewMatrixFromTable(table string) Matrix {
 func (m Matrix) Get(row int, column int) float {
 	return m[row][column]
 }
+
+func splitCells() bufio.SplitFunc {
+	return func(data []byte, atEOF bool) (advance int, token []byte, err error) {
+		words := bufio.ScanWords
+		advance, token, err = words(data, atEOF)
+		if err != nil {
+			return
+		}
+		if len(token) == 1 && token[0] == '|' {
+			token = nil
+		}
+		return
+	}
+}
