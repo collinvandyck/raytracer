@@ -83,10 +83,11 @@ func (t tuple4) negate() tuple4 {
 }
 
 func (t tuple4) equal(o tuple4) bool {
-	return floatsEqual(t.x, o.x) &&
-		floatsEqual(t.y, o.y) &&
-		floatsEqual(t.z, o.z) &&
-		floatsEqual(t.w, o.w)
+	xe := floatsEqual(t.x, o.x)
+	ye := floatsEqual(t.y, o.y)
+	ze := floatsEqual(t.z, o.z)
+	we := floatsEqual(t.w, o.w)
+	return xe && ye && ze && we
 }
 
 func tuple(x, y, z, w float) tuple4 {
