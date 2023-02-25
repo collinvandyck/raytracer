@@ -1,5 +1,10 @@
 package rt
 
+import (
+	"bufio"
+	"strings"
+)
+
 type Matrix [][]float
 
 func NewMatrix(rows, cols int) Matrix {
@@ -11,6 +16,13 @@ func NewMatrix(rows, cols int) Matrix {
 }
 
 func NewMatrixFromTable(table string) Matrix {
+	s := bufio.NewScanner(strings.NewReader(table))
+	for s.Scan() {
+		line := strings.TrimSpace(s.Text())
+		if !strings.HasPrefix(line, "|") {
+			continue
+		}
+	}
 	return Matrix{}
 }
 
