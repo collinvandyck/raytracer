@@ -33,12 +33,21 @@ func (t tuple4) subtract(o tuple4) tuple4 {
 	}
 }
 
-func (t tuple4) multiply(val float) tuple4 {
+func (t tuple4) multiplyBy(val float) tuple4 {
 	return tuple4{
 		t.x * val,
 		t.y * val,
 		t.z * val,
 		t.w * val,
+	}
+}
+
+func (t tuple4) multiply(o tuple4) tuple4 {
+	return tuple4{
+		t.x * o.x,
+		t.y * o.y,
+		t.z * o.z,
+		t.w * o.w,
 	}
 }
 
@@ -120,10 +129,8 @@ func (v vector) negate() vector {
 }
 
 func (v vector) magnitude() float {
-	x2 := v.x * v.x
-	y2 := v.y * v.y
-	z2 := v.z * v.z
-	return math.Sqrt(x2 + y2 + z2)
+	m1 := tuple4(v).multiply(tuple4(v))
+	return math.Sqrt(m1.x + m1.y + m1.z)
 }
 
 func (v vector) normalize() vector {

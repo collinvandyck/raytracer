@@ -102,13 +102,13 @@ func TestTupleMultiply(t *testing.T) {
 		const factor float = 3.5
 		t1 := tuple(1, -2, 3, -4)
 		re := tuple(1*factor, -2*factor, 3*factor, -4*factor)
-		equalTuple(t, re, t1.multiply(factor))
+		equalTuple(t, re, t1.multiplyBy(factor))
 	})
 	t.Run("Multiplying a tuple by a fraction", func(t *testing.T) {
 		const factor float = 0.5
 		t1 := tuple(1, -2, 3, -4)
 		re := tuple(1*factor, -2*factor, 3*factor, -4*factor)
-		equalTuple(t, re, t1.multiply(factor))
+		equalTuple(t, re, t1.multiplyBy(factor))
 	})
 }
 
