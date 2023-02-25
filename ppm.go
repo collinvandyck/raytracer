@@ -9,16 +9,12 @@ import (
 )
 
 func WritePPM(canvas Canvas, dst io.Writer) error {
-	bw := bufio.NewWriter(dst)
 	writer := ppmWriter{
 		canvas: canvas,
-		writer: bw,
+		writer: dst,
 		max:    255,
 	}
-	if err := writer.write(); err != nil {
-		return err
-	}
-	return bw.Flush()
+	return writer.write()
 }
 
 func WritePPMTo(canvas Canvas, filename string) error {
@@ -26,7 +22,11 @@ func WritePPMTo(canvas Canvas, filename string) error {
 	if err != nil {
 		return err
 	}
-	if err = WritePPM(canvas, f); err != nil {
+	bw := bufio.NewWriter(f)
+	if err = WritePPM(canvas, bw); err != nil {
+		return err
+	}
+	if err = bw.Flush(); err != nil {
 		return err
 	}
 	return f.Close()
