@@ -26,7 +26,7 @@ func tick(env env, p projectile) projectile {
 
 func main() {
 	p := projectile{
-		point: rt.NewPoint(0, 1, 0),
+		point: rt.NewPoint(0, 0, 0),
 		veloc: rt.NewVector(4, 8, 0).Normalize(),
 	}
 	e := env{

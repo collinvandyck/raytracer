@@ -168,8 +168,8 @@ func (v Vector) Magnitude() float {
 
 func (v Vector) Normalize() Vector {
 	m1 := v.Magnitude()
-	m2 := tuple4(v).divideBy(m1)
-	return NewVector(m2.x, m2.y, m2.z)
+	d1 := tuple4(v).divideBy(m1)
+	return NewVector(d1.x, d1.y, d1.z)
 }
 
 func (v Vector) Dot(o Vector) float {
