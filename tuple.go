@@ -69,6 +69,14 @@ func (t tuple4) divide(o tuple4) tuple4 {
 	}
 }
 
+func (t tuple4) dot(o tuple4) float {
+	x2 := t.x * o.x
+	y2 := t.y * o.y
+	z2 := t.z * o.z
+	w2 := t.w * o.w
+	return x2 + y2 + z2 + w2
+}
+
 var zeroTuple4 tuple4
 
 func (t tuple4) negate() tuple4 {
@@ -149,8 +157,5 @@ func (v vector) normalize() vector {
 }
 
 func (v vector) dot(o vector) float {
-	x2 := v.x * o.x
-	y2 := v.y * o.y
-	z2 := v.z * o.z
-	return x2 + y2 + z2
+	return tuple4(v).dot(tuple4(o))
 }
