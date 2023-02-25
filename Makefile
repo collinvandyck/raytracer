@@ -5,3 +5,4 @@ run:
 
 cannon:
 	go run ./cmd/exp/cannon
+	open cannon.ppm

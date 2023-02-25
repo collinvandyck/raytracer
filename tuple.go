@@ -165,6 +165,10 @@ func (v Vector) Negate() Vector {
 	return Vector(tuple4(v).negate())
 }
 
+func (v Vector) MultiplyBy(o float) Vector {
+	return Vector(tuple4(v).multiplyBy(o))
+}
+
 func (v Vector) Magnitude() float {
 	m1 := tuple4(v).multiply(tuple4(v))
 	return math.Sqrt(m1.x + m1.y + m1.z)
