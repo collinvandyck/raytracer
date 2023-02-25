@@ -7,7 +7,7 @@ func NewColor(r, g, b float) Color {
 }
 
 func (c Color) Add(o Color) Color {
-	return c
+	return Color(tuple4(c).add(tuple4(o)))
 }
 
 func (c Color) Subtract(o Color) Color {
@@ -28,4 +28,8 @@ func (c Color) Green() float {
 
 func (c Color) Blue() float {
 	return c.z
+}
+
+func (c Color) Equal(o Color) bool {
+	return tuple4(c).equal(tuple4(o))
 }

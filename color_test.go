@@ -13,4 +13,16 @@ func TestColors(t *testing.T) {
 		require.Equal(t, 0.4, c1.Green())
 		require.Equal(t, 1.7, c1.Blue())
 	})
+	t.Run("Adding colors", func(t *testing.T) {
+		c1 := NewColor(0.9, 0.6, 0.75)
+		c2 := NewColor(0.7, 0.1, 0.25)
+		equalColor(t, NewColor(1.6, 0.7, 1.0), c1.Add(c2))
+	})
+
+}
+
+func equalColor(t *testing.T, c1, c2 Color) {
+	t.Helper()
+	require.EqualValues(t, c1, c2)
+	require.True(t, c1.Equal(c2))
 }
