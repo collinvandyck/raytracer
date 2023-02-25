@@ -159,3 +159,7 @@ func (v vector) normalize() vector {
 func (v vector) dot(o vector) float {
 	return tuple4(v).dot(tuple4(o))
 }
+
+func (v vector) cross(o vector) vector {
+	return v
+}

@@ -168,6 +168,15 @@ func TestVectorDotProduct(t *testing.T) {
 	})
 }
 
+func TestVectorCrossProduct(t *testing.T) {
+	t.Run("The cross product of two vectors", func(t *testing.T) {
+		v1 := newVector(1, 2, 3)
+		v2 := newVector(2, 3, 4)
+		equalVector(t, newVector(-1, 2, -1), v1.cross(v2))
+		equalVector(t, newVector(1, -2, 1), v2.cross(v1))
+	})
+}
+
 func equalTuple(t *testing.T, t1, t2 tuple4) {
 	require.EqualValues(t, t1, t2)
 }
