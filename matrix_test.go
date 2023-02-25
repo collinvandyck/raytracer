@@ -24,4 +24,16 @@ func TestMatrix(t *testing.T) {
 		require.Equal(t, 13.5, m.Get(3, 0))
 		require.Equal(t, 15.5, m.Get(3, 2))
 	})
+	t.Run("A 2x2 matrix ought to be representable", func(t *testing.T) {
+		m := NewMatrixFromTable(`
+		    +---------+
+			| -3 | 5  |
+			| 1  | -2 |
+		    +---------+
+		`)
+		require.Equal(t, -3.0, m.Get(0, 0))
+		require.Equal(t, 5.0, m.Get(0, 1))
+		require.Equal(t, 1.0, m.Get(1, 0))
+		require.Equal(t, -2.0, m.Get(1, 1))
+	})
 }
