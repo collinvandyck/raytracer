@@ -77,13 +77,12 @@ func (t tuple4) dot(o tuple4) float {
 	return x2 + y2 + z2 + w2
 }
 
-var zeroTuple4 tuple4
-
 func (t tuple4) negate() tuple4 {
-	return zeroTuple4.subtract(t)
+	var zero tuple4
+	return zero.subtract(t)
 }
 
-func (t tuple4) Equal(o tuple4) bool {
+func (t tuple4) equal(o tuple4) bool {
 	return floatsEqual(t.x, o.x) &&
 		floatsEqual(t.y, o.y) &&
 		floatsEqual(t.z, o.z) &&
