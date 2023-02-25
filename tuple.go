@@ -161,5 +161,8 @@ func (v vector) dot(o vector) float {
 }
 
 func (v vector) cross(o vector) vector {
-	return v
+	x1 := v.y*o.z - v.z*o.y
+	y1 := v.z*o.x - v.x*o.z
+	z1 := v.x*o.y - v.y*o.x
+	return newVector(x1, y1, z1)
 }
