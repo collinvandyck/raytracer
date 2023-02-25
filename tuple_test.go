@@ -40,13 +40,14 @@ func TestTupleAdd(t *testing.T) {
 	t.Run("Adding two tuples", func(t *testing.T) {
 		t1 := tuple(3, -2, 5, 1)
 		t2 := tuple(-2, 3, 1, 0)
-		require.True(t, tuple(1, 1, 6, 1).Equal(t1.add(t2)))
+		re := tuple(1, 1, 6, 1)
+		equalTuple(t, re, t1.add(t2))
 	})
 	t.Run("Adding two vectors is a vector", func(t *testing.T) {
 		v1 := newVector(3, -2, 5)
 		v2 := newVector(-2, 3, 1)
-		re := v1.addVector(v2)
-		require.Equal(t, newVector(1, 1, 6), re)
+		re := newVector(1, 1, 6)
+		equalVector(t, re, v1.addVector(v2))
 
 	})
 	t.Run("Adding vector and a point results in a point", func(t *testing.T) {
@@ -142,6 +143,18 @@ func TestVectorNormalize(t *testing.T) {
 	t.Run("Normalizing vector(4, 0, 0) gives (1, 0, 0)", func(t *testing.T) {
 		v1 := newVector(4, 0, 0)
 		re := newVector(1, 0, 0)
-		require.EqualValues(t, re, v1.normalize())
+		equalVector(t, re, v1)
 	})
+}
+
+func equalTuple(t *testing.T, t1, t2 tuple4) {
+	require.EqualValues(t, t1, t2)
+}
+
+func equalVector(t *testing.T, v1, v2 vector) {
+	require.EqualValues(t, v1, v2)
+}
+
+func equalPoint(t *testing.T, p1, p2 point) {
+	require.EqualValues(t, p1, p2)
 }
