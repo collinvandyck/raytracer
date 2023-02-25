@@ -15,6 +15,14 @@ func NewCanvas(width int, height int) Canvas {
 	return res
 }
 
+func (c *Canvas) Fill(color Color) {
+	for ri := 0; ri < c.Height(); ri++ {
+		for ci := 0; ci < c.Width(); ci++ {
+			c.WritePixel(ci, ri, color)
+		}
+	}
+}
+
 func (c *Canvas) WritePixel(x, y int, color Color) {
 	c.pixels[y][x] = color
 }
