@@ -137,3 +137,11 @@ func TestVectorMagnitude(t *testing.T) {
 		require.EqualValues(t, math.Sqrt(14), v1.magnitude())
 	})
 }
+
+func TestVectorNormalize(t *testing.T) {
+	t.Run("Normalizing vector(4, 0, 0) gives (1, 0, 0)", func(t *testing.T) {
+		v1 := newVector(4, 0, 0)
+		re := newVector(1, 0, 0)
+		require.EqualValues(t, re, v1.normalize())
+	})
+}

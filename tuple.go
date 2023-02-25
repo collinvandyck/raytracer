@@ -64,6 +64,10 @@ func (v vector) magnitude() float {
 	return math.Sqrt(x2 + y2 + z2)
 }
 
+func (v vector) normalize() vector {
+	return v
+}
+
 func (t tuple4) add(o tuple4) tuple4 {
 	return tuple4{
 		t.x + o.x,
