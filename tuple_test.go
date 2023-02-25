@@ -144,7 +144,21 @@ func TestVectorNormalize(t *testing.T) {
 	t.Run("Normalizing vector(4, 0, 0) gives (1, 0, 0)", func(t *testing.T) {
 		v1 := newVector(4, 0, 0)
 		re := newVector(1, 0, 0)
-		equalVector(t, re, v1)
+		equalVector(t, re, v1.normalize())
+	})
+	t.Run("Normalizing vector(1, 2, 3)", func(t *testing.T) {
+		v1 := newVector(4, 0, 0)
+		ex := 1.0 / math.Sqrt(14)
+		ey := 2.0 / math.Sqrt(14)
+		ez := 3.0 / math.Sqrt(14)
+		re := newVector(ex, ey, ez)
+		equalVector(t, re, v1.normalize())
+	})
+	t.Run("The magnitude of a normalized vector", func(t *testing.T) {
+		v1 := newVector(1, 2, 3)
+		n1 := v1.normalize()
+		e1 := n1.magnitude()
+		require.Equal(t, 1, e1)
 	})
 }
 
