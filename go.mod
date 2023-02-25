@@ -2,6 +2,8 @@ module rt
 
 go 1.20
 
+require golang.org/x/exp v0.0.0-20230224173230-c95f2b4c22f2
+
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
