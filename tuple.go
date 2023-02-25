@@ -39,7 +39,7 @@ func (t tuple4) multiply(val float) tuple4 {
 		t.x * val,
 		t.y * val,
 		t.z * val,
-		t.w,
+		t.w * val,
 	}
 }
 

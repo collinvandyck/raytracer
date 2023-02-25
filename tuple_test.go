@@ -99,3 +99,11 @@ func TestTupleSubtract(t *testing.T) {
 		require.Equal(t, re, v1.negate())
 	})
 }
+
+func TestTupleMultiply(t *testing.T) {
+	t.Run("Multiplying a tuple by a scalaer", func(t *testing.T) {
+		t1 := tuple(1, -2, 3, -4)
+		re := tuple(1*3.5, -2*3.5, 3*3.5, -4*3.5)
+		require.Equal(t, re, t1.multiply(3.5))
+	})
+}
