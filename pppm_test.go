@@ -66,5 +66,14 @@ func TestPPM(t *testing.T) {
 		for i := 0; i < 3; i++ {
 			require.True(t, br.Scan())
 		}
+
+		require.True(t, br.Scan())
+		require.Equal(t, "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204", br.Text())
+		require.True(t, br.Scan())
+		require.Equal(t, "153 255 204 153 255 204 153 255 204 153 255 204 153", br.Text())
+		require.True(t, br.Scan())
+		require.Equal(t, "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204", br.Text())
+		require.True(t, br.Scan())
+		require.Equal(t, "153 255 204 153 255 204 153 255 204 153 255 204 153", br.Text())
 	})
 }
