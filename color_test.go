@@ -27,6 +27,11 @@ func TestColors(t *testing.T) {
 		c1 := NewColor(0.2, 0.3, 0.4)
 		equalColor(t, NewColor(0.4, 0.6, 0.8), c1.MultiplyBy(2))
 	})
+	t.Run("Multiplying colors", func(t *testing.T) {
+		c1 := NewColor(1, 0.2, 0.4)
+		c2 := NewColor(0.9, 1, 0.1)
+		equalColor(t, NewColor(0.9, 0.2, 0.04), c1.Multiply(c2))
+	})
 }
 
 func equalColor(t *testing.T, c1, c2 Color) {

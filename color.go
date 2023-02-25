@@ -14,6 +14,10 @@ func (c Color) Subtract(o Color) Color {
 	return Color(tuple4(c).subtract(tuple4(o)))
 }
 
+func (c Color) Multiply(o Color) Color {
+	return Color(tuple4(c).multiply(tuple4(o)))
+}
+
 func (c Color) MultiplyBy(val float) Color {
 	return Color(tuple4(c).multiplyBy(val))
 }
