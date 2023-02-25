@@ -103,16 +103,16 @@ func newPoint(x, y, z float) point {
 	return point(newTuple(x, y, z, 1))
 }
 
-func (p point) addVector(v2 vector) point {
-	return point(tuple4(p).add(tuple4(v2)))
+func (p point) addVector(o vector) point {
+	return point(tuple4(p).add(tuple4(o)))
 }
 
-func (p point) subtractPoint(p2 point) vector {
-	return vector(tuple4(p).subtract(tuple4(p2)))
+func (p point) subtractPoint(o point) vector {
+	return vector(tuple4(p).subtract(tuple4(o)))
 }
 
-func (p point) subtractVector(v2 vector) point {
-	return point(tuple4(p).subtract(tuple4(v2)))
+func (p point) subtractVector(o vector) point {
+	return point(tuple4(p).subtract(tuple4(o)))
 }
 
 type vector tuple4
@@ -121,16 +121,16 @@ func newVector(x, y, z float) vector {
 	return vector(newTuple(x, y, z, 0))
 }
 
-func (v vector) addVector(v2 vector) vector {
-	return vector(tuple4(v).add(tuple4(v2)))
+func (v vector) addVector(o vector) vector {
+	return vector(tuple4(v).add(tuple4(o)))
 }
 
-func (v vector) addPoint(p2 point) point {
-	return point(tuple4(v).add(tuple4(p2)))
+func (v vector) addPoint(o point) point {
+	return point(tuple4(v).add(tuple4(o)))
 }
 
-func (v vector) subtractVector(v2 vector) vector {
-	return vector(tuple4(v).subtract(tuple4(v2)))
+func (v vector) subtractVector(o vector) vector {
+	return vector(tuple4(v).subtract(tuple4(o)))
 }
 
 func (v vector) negate() vector {
@@ -148,9 +148,9 @@ func (v vector) normalize() vector {
 	return newVector(m2.x, m2.y, m2.z)
 }
 
-func (v vector) dot(v2 vector) float {
-	x2 := v.x * v2.x
-	y2 := v.y * v2.y
-	z2 := v.z * v2.z
+func (v vector) dot(o vector) float {
+	x2 := v.x * o.x
+	y2 := v.y * o.y
+	z2 := v.z * o.z
 	return x2 + y2 + z2
 }
