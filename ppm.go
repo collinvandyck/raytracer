@@ -36,7 +36,7 @@ func (w *ppmWriter) writeHeader() {
 func (w *ppmWriter) writeBody() {
 	for ri := 0; ri < w.canvas.Height(); ri++ {
 		for ci := 0; ci < w.canvas.Width(); ci++ {
-			px := w.canvas.PixelAt(ri, ci)
+			px := w.canvas.PixelAt(ci, ri)
 			r := w.scale(px.Red())
 			g := w.scale(px.Green())
 			b := w.scale(px.Blue())
