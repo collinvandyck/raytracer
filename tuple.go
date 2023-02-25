@@ -15,65 +15,6 @@ type tuple4 struct {
 	w float
 }
 
-func newTuple(x, y, z, w float) tuple4 {
-	return tuple4{x, y, z, w}
-}
-
-type point tuple4
-
-func newPoint(x, y, z float) point {
-	return point(newTuple(x, y, z, 1))
-}
-
-func (p point) addVector(v2 vector) point {
-	return point(tuple4(p).add(tuple4(v2)))
-}
-
-func (p point) subtractPoint(p2 point) vector {
-	return vector(tuple4(p).subtract(tuple4(p2)))
-}
-
-func (p point) subtractVector(v2 vector) point {
-	return point(tuple4(p).subtract(tuple4(v2)))
-}
-
-type vector tuple4
-
-func newVector(x, y, z float) vector {
-	return vector(newTuple(x, y, z, 0))
-}
-
-func (v vector) addVector(v2 vector) vector {
-	return vector(tuple4(v).add(tuple4(v2)))
-}
-
-func (v vector) addPoint(p2 point) point {
-	return point(tuple4(v).add(tuple4(p2)))
-}
-
-func (v vector) subtractVector(v2 vector) vector {
-	return vector(tuple4(v).subtract(tuple4(v2)))
-}
-
-func (v vector) negate() vector {
-	return vector(tuple4(v).negate())
-}
-
-func (v vector) magnitude() float {
-	x2 := v.x * v.x
-	y2 := v.y * v.y
-	z2 := v.z * v.z
-	return math.Sqrt(x2 + y2 + z2)
-}
-
-func (v vector) normalize() vector {
-	m := v.magnitude()
-	x2 := v.x / m
-	y2 := v.y / m
-	z2 := v.z / m
-	return newVector(x2, y2, z2)
-}
-
 func (t tuple4) add(o tuple4) tuple4 {
 	return tuple4{
 		t.x + o.x,
@@ -133,4 +74,62 @@ func (t tuple4) isPoint() bool {
 
 func (t tuple4) isVector() bool {
 	return t.w == 0
+}
+func newTuple(x, y, z, w float) tuple4 {
+	return tuple4{x, y, z, w}
+}
+
+type point tuple4
+
+func newPoint(x, y, z float) point {
+	return point(newTuple(x, y, z, 1))
+}
+
+func (p point) addVector(v2 vector) point {
+	return point(tuple4(p).add(tuple4(v2)))
+}
+
+func (p point) subtractPoint(p2 point) vector {
+	return vector(tuple4(p).subtract(tuple4(p2)))
+}
+
+func (p point) subtractVector(v2 vector) point {
+	return point(tuple4(p).subtract(tuple4(v2)))
+}
+
+type vector tuple4
+
+func newVector(x, y, z float) vector {
+	return vector(newTuple(x, y, z, 0))
+}
+
+func (v vector) addVector(v2 vector) vector {
+	return vector(tuple4(v).add(tuple4(v2)))
+}
+
+func (v vector) addPoint(p2 point) point {
+	return point(tuple4(v).add(tuple4(p2)))
+}
+
+func (v vector) subtractVector(v2 vector) vector {
+	return vector(tuple4(v).subtract(tuple4(v2)))
+}
+
+func (v vector) negate() vector {
+	return vector(tuple4(v).negate())
+}
+
+func (v vector) magnitude() float {
+	x2 := v.x * v.x
+	y2 := v.y * v.y
+	z2 := v.z * v.z
+	return math.Sqrt(x2 + y2 + z2)
+}
+
+func (v vector) normalize() vector {
+	m := v.magnitude()
+	x2 := v.x / m
+	y2 := v.y / m
+	z2 := v.z / m
+	return newVector(x2, y2, z2)
 }
