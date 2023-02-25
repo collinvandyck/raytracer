@@ -1,32 +1,32 @@
 package rt
 
 type Canvas struct {
-	colors [][]Color
+	pixels [][]Color
 }
 
 func NewCanvas(width int, height int) *Canvas {
 	if width <= 0 || height <= 0 {
 		panic("dimensions must be positive")
 	}
-	res := &Canvas{colors: make([][]Color, height)}
-	for i := range res.colors {
-		res.colors[i] = make([]Color, width)
+	res := &Canvas{pixels: make([][]Color, height)}
+	for i := range res.pixels {
+		res.pixels[i] = make([]Color, width)
 	}
 	return res
 }
 
 func (c *Canvas) WritePixel(x, y int, color Color) {
-	c.colors[y][x] = color
+	c.pixels[y][x] = color
 }
 
 func (c *Canvas) PixelAt(x, y int) Color {
-	return c.colors[y][x]
+	return c.pixels[y][x]
 }
 
 func (c *Canvas) Width() int {
-	return len(c.colors[0])
+	return len(c.pixels[0])
 }
 
 func (c *Canvas) Height() int {
-	return len(c.colors)
+	return len(c.pixels)
 }
