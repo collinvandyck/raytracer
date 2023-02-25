@@ -52,6 +52,6 @@ func TestPPM(t *testing.T) {
 		require.True(t, br.Scan())
 		require.Equal(t, "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255", br.Text())
 
-		require.Empty(t, br.Bytes())
+		require.False(t, br.Scan())
 	})
 }
