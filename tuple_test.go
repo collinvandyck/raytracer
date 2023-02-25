@@ -117,7 +117,7 @@ func TestTupleDivide(t *testing.T) {
 		const factor float = 2
 		t1 := tuple(1, -2, 3, -4)
 		re := tuple(1/factor, -2/factor, 3/factor, -4/factor)
-		equalTuple(t, re, t1.divide(factor))
+		equalTuple(t, re, t1.divideBy(factor))
 	})
 }
 

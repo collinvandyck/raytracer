@@ -51,12 +51,21 @@ func (t tuple4) multiply(o tuple4) tuple4 {
 	}
 }
 
-func (t tuple4) divide(val float) tuple4 {
+func (t tuple4) divideBy(val float) tuple4 {
 	return tuple4{
 		t.x / val,
 		t.y / val,
 		t.z / val,
 		t.w / val,
+	}
+}
+
+func (t tuple4) divide(o tuple4) tuple4 {
+	return tuple4{
+		t.x / o.x,
+		t.y / o.y,
+		t.z / o.z,
+		t.w / o.w,
 	}
 }
 
@@ -134,11 +143,9 @@ func (v vector) magnitude() float {
 }
 
 func (v vector) normalize() vector {
-	m := v.magnitude()
-	x2 := v.x / m
-	y2 := v.y / m
-	z2 := v.z / m
-	return newVector(x2, y2, z2)
+	m1 := v.magnitude()
+	m2 := tuple4(v).divideBy(m1)
+	return newVector(m2.x, m2.y, m2.z)
 }
 
 func (v vector) dot(v2 vector) float {
