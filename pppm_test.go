@@ -26,7 +26,7 @@ func TestPPM(t *testing.T) {
 	t.Run("Constructing the PPM pixel data", func(t *testing.T) {
 		cv := NewCanvas(5, 3)
 		c1 := NewColor(1.5, 0, 0)
-		c2 := NewColor(0, 0.5, 1)
+		c2 := NewColor(0, 0.5, 0)
 		c3 := NewColor(-0.5, 0, 1)
 
 		cv.WritePixel(0, 0, c1)

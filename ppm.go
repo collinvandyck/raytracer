@@ -3,6 +3,7 @@ package rt
 import (
 	"fmt"
 	"io"
+	"math"
 )
 
 func writePPM(canvas Canvas, dst io.Writer) error {
@@ -58,12 +59,15 @@ func (w *ppmWriter) writeString(v string) {
 }
 
 func (w *ppmWriter) scale(val float) int {
-	v := int(val * float(w.max))
+	if val == 0 {
+		return 0
+	}
+	v := val * float(w.max)
 	if v < 0 {
-		v = 0
+		return 0
 	}
-	if v > w.max {
-		v = w.max
+	if v > float(w.max) {
+		return w.max
 	}
-	return v
+	return int(math.Round(v))
 }
