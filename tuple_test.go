@@ -57,25 +57,23 @@ func TestTupleAdd(t *testing.T) {
 		require.Equal(t, vector(1, 1, 6), re)
 	})
 	t.Run("Adding vector and a point results in a point", func(t *testing.T) {
-		a1 := point(3, -2, 5)
-		a2 := vector(-2, 3, 1)
-		re := a1.add(a2)
-		require.False(t, re.isVector())
-		require.True(t, re.isPoint())
+		p1 := point(3, -2, 5)
+		v1 := vector(-2, 3, 1)
+		re := p1.add(v1)
 		require.Equal(t, point(1, 1, 6), re)
 	})
 }
 
 func TestTupleSubtract(t *testing.T) {
 	t.Run("Subtracing two tuples", func(t *testing.T) {
-		a1 := tuple(3, -2, 5, 1)
-		a2 := tuple(-2, 3, 1, 0)
-		require.True(t, tuple(5, -5, 4, 1).Equal(a1.subtract(a2)))
+		t1 := tuple(3, -2, 5, 1)
+		t2 := tuple(-2, 3, 1, 0)
+		require.True(t, tuple(5, -5, 4, 1).Equal(t1.subtract(t2)))
 	})
 	t.Run("Subtracting two points is a vector", func(t *testing.T) {
-		a1 := point(3, -2, 5)
-		a2 := point(-2, 3, 1)
-		re := a1.subtract(a2)
+		p1 := point(3, -2, 5)
+		p2 := point(-2, 3, 1)
+		re := p1.subtract(p2)
 		require.Equal(t, vector(5, -5, 4), re)
 	})
 	t.Run("Subtracting two vectors is a vector", func(t *testing.T) {
