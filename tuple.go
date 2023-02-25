@@ -1,4 +1,4 @@
-package raytracer
+package rt
 
 import (
 	"math"
@@ -127,6 +127,18 @@ func (p Point) Equal(o Point) bool {
 	return tuple4(p).equal(tuple4(o))
 }
 
+func (p Point) X() float {
+	return p.x
+}
+
+func (p Point) Y() float {
+	return p.y
+}
+
+func (p Point) Z() float {
+	return p.z
+}
+
 type Vector tuple4
 
 func NewVector(x, y, z float) Vector {
@@ -173,4 +185,16 @@ func (v Vector) Cross(o Vector) Vector {
 
 func (v Vector) Equal(o Vector) bool {
 	return tuple4(v).equal(tuple4(o))
+}
+
+func (v Vector) X() float {
+	return v.x
+}
+
+func (v Vector) Y() float {
+	return v.y
+}
+
+func (v Vector) Z() float {
+	return v.z
 }
