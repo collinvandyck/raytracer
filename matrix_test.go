@@ -27,8 +27,8 @@ func TestMatrix(t *testing.T) {
 	t.Run("A 2x2 matrix ought to be representable", func(t *testing.T) {
 		m := NewMatrixFromTable(`
 		    +---------+
-			| -3 | 5  |
-			| 1  | -2 |
+			| -3 |  5 |
+			|  1 | -2 |
 		    +---------+
 		`)
 		require.Equal(t, -3.0, m.Get(0, 0))
