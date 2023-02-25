@@ -34,7 +34,7 @@ func main() {
 		wind: rt.NewVector(-0.01, 0, 0),
 	}
 	report := func() {
-		fmt.Println(p.point.Y())
+		fmt.Printf("x:%0.05f\ty:%0.05f\n", p.point.X(), p.point.Y())
 	}
 	for {
 		report()
