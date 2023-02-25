@@ -25,6 +25,14 @@ func (p point) addVector(v2 vector) point {
 	return point(tuple4(p).add(tuple4(v2)))
 }
 
+func (p point) subtractPoint(p2 point) vector {
+	return vector(tuple4(p).subtract(tuple4(p2)))
+}
+
+func (p point) subtractVector(v2 vector) point {
+	return point(tuple4(p).subtract(tuple4(v2)))
+}
+
 type vector tuple4
 
 func newVector(x, y, z float) vector {
@@ -37,6 +45,14 @@ func (v vector) addVector(v2 vector) vector {
 
 func (v vector) addPoint(p2 point) point {
 	return point(tuple4(v).add(tuple4(p2)))
+}
+
+func (v vector) subtractVector(v2 vector) vector {
+	return vector(tuple4(v).subtract(tuple4(v2)))
+}
+
+func (v vector) negate() vector {
+	return vector(tuple4(v).negate())
 }
 
 func (t tuple4) add(o tuple4) tuple4 {
