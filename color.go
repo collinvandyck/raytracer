@@ -11,11 +11,11 @@ func (c Color) Add(o Color) Color {
 }
 
 func (c Color) Subtract(o Color) Color {
-	return c
+	return Color(tuple4(c).subtract(tuple4(o)))
 }
 
 func (c Color) MultiplyBy(val float) Color {
-	return c
+	return Color(tuple4(c).multiplyBy(val))
 }
 
 func (c Color) Red() float {
