@@ -41,6 +41,21 @@ func TestTupleAdd(t *testing.T) {
 		a2 := tuple(-2, 3, 1, 0)
 		require.True(t, tuple(1, 1, 6, 1).Equal(a1.add(a2)))
 	})
+	t.Run("Adding two points", func(t *testing.T) {
+		a1 := point(3, -2, 5)
+		a2 := point(-2, 3, 1)
+		re := a1.add(a2)
+		require.False(t, re.isPoint())
+		require.False(t, re.isVector())
+	})
+	t.Run("Adding two vectors is a vector", func(t *testing.T) {
+		a1 := vector(3, -2, 5)
+		a2 := vector(-2, 3, 1)
+		re := a1.add(a2)
+		require.False(t, re.isPoint())
+		require.True(t, re.isVector())
+		require.Equal(t, vector(1, 1, 6), re)
+	})
 	t.Run("Adding point to a vector", func(t *testing.T) {
 		a1 := point(3, -2, 5)
 		a2 := vector(-2, 3, 1)
@@ -48,12 +63,5 @@ func TestTupleAdd(t *testing.T) {
 		require.False(t, re.isVector())
 		require.True(t, re.isPoint())
 		require.Equal(t, point(1, 1, 6), re)
-	})
-	t.Run("Adding two points", func(t *testing.T) {
-		a1 := point(3, -2, 5)
-		a2 := point(-2, 3, 1)
-		re := a1.add(a2)
-		require.False(t, re.isPoint())
-		require.False(t, re.isVector())
 	})
 }
