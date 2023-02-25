@@ -41,7 +41,7 @@ func (w *ppmWriter) writeBody() {
 			w.writeString(ps)
 			l += len(ps)
 		}
-		writePixel := func(vi int) {
+		writevalue := func(vi int) {
 			vs := fmt.Sprintf("%d", vi)
 			switch {
 			case l == 0:
@@ -55,9 +55,9 @@ func (w *ppmWriter) writeBody() {
 		}
 		for ci := 0; ci < w.canvas.Width(); ci++ {
 			px := w.canvas.PixelAt(ci, ri)
-			writePixel(w.scale(px.Red()))
-			writePixel(w.scale(px.Green()))
-			writePixel(w.scale(px.Blue()))
+			writevalue(w.scale(px.Red()))
+			writevalue(w.scale(px.Green()))
+			writevalue(w.scale(px.Blue()))
 		}
 		w.writeString("\n")
 	}
