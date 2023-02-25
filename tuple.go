@@ -1,14 +1,42 @@
 package raytracer
 
-type float = float64
-
-var zeroVector = vector(0, 0, 0)
+type (
+	float = float64
+)
 
 type tuple4 struct {
 	x float
 	y float
 	z float
 	w float
+}
+
+func newTuple(x, y, z, w float) tuple4 {
+	return tuple4{x, y, z, w}
+}
+
+type point tuple4
+
+func newPoint(x, y, z float) point {
+	return point(newTuple(x, y, z, 1))
+}
+
+func (p point) addVector(v2 vector) point {
+	return point(tuple4(p).add(tuple4(v2)))
+}
+
+type vector tuple4
+
+func newVector(x, y, z float) vector {
+	return vector(newTuple(x, y, z, 0))
+}
+
+func (v vector) addVector(v2 vector) vector {
+	return vector(tuple4(v).add(tuple4(v2)))
+}
+
+func (v vector) addPoint(p2 point) point {
+	return point(tuple4(v).add(tuple4(p2)))
 }
 
 func (t tuple4) add(o tuple4) tuple4 {
@@ -29,11 +57,6 @@ func (t tuple4) subtract(o tuple4) tuple4 {
 	}
 }
 
-func (t tuple4) negate() tuple4 {
-	zero := tuple4{0, 0, 0, 0}
-	return zero.subtract(t)
-}
-
 func (t tuple4) multiply(val float) tuple4 {
 	return tuple4{
 		t.x * val,
@@ -52,6 +75,11 @@ func (t tuple4) divide(val float) tuple4 {
 	}
 }
 
+func (t tuple4) negate() tuple4 {
+	zero := tuple4{0, 0, 0, 0}
+	return zero.subtract(t)
+}
+
 func (t tuple4) Equal(o tuple4) bool {
 	return floatsEqual(t.x, o.x) &&
 		floatsEqual(t.y, o.y) &&
@@ -61,14 +89,6 @@ func (t tuple4) Equal(o tuple4) bool {
 
 func tuple(x, y, z, w float) tuple4 {
 	return tuple4{x, y, z, w}
-}
-
-func point(x, y, z float) tuple4 {
-	return tuple4{x, y, z, 1}
-}
-
-func vector(x, y, z float) tuple4 {
-	return tuple4{x, y, z, 0}
 }
 
 func (t tuple4) isPoint() bool {
