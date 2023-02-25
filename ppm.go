@@ -6,7 +6,7 @@ import (
 	"math"
 )
 
-func writePPM(canvas Canvas, dst io.Writer) error {
+func WritePPM(canvas Canvas, dst io.Writer) error {
 	writer := ppmWriter{
 		canvas: canvas,
 		writer: dst,

@@ -12,7 +12,7 @@ func TestPPM(t *testing.T) {
 	t.Run("Constructing the PPM header", func(t *testing.T) {
 		c1 := NewCanvas(5, 3)
 		buf := new(bytes.Buffer)
-		err := writePPM(c1, buf)
+		err := WritePPM(c1, buf)
 		require.NoError(t, err)
 
 		br := bufio.NewScanner(buf)
@@ -34,7 +34,7 @@ func TestPPM(t *testing.T) {
 		cv.WritePixel(4, 2, c3)
 
 		buf := new(bytes.Buffer)
-		err := writePPM(cv, buf)
+		err := WritePPM(cv, buf)
 		require.NoError(t, err)
 
 		br := bufio.NewScanner(buf)
@@ -60,7 +60,7 @@ func TestPPM(t *testing.T) {
 		cv.Fill(NewColor(1, 0.8, 0.6))
 
 		buf := new(bytes.Buffer)
-		err := writePPM(cv, buf)
+		err := WritePPM(cv, buf)
 		require.NoError(t, err)
 
 		br := bufio.NewScanner(buf)
@@ -81,7 +81,7 @@ func TestPPM(t *testing.T) {
 		cv := NewCanvas(5, 3)
 
 		buf := new(bytes.Buffer)
-		err := writePPM(cv, buf)
+		err := WritePPM(cv, buf)
 		require.NoError(t, err)
 		data := buf.String()
 		runes := []rune(data)

@@ -111,6 +111,10 @@ func NewPoint(x, y, z float) Point {
 	return Point(newTuple(x, y, z, 1))
 }
 
+func (p Point) Scale(o Point) Point {
+	return Point(tuple4(p).multiply(tuple4(o)))
+}
+
 func (p Point) AddVector(o Vector) Point {
 	return Point(tuple4(p).add(tuple4(o)))
 }
