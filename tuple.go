@@ -33,10 +33,6 @@ func (p point) subtractVector(v2 vector) point {
 	return point(tuple4(p).subtract(tuple4(v2)))
 }
 
-func (p point) multiply(factor float) point {
-	return point(tuple4(p).multiply(factor))
-}
-
 type vector tuple4
 
 func newVector(x, y, z float) vector {
@@ -57,10 +53,6 @@ func (v vector) subtractVector(v2 vector) vector {
 
 func (v vector) negate() vector {
 	return vector(tuple4(v).negate())
-}
-
-func (v vector) multiply(factor float) vector {
-	return vector(tuple4(v).multiply(factor))
 }
 
 func (t tuple4) add(o tuple4) tuple4 {
