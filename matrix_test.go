@@ -19,5 +19,9 @@ func TestMatrix(t *testing.T) {
 		require.Equal(t, 1.0, m.Get(0, 0))
 		require.Equal(t, 4.0, m.Get(0, 3))
 		require.Equal(t, 5.5, m.Get(1, 0))
+		require.Equal(t, 7.5, m.Get(1, 2))
+		require.Equal(t, 11.0, m.Get(2, 2))
+		require.Equal(t, 13.5, m.Get(3, 0))
+		require.Equal(t, 15.5, m.Get(3, 2))
 	})
 }
