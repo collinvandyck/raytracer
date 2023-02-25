@@ -17,8 +17,12 @@ func TestTuple(t *testing.T) {
 		require.False(t, tup.isVector())
 	})
 	t.Run("A point creates a tuple with w=1", func(t *testing.T) {
-		point := newPoint(4, -4, 3)
-		require.Equal(t, tuple4{4, -4, 3, 1}, point)
+		p1 := newPoint(4, -4, 3)
+		require.Equal(t, point(tuple4{4, -4, 3, 1}), p1)
+	})
+	t.Run("A vector creates a tuple with w=0", func(t *testing.T) {
+		v1 := newVector(4, -4, 3)
+		require.Equal(t, vector(tuple4{4, -4, 3, 0}), v1)
 	})
 	t.Run("A tuple with w=0 is a vector", func(t *testing.T) {
 		tup := tuple(4.3, -4.2, 3.1, 0.0)
@@ -28,10 +32,6 @@ func TestTuple(t *testing.T) {
 		require.Equal(t, tup.w, 0.0)
 		require.False(t, tup.isPoint())
 		require.True(t, tup.isVector())
-	})
-	t.Run("A vector creates a tuple with w=0", func(t *testing.T) {
-		vector := newVector(4, -4, 3)
-		require.Equal(t, tuple4{4, -4, 3, 0}, vector)
 	})
 }
 
