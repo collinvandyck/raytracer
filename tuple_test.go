@@ -37,14 +37,14 @@ func TestTuple(t *testing.T) {
 
 func TestTupleAdd(t *testing.T) {
 	t.Run("Adding two tuples", func(t *testing.T) {
-		a1 := tuple(3, -2, 5, 1)
-		a2 := tuple(-2, 3, 1, 0)
-		require.True(t, tuple(1, 1, 6, 1).Equal(a1.add(a2)))
+		t1 := tuple(3, -2, 5, 1)
+		t2 := tuple(-2, 3, 1, 0)
+		require.True(t, tuple(1, 1, 6, 1).Equal(t1.add(t2)))
 	})
 	t.Run("Adding two points is undefined", func(t *testing.T) {
-		a1 := point(3, -2, 5)
-		a2 := point(-2, 3, 1)
-		re := a1.add(a2)
+		p1 := point(3, -2, 5)
+		p2 := point(-2, 3, 1)
+		re := p1.add(p2)
 		require.False(t, re.isPoint())
 		require.False(t, re.isVector())
 	})
