@@ -160,6 +160,14 @@ func TestVectorNormalize(t *testing.T) {
 	})
 }
 
+func TestVectorDotProduct(t *testing.T) {
+	t.Run("The dot product of two tuples", func(t *testing.T) {
+		v1 := newVector(1, 2, 3)
+		v2 := newVector(2, 3, 4)
+		require.EqualValues(t, 20, v1.dot(v2))
+	})
+}
+
 func equalTuple(t *testing.T, t1, t2 tuple4) {
 	require.EqualValues(t, t1, t2)
 }

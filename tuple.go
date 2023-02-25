@@ -133,3 +133,10 @@ func (v vector) normalize() vector {
 	z2 := v.z / m
 	return newVector(x2, y2, z2)
 }
+
+func (v vector) dot(v2 vector) float {
+	x2 := v.x * v2.x
+	y2 := v.y * v2.y
+	z2 := v.z * v2.z
+	return x2 + y2 + z2
+}
