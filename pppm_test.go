@@ -44,5 +44,14 @@ func TestPPM(t *testing.T) {
 		require.EqualValues(t, "5 3", br.Text())
 		require.True(t, br.Scan())
 		require.EqualValues(t, "255", br.Text())
+
+		require.True(t, br.Scan())
+		require.Equal(t, "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0", br.Text())
+		require.True(t, br.Scan())
+		require.Equal(t, "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0", br.Text())
+		require.True(t, br.Scan())
+		require.Equal(t, "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255", br.Text())
+
+		require.Empty(t, br.Bytes())
 	})
 }
