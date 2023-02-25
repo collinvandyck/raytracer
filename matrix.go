@@ -61,6 +61,9 @@ func (m Matrix) splitLines() bufio.SplitFunc {
 		advance, token, err = lines(data, atEOF)
 		if token != nil {
 			token = []byte(strings.TrimSpace(string(token)))
+			if len(token) == 0 {
+				token = nil
+			}
 		}
 		return
 	}
