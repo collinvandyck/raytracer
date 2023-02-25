@@ -2,6 +2,8 @@ package rt
 
 import (
 	"bufio"
+	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -22,6 +24,20 @@ func NewMatrixFromTable(table string) Matrix {
 		if !strings.HasPrefix(line, "|") {
 			continue
 		}
+		split := strings.Split(line, "|")
+		values := []float{}
+		for _, part := range split {
+			part = strings.TrimSpace(part)
+			if len(part) == 0 {
+				continue
+			}
+			val, err := strconv.ParseFloat(part, 64)
+			if err != nil {
+				panic(err)
+			}
+			values = append(values, val)
+		}
+		fmt.Println(values)
 	}
 	return Matrix{}
 }
