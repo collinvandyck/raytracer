@@ -36,4 +36,22 @@ func TestMatrix(t *testing.T) {
 		require.Equal(t, 1.0, m.Get(1, 0))
 		require.Equal(t, -2.0, m.Get(1, 1))
 	})
+	t.Run("A 3x3 matrix ought to be representable", func(t *testing.T) {
+		m := NewMatrixFromTable(`
+		    +---------------+
+			| -3 |  5 |  0  |
+			|  1 | -2 | -7  |
+			|  0 |  1 |  1  |
+		    +---------------+
+		`)
+		require.Equal(t, -3.0, m.Get(0, 0))
+		require.Equal(t, 5.0, m.Get(0, 1))
+		require.Equal(t, 0.0, m.Get(0, 2))
+		require.Equal(t, 1.0, m.Get(1, 0))
+		require.Equal(t, -2.0, m.Get(1, 1))
+		require.Equal(t, -7.0, m.Get(1, 2))
+		require.Equal(t, 0.0, m.Get(2, 0))
+		require.Equal(t, 1.0, m.Get(2, 1))
+		require.Equal(t, 1.0, m.Get(2, 2))
+	})
 }
