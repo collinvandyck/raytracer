@@ -57,5 +57,14 @@ func TestPPM(t *testing.T) {
 	t.Run("Splitting long lines in PPM files", func(t *testing.T) {
 		cv := NewCanvas(10, 2)
 		cv.Fill(NewColor(1, 0.8, 0.6))
+
+		buf := new(bytes.Buffer)
+		err := writePPM(cv, buf)
+		require.NoError(t, err)
+
+		br := bufio.NewScanner(buf)
+		for i := 0; i < 3; i++ {
+			require.True(t, br.Scan())
+		}
 	})
 }
