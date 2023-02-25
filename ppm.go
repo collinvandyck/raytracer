@@ -1,23 +1,21 @@
 package rt
 
 import (
-	"bufio"
 	"fmt"
 	"io"
 )
 
 func writePPM(canvas Canvas, dst io.Writer) error {
-	bw := bufio.NewWriter(dst)
 	writer := ppmWriter{
 		canvas: canvas,
-		writer: bw,
+		writer: dst,
 	}
 	return writer.write()
 }
 
 type ppmWriter struct {
 	canvas Canvas
-	writer *bufio.Writer
+	writer io.Writer
 }
 
 func (w ppmWriter) write() error {
@@ -32,6 +30,6 @@ func (w ppmWriter) writeHeader() error {
 }
 
 func (w ppmWriter) writeString(v string) error {
-	_, err := w.writer.WriteString(v)
+	_, err := w.writer.Write([]byte(v))
 	return err
 }

@@ -1,6 +1,7 @@
 package rt
 
 import (
+	"bufio"
 	"bytes"
 	"testing"
 
@@ -13,5 +14,9 @@ func TestPPM(t *testing.T) {
 		buf := new(bytes.Buffer)
 		err := writePPM(c1, buf)
 		require.NoError(t, err)
+
+		br := bufio.NewScanner(buf)
+		require.True(t, br.Scan())
+		require.EqualValues(t, "P3", br.Text())
 	})
 }
