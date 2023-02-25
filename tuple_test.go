@@ -18,12 +18,12 @@ func TestTuple(t *testing.T) {
 		require.False(t, tup.isVector())
 	})
 	t.Run("A point creates a tuple with w=1", func(t *testing.T) {
-		p1 := newPoint(4, -4, 3)
-		require.Equal(t, point(tuple4{4, -4, 3, 1}), p1)
+		p1 := NewPoint(4, -4, 3)
+		require.Equal(t, Point(tuple4{4, -4, 3, 1}), p1)
 	})
 	t.Run("A vector creates a tuple with w=0", func(t *testing.T) {
-		v1 := newVector(4, -4, 3)
-		require.Equal(t, vector(tuple4{4, -4, 3, 0}), v1)
+		v1 := NewVector(4, -4, 3)
+		require.Equal(t, Vector(tuple4{4, -4, 3, 0}), v1)
 	})
 	t.Run("A tuple with w=0 is a vector", func(t *testing.T) {
 		tup := tuple(4.3, -4.2, 3.1, 0.0)
@@ -44,18 +44,18 @@ func TestTupleAdd(t *testing.T) {
 		equalTuple(t, re, t1.add(t2))
 	})
 	t.Run("Adding two vectors is a vector", func(t *testing.T) {
-		v1 := newVector(3, -2, 5)
-		v2 := newVector(-2, 3, 1)
-		re := newVector(1, 1, 6)
-		equalVector(t, re, v1.addVector(v2))
+		v1 := NewVector(3, -2, 5)
+		v2 := NewVector(-2, 3, 1)
+		re := NewVector(1, 1, 6)
+		equalVector(t, re, v1.AddVector(v2))
 
 	})
 	t.Run("Adding vector and a point results in a point", func(t *testing.T) {
-		p1 := newPoint(3, -2, 5)
-		v1 := newVector(-2, 3, 1)
-		re := newPoint(1, 1, 6)
-		equalPoint(t, re, p1.addVector(v1))
-		equalPoint(t, re, v1.addPoint(p1))
+		p1 := NewPoint(3, -2, 5)
+		v1 := NewVector(-2, 3, 1)
+		re := NewPoint(1, 1, 6)
+		equalPoint(t, re, p1.AddVector(v1))
+		equalPoint(t, re, v1.AddPoint(p1))
 	})
 }
 
@@ -67,33 +67,33 @@ func TestTupleSubtract(t *testing.T) {
 		equalTuple(t, re, t1.subtract(t2))
 	})
 	t.Run("Subtracting two points is a vector", func(t *testing.T) {
-		p1 := newPoint(3, -2, 5)
-		p2 := newPoint(-2, 3, 1)
-		re := newVector(5, -5, 4)
-		equalVector(t, re, p1.subtractPoint(p2))
+		p1 := NewPoint(3, -2, 5)
+		p2 := NewPoint(-2, 3, 1)
+		re := NewVector(5, -5, 4)
+		equalVector(t, re, p1.SubtractPoint(p2))
 	})
 	t.Run("Subtracting two vectors is a vector", func(t *testing.T) {
-		v1 := newVector(3, -2, 5)
-		v2 := newVector(-2, 3, 1)
-		re := newVector(5, -5, 4)
-		equalVector(t, re, v1.subtractVector(v2))
+		v1 := NewVector(3, -2, 5)
+		v2 := NewVector(-2, 3, 1)
+		re := NewVector(5, -5, 4)
+		equalVector(t, re, v1.SubtractVector(v2))
 	})
 	t.Run("Subtracting a vector from a point is a point", func(t *testing.T) {
-		p1 := newPoint(3, 2, 1)
-		v1 := newVector(5, 6, 7)
-		re := newPoint(-2, -4, -6)
-		equalPoint(t, re, p1.subtractVector(v1))
+		p1 := NewPoint(3, 2, 1)
+		v1 := NewVector(5, 6, 7)
+		re := NewPoint(-2, -4, -6)
+		equalPoint(t, re, p1.SubtractVector(v1))
 	})
 	t.Run("Subtracing a vector from the zero vector", func(t *testing.T) {
-		v1 := newVector(0, 0, 0)
-		v2 := newVector(1, -2, -3)
-		re := newVector(-1, 2, 3)
-		equalVector(t, re, v1.subtractVector(v2))
+		v1 := NewVector(0, 0, 0)
+		v2 := NewVector(1, -2, -3)
+		re := NewVector(-1, 2, 3)
+		equalVector(t, re, v1.SubtractVector(v2))
 	})
 	t.Run("Negating a vector", func(t *testing.T) {
-		v1 := newVector(1, -2, -3)
-		re := newVector(-1, 2, 3)
-		equalVector(t, re, v1.negate())
+		v1 := NewVector(1, -2, -3)
+		re := NewVector(-1, 2, 3)
+		equalVector(t, re, v1.Negate())
 	})
 }
 
@@ -123,57 +123,57 @@ func TestTupleDivide(t *testing.T) {
 
 func TestVectorMagnitude(t *testing.T) {
 	t.Run("Computing the magnitude of vector(1, 0, 0)", func(t *testing.T) {
-		v1 := newVector(1, 0, 0)
-		require.EqualValues(t, 1, v1.magnitude())
+		v1 := NewVector(1, 0, 0)
+		require.EqualValues(t, 1, v1.Magnitude())
 	})
 	t.Run("Computing the magnitude of vector(0, 1, 0)", func(t *testing.T) {
-		v1 := newVector(0, 1, 0)
-		require.EqualValues(t, 1, v1.magnitude())
+		v1 := NewVector(0, 1, 0)
+		require.EqualValues(t, 1, v1.Magnitude())
 	})
 	t.Run("Computing the magnitude of vector(1, 2, 3)", func(t *testing.T) {
-		v1 := newVector(1, 2, 3)
-		require.EqualValues(t, math.Sqrt(14), v1.magnitude())
+		v1 := NewVector(1, 2, 3)
+		require.EqualValues(t, math.Sqrt(14), v1.Magnitude())
 	})
 	t.Run("Computing the magnitude of vector(-1, -2, -3)", func(t *testing.T) {
-		v1 := newVector(1, 2, 3)
-		require.EqualValues(t, math.Sqrt(14), v1.magnitude())
+		v1 := NewVector(1, 2, 3)
+		require.EqualValues(t, math.Sqrt(14), v1.Magnitude())
 	})
 }
 
 func TestVectorNormalize(t *testing.T) {
 	t.Run("Normalizing vector(4, 0, 0) gives (1, 0, 0)", func(t *testing.T) {
-		v1 := newVector(4, 0, 0)
-		re := newVector(1, 0, 0)
-		equalVector(t, re, v1.normalize())
+		v1 := NewVector(4, 0, 0)
+		re := NewVector(1, 0, 0)
+		equalVector(t, re, v1.Normalize())
 	})
 	t.Run("Normalizing vector(1, 2, 3)", func(t *testing.T) {
-		v1 := newVector(1, 2, 3)
+		v1 := NewVector(1, 2, 3)
 		ex := 1.0 / math.Sqrt(14)
 		ey := 2.0 / math.Sqrt(14)
 		ez := 3.0 / math.Sqrt(14)
-		re := newVector(ex, ey, ez)
-		equalVector(t, re, v1.normalize())
+		re := NewVector(ex, ey, ez)
+		equalVector(t, re, v1.Normalize())
 	})
 	t.Run("The magnitude of a normalized vector", func(t *testing.T) {
-		v1 := newVector(1, 2, 3)
-		require.EqualValues(t, 1, v1.normalize().magnitude())
+		v1 := NewVector(1, 2, 3)
+		require.EqualValues(t, 1, v1.Normalize().Magnitude())
 	})
 }
 
 func TestVectorDotProduct(t *testing.T) {
 	t.Run("The dot product of two tuples", func(t *testing.T) {
-		v1 := newVector(1, 2, 3)
-		v2 := newVector(2, 3, 4)
-		require.EqualValues(t, 20, v1.dot(v2))
+		v1 := NewVector(1, 2, 3)
+		v2 := NewVector(2, 3, 4)
+		require.EqualValues(t, 20, v1.Dot(v2))
 	})
 }
 
 func TestVectorCrossProduct(t *testing.T) {
 	t.Run("The cross product of two vectors", func(t *testing.T) {
-		v1 := newVector(1, 2, 3)
-		v2 := newVector(2, 3, 4)
-		equalVector(t, newVector(-1, 2, -1), v1.cross(v2))
-		equalVector(t, newVector(1, -2, 1), v2.cross(v1))
+		v1 := NewVector(1, 2, 3)
+		v2 := NewVector(2, 3, 4)
+		equalVector(t, NewVector(-1, 2, -1), v1.Cross(v2))
+		equalVector(t, NewVector(1, -2, 1), v2.Cross(v1))
 	})
 }
 
@@ -183,14 +183,14 @@ func equalTuple(t *testing.T, t1, t2 tuple4) {
 	require.True(t, t1.equal(t2))
 }
 
-func equalVector(t *testing.T, v1, v2 vector) {
+func equalVector(t *testing.T, v1, v2 Vector) {
 	t.Helper()
 	require.EqualValues(t, v1, v2)
-	require.True(t, v1.equal(v2))
+	require.True(t, v1.Equal(v2))
 }
 
-func equalPoint(t *testing.T, p1, p2 point) {
+func equalPoint(t *testing.T, p1, p2 Point) {
 	t.Helper()
 	require.EqualValues(t, p1, p2)
-	require.True(t, p1.equal(p2))
+	require.True(t, p1.Equal(p2))
 }

@@ -105,72 +105,72 @@ func newTuple(x, y, z, w float) tuple4 {
 	return tuple4{x, y, z, w}
 }
 
-type point tuple4
+type Point tuple4
 
-func newPoint(x, y, z float) point {
-	return point(newTuple(x, y, z, 1))
+func NewPoint(x, y, z float) Point {
+	return Point(newTuple(x, y, z, 1))
 }
 
-func (p point) addVector(o vector) point {
-	return point(tuple4(p).add(tuple4(o)))
+func (p Point) AddVector(o Vector) Point {
+	return Point(tuple4(p).add(tuple4(o)))
 }
 
-func (p point) subtractPoint(o point) vector {
-	return vector(tuple4(p).subtract(tuple4(o)))
+func (p Point) SubtractPoint(o Point) Vector {
+	return Vector(tuple4(p).subtract(tuple4(o)))
 }
 
-func (p point) subtractVector(o vector) point {
-	return point(tuple4(p).subtract(tuple4(o)))
+func (p Point) SubtractVector(o Vector) Point {
+	return Point(tuple4(p).subtract(tuple4(o)))
 }
 
-func (p point) equal(o point) bool {
+func (p Point) Equal(o Point) bool {
 	return tuple4(p).equal(tuple4(o))
 }
 
-type vector tuple4
+type Vector tuple4
 
-func newVector(x, y, z float) vector {
-	return vector(newTuple(x, y, z, 0))
+func NewVector(x, y, z float) Vector {
+	return Vector(newTuple(x, y, z, 0))
 }
 
-func (v vector) addVector(o vector) vector {
-	return vector(tuple4(v).add(tuple4(o)))
+func (v Vector) AddVector(o Vector) Vector {
+	return Vector(tuple4(v).add(tuple4(o)))
 }
 
-func (v vector) addPoint(o point) point {
-	return point(tuple4(v).add(tuple4(o)))
+func (v Vector) AddPoint(o Point) Point {
+	return Point(tuple4(v).add(tuple4(o)))
 }
 
-func (v vector) subtractVector(o vector) vector {
-	return vector(tuple4(v).subtract(tuple4(o)))
+func (v Vector) SubtractVector(o Vector) Vector {
+	return Vector(tuple4(v).subtract(tuple4(o)))
 }
 
-func (v vector) negate() vector {
-	return vector(tuple4(v).negate())
+func (v Vector) Negate() Vector {
+	return Vector(tuple4(v).negate())
 }
 
-func (v vector) magnitude() float {
+func (v Vector) Magnitude() float {
 	m1 := tuple4(v).multiply(tuple4(v))
 	return math.Sqrt(m1.x + m1.y + m1.z)
 }
 
-func (v vector) normalize() vector {
-	m1 := v.magnitude()
+func (v Vector) Normalize() Vector {
+	m1 := v.Magnitude()
 	m2 := tuple4(v).divideBy(m1)
-	return newVector(m2.x, m2.y, m2.z)
+	return NewVector(m2.x, m2.y, m2.z)
 }
 
-func (v vector) dot(o vector) float {
+func (v Vector) Dot(o Vector) float {
 	return tuple4(v).dot(tuple4(o))
 }
 
-func (v vector) cross(o vector) vector {
+func (v Vector) Cross(o Vector) Vector {
 	x1 := v.y*o.z - v.z*o.y
 	y1 := v.z*o.x - v.x*o.z
 	z1 := v.x*o.y - v.y*o.x
-	return newVector(x1, y1, z1)
+	return NewVector(x1, y1, z1)
 }
 
-func (v vector) equal(o vector) bool {
+func (v Vector) Equal(o Vector) bool {
 	return tuple4(v).equal(tuple4(o))
 }
