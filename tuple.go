@@ -58,7 +58,10 @@ func (v vector) negate() vector {
 }
 
 func (v vector) magnitude() float {
-	return math.Abs(v.x) + math.Abs(v.y) + math.Abs(v.z)
+	x2 := v.x * v.x
+	y2 := v.y * v.y
+	z2 := v.z * v.z
+	return math.Sqrt(x2 + y2 + z2)
 }
 
 func (t tuple4) add(o tuple4) tuple4 {
