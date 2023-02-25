@@ -1,6 +1,8 @@
 package rt
 
 import (
+	"bufio"
+	"fmt"
 	"strings"
 	"testing"
 
@@ -39,7 +41,19 @@ func TestSplit(t *testing.T) {
 
 func TestSplitScanner(t *testing.T) {
 	val := "  | 1 | 2 | 3 | "
-	val = strings.TrimSpace(val)
-	split := strings.Split(val, "|")
-	t.Logf("%#v (%d)", split, len(split))
+	s := bufio.NewScanner(strings.NewReader(val))
+	s.Buffer(make([]byte, 2), bufio.MaxScanTokenSize)
+	s.Split(SplitCells())
+	for s.Scan() {
+		t.Log(s.Text())
+	}
 }
+
+func SplitCells() bufio.SplitFunc {
+	return func(data []byte, atEOF bool) (advance int, token []byte, err error) {
+		fmt.Printf("%t\t%d\t%s\n", atEOF, len(data), data)
+		return
+	}
+}
+
+type SplitFunc func(data []byte, atEOF bool) (advance int, token []byte, err error)
