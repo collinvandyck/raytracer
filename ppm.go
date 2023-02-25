@@ -1,17 +1,20 @@
 package rt
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"math"
 )
 
 func WritePPM(canvas Canvas, dst io.Writer) error {
+	bw := bufio.NewWriter(dst)
 	writer := ppmWriter{
 		canvas: canvas,
-		writer: dst,
+		writer: bw,
 		max:    255,
 	}
+	defer bw.Flush()
 	return writer.write()
 }
 

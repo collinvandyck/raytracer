@@ -24,6 +24,12 @@ func (c *Canvas) Fill(color Color) {
 }
 
 func (c *Canvas) WritePixel(x, y int, color Color) {
+	if y < 0 || y >= len(c.pixels) {
+		return
+	}
+	if x < 0 || x >= len(c.pixels[y]) {
+		return
+	}
 	c.pixels[y][x] = color
 }
 
