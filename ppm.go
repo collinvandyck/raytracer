@@ -44,17 +44,14 @@ func (w *ppmWriter) writeBody() {
 		writePixel := func(vi int) {
 			vs := fmt.Sprintf("%d", vi)
 			switch {
-			// first value, we should be fine to write it
 			case l == 0:
-				write(vs)
 			case 1+l+len(vs) > 70:
 				l = 0
 				write("\n")
-				write(vs)
 			default:
 				write(" ")
-				write(vs)
 			}
+			write(vs)
 		}
 		for ci := 0; ci < w.canvas.Width(); ci++ {
 			px := w.canvas.PixelAt(ci, ri)
