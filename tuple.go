@@ -65,7 +65,11 @@ func (v vector) magnitude() float {
 }
 
 func (v vector) normalize() vector {
-	return v
+	m := v.magnitude()
+	x2 := v.x * m
+	y2 := v.y * m
+	z2 := v.z * m
+	return newVector(x2, y2, z2)
 }
 
 func (t tuple4) add(o tuple4) tuple4 {

@@ -156,9 +156,7 @@ func TestVectorNormalize(t *testing.T) {
 	})
 	t.Run("The magnitude of a normalized vector", func(t *testing.T) {
 		v1 := newVector(1, 2, 3)
-		n1 := v1.normalize()
-		e1 := n1.magnitude()
-		require.Equal(t, 1, e1)
+		require.Equal(t, 1, v1.normalize().magnitude())
 	})
 }
 
