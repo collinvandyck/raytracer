@@ -11,12 +11,12 @@ type projectile struct {
 	veloc rt.Vector
 }
 
-type env struct {
+type environment struct {
 	grav rt.Vector
 	wind rt.Vector
 }
 
-func tick(env env, p projectile) projectile {
+func tick(env environment, p projectile) projectile {
 	newPoint := p.point.AddVector(p.veloc)
 	newVeloc := p.veloc.AddVector(env.grav.AddVector(env.wind))
 	return projectile{
@@ -29,16 +29,16 @@ func main() {
 	var (
 		start   = rt.NewPoint(0, 1, 0)
 		veloc   = rt.NewVector(1, 1.8, 0).Normalize().MultiplyBy(11.25)
+		proj    = projectile{point: start, veloc: veloc}
 		gravity = rt.NewVector(0, -0.1, 0)
 		wind    = rt.NewVector(-0.01, 0, 0)
-		proj    = projectile{start, veloc}
-		env     = env{grav: gravity, wind: wind}
+		env     = environment{grav: gravity, wind: wind}
+		color   = rt.NewColor(1, 1, 0)
 	)
 	cv := rt.NewCanvas(900, 550)
 	report := func() {
 		pjp := proj.point
 		plp := rt.NewPoint(pjp.X(), 550-pjp.Y(), 0)
-		color := rt.NewColor(255, 0, 0)
 		cv.WritePixel(int(plp.X()), int(plp.Y()), color)
 	}
 	for {
