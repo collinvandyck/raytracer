@@ -203,6 +203,24 @@ func TestMatrix(t *testing.T) {
 			`)
 			equalMatrix(t, me, m1.Submatrix(0, 2))
 		})
+		t.Run("A submatrix of a 4x4 matrix is a 3x3 matrix", func(t *testing.T) {
+			m1 := NewMatrixFromTable(`
+				+-----------------+
+				| -6 | 1 |  1 | 6 |
+				| -8 | 5 |  8 | 6 |
+				| -1 | 0 |  8 | 2 |
+				| -7 | 1 | -1 | 1 |
+				+-----------------+
+			`)
+			me := NewMatrixFromTable(`
+				+-------------+
+				| -6 |  1 | 6 |
+				| -8 |  8 | 6 |
+				| -7 | -1 | 1 |
+				+-------------+
+			`)
+			equalMatrix(t, me, m1.Submatrix(2, 1))
+		})
 	})
 }
 
