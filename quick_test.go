@@ -15,6 +15,8 @@ func TestQuickSubmatrixRegression(t *testing.T) {
 		| -6 |  7 |  7 | -9 |
 		+-------------------+`)
 	m1.SetOptimize(true)
+	m1.SetDebug(true)
+
 	m2 := m1.Submatrix(0, 0)
 	equalMatrix(t, NewMatrixFromTable(`
 		+-------------+
