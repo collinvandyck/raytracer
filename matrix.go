@@ -98,7 +98,5 @@ func (m Matrix) Multiply(o Matrix) (res Matrix) {
 }
 
 func (m Matrix) sameDimensions(o Matrix) bool {
-	mr, or := m.Rows(), o.Rows()
-	mc, oc := m.Cols(), o.Cols()
-	return mr == or && mc == oc
+	return m.Rows() == o.Rows() && m.Cols() == o.Cols()
 }
