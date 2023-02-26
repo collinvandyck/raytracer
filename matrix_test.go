@@ -170,6 +170,9 @@ func TestMatrix(t *testing.T) {
 		`)
 		equalMatrix(t, me, m1.Transpose())
 	})
+	t.Run("Transposing the identity matrix", func(t *testing.T) {
+		equalMatrix(t, MatrixIdentity4x4, MatrixIdentity4x4.Transpose())
+	})
 }
 
 func notEqualMatrix(t *testing.T, m1, m2 Matrix) {
