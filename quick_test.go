@@ -43,11 +43,10 @@ func TestQuickSubmatrix(t *testing.T) {
 		+-------------+
 		| 123  | -108 |
 		| -126 |  123 |
-		+-------------+
-	`), m5)
+		+-------------+ `), m5)
 }
 
-func TestQuick(t *testing.T) {
+func TestQuickCofactor(t *testing.T) {
 	m1 := NewMatrixFromTable(`
 		+---------------------------+
 		| -2.0 | -8.0 |  3.0 |  5.0 |
