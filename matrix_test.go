@@ -260,6 +260,38 @@ func TestMatrix(t *testing.T) {
 			`)
 			equalMatrix(t, me, m1.Submatrix(2, 1))
 		})
+		t.Run("A submatrix of a 4x4 matrix to a 2x2 matrix", func(t *testing.T) {
+			m1 := NewMatrixFromTable(`
+				+-----------------+
+				| -6 | 1 |  1 | 6 |
+				| -8 | 5 |  8 | 6 |
+				| -1 | 0 |  8 | 2 |
+				| -7 | 1 | -1 | 1 |
+				+-----------------+
+			`)
+			m3x3 := m1.Submatrix(2, 1)
+			ex3x3 := NewMatrixFromTable(`
+				+-------------+
+				| -6 |  1 | 6 |
+				| -8 |  8 | 6 |
+				| -7 | -1 | 1 |
+				+-------------+
+			`)
+			equalMatrix(t, ex3x3, m3x3)
+
+			m2x2 := m3x3.Submatrix(1, 1)
+			ex2x2 := NewMatrixFromTable(`
+				+--------+
+				| -6 | 6 |
+				| -7 | 1 |
+				+--------+
+			`)
+			require.EqualValues(t, -6, m2x2.Get(0, 0))
+			require.EqualValues(t, 6, m2x2.Get(0, 1))
+			require.EqualValues(t, -7, m2x2.Get(1, 0))
+			require.EqualValues(t, 1, m2x2.Get(1, 1))
+			equalMatrix(t, ex2x2, m2x2)
+		})
 	})
 	t.Run("Minors", func(t *testing.T) {
 		t.Run("Calculating a minor of a 3x3 matrix", func(t *testing.T) {

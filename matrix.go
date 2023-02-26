@@ -3,6 +3,7 @@ package rt
 import (
 	"bufio"
 	"bytes"
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -95,28 +96,6 @@ func (m Matrix) Get(row int, col int) float {
 func (m Matrix) Set(row int, col int, val float) {
 	row, col = m.resolveRow(row), m.resolveCol(col)
 	m.vals[row][col] = val
-}
-
-func (m Matrix) resolveRow(row int) int {
-	if m.parent == nil {
-		return row
-	}
-	res := m.parent.resolveRow(row)
-	if m.smr <= res {
-		res += 1
-	}
-	return res
-}
-
-func (m Matrix) resolveCol(col int) int {
-	if m.parent == nil {
-		return col
-	}
-	res := m.parent.resolveCol(col)
-	if m.smc <= res {
-		res += 1
-	}
-	return res
 }
 
 func (m Matrix) Equal(o Matrix) bool {
@@ -281,4 +260,34 @@ func (m Matrix) Empty() bool {
 
 func (m Matrix) sameDimensions(o Matrix) bool {
 	return m.Rows() == o.Rows() && m.Cols() == o.Cols()
+}
+
+func (m Matrix) resolveRow(row int) int {
+	parents := 0
+	for x := m.parent; x != nil; x = x.parent {
+		parents++
+	}
+	if m.parent == nil {
+		return row
+	}
+	prow := m.parent.resolveRow(row)
+	res := prow
+	if m.smr <= prow {
+		res += 1
+	}
+	if parents == 2 {
+		fmt.Printf("grandchild maxtrix row=%d prow=%d smr=%d res=%d\n", row, prow, m.smr, res)
+	}
+	return res
+}
+
+func (m Matrix) resolveCol(col int) int {
+	if m.parent == nil {
+		return col
+	}
+	res := m.parent.resolveCol(col)
+	if m.smc <= res {
+		res += 1
+	}
+	return res
 }
