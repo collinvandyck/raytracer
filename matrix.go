@@ -8,19 +8,21 @@ import (
 	"strings"
 )
 
-type Matrix [][]float
+type Matrix struct {
+	vals [][]float
+}
 
-var MatrixIdentity4x4 = Matrix{
+var MatrixIdentity4x4 = NewMatrixFromValues([][]float{
 	{1, 0, 0, 0},
 	{0, 1, 0, 0},
 	{0, 0, 1, 0},
 	{0, 0, 0, 1},
-}
+})
 
 func NewMatrix(rows, cols int) Matrix {
-	m := make(Matrix, rows)
-	for i := range m {
-		m[i] = make([]float, cols)
+	m := Matrix{vals: make([][]float, rows)}
+	for i := range m.vals {
+		m.vals[i] = make([]float, cols)
 	}
 	return m
 }
@@ -29,7 +31,7 @@ func NewMatrixFromValues(values [][]float) (res Matrix) {
 	if len(values) == 0 {
 		return res
 	}
-	res = Matrix(values)
+	res = Matrix{vals: values}
 	return res
 }
 
@@ -62,36 +64,36 @@ func NewMatrixFromTable(table string) (res Matrix) {
 		}
 		rows = append(rows, row)
 	}
-	res = Matrix(rows)
+	res = NewMatrixFromValues(rows)
 	return
 }
 
 func (m Matrix) Rows() int {
-	return len(m)
+	return len(m.vals)
 }
 
 func (m Matrix) Cols() int {
-	if len(m) == 0 {
+	if len(m.vals) == 0 {
 		return 0
 	}
-	return len(m[0])
+	return len(m.vals[0])
 }
 
 func (m Matrix) Get(row int, column int) float {
-	return m[row][column]
+	return m.vals[row][column]
 }
 
 func (m Matrix) Set(row int, column int, val float) {
-	m[row][column] = val
+	m.vals[row][column] = val
 }
 
 func (m Matrix) Equal(o Matrix) bool {
 	if !m.sameDimensions(o) {
 		return false
 	}
-	for r := 0; r < len(m); r++ {
-		r1 := m[r]
-		r2 := o[r]
+	for r := 0; r < len(m.vals); r++ {
+		r1 := m.vals[r]
+		r2 := o.vals[r]
 		for x := 0; x < len(r1); x++ {
 			if !floatsEqual(r1[x], r2[x]) {
 				return false
