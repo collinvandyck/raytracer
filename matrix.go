@@ -2,6 +2,7 @@ package rt
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"strconv"
 	"strings"
@@ -141,16 +142,56 @@ func (m Matrix) Submatrix(row, col int) Matrix {
 }
 
 func (m Matrix) String() string {
+	if m.Empty() {
+		return "<empty>"
+	}
 	rows := make([][]string, 0)
 	for ri := 0; ri < m.Rows(); ri++ {
 		row := make([]string, 0)
 		for ci := 0; ci < m.Cols(); ci++ {
-			str := fmt.Sprintf("%f", m.Get(ri, ci))
+			str := fmt.Sprintf("%.1f", m.Get(ri, ci))
 			row = append(row, str)
 		}
 		rows = append(rows, row)
 	}
-	return fmt.Sprintf("%v", rows)
+	widths := make([]int, 0)
+	for ci := 0; ci < len(rows[0]); ci++ {
+		width := 0
+		for ri := 0; ri < len(rows); ri++ {
+			cw := len(rows[ri][ci])
+			if cw > width {
+				width = cw
+			}
+		}
+		widths = append(widths, width)
+	}
+	widthSum := 0
+	for _, w := range widths {
+		widthSum += w
+	}
+	header := "+"
+	header += strings.Repeat("-", widthSum-1)
+	header += strings.Repeat("-", m.Cols()*3) // table borders
+	header += "+"
+	buf := new(bytes.Buffer)
+	buf.WriteString(header + "\n")
+	for _, row := range rows {
+		buf.WriteString("| ")
+		for col, val := range row {
+			pad := widths[col] - len(val)
+			if pad > 0 {
+				val = strings.Repeat(" ", pad) + val
+			}
+			buf.WriteString(val + " | ")
+		}
+		buf.WriteString("\n")
+	}
+	buf.WriteString(header + "\n")
+	return buf.String()
+}
+
+func (m Matrix) Empty() bool {
+	return m.Rows() == 0 || m.Cols() == 0
 }
 
 func (m Matrix) Determinant() float {
