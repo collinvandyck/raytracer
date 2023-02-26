@@ -9,7 +9,7 @@ import (
 
 func TestTuple(t *testing.T) {
 	t.Run("A tuple with w=1 is a point", func(t *testing.T) {
-		tup := tuple(4.3, -4.2, 3.1, 1.0)
+		tup := newTuple(4.3, -4.2, 3.1, 1.0)
 		require.Equal(t, tup.x, 4.3)
 		require.Equal(t, tup.y, -4.2)
 		require.Equal(t, tup.z, 3.1)
@@ -26,7 +26,7 @@ func TestTuple(t *testing.T) {
 		require.Equal(t, Vector(tuple4{4, -4, 3, 0}), v1)
 	})
 	t.Run("A tuple with w=0 is a vector", func(t *testing.T) {
-		tup := tuple(4.3, -4.2, 3.1, 0.0)
+		tup := newTuple(4.3, -4.2, 3.1, 0.0)
 		require.Equal(t, tup.x, 4.3)
 		require.Equal(t, tup.y, -4.2)
 		require.Equal(t, tup.z, 3.1)
@@ -38,9 +38,9 @@ func TestTuple(t *testing.T) {
 
 func TestTupleAdd(t *testing.T) {
 	t.Run("Adding two tuples", func(t *testing.T) {
-		t1 := tuple(3, -2, 5, 1)
-		t2 := tuple(-2, 3, 1, 0)
-		re := tuple(1, 1, 6, 1)
+		t1 := newTuple(3, -2, 5, 1)
+		t2 := newTuple(-2, 3, 1, 0)
+		re := newTuple(1, 1, 6, 1)
 		equalTuple(t, re, t1.add(t2))
 	})
 	t.Run("Adding two vectors is a vector", func(t *testing.T) {
@@ -61,9 +61,9 @@ func TestTupleAdd(t *testing.T) {
 
 func TestTupleSubtract(t *testing.T) {
 	t.Run("Subtracing two tuples", func(t *testing.T) {
-		t1 := tuple(3, -2, 5, 1)
-		t2 := tuple(-2, 3, 1, 0)
-		re := tuple(5, -5, 4, 1)
+		t1 := newTuple(3, -2, 5, 1)
+		t2 := newTuple(-2, 3, 1, 0)
+		re := newTuple(5, -5, 4, 1)
 		equalTuple(t, re, t1.subtract(t2))
 	})
 	t.Run("Subtracting two points is a vector", func(t *testing.T) {
@@ -100,14 +100,14 @@ func TestTupleSubtract(t *testing.T) {
 func TestTupleMultiply(t *testing.T) {
 	t.Run("Multiplying a tuple by a scalar", func(t *testing.T) {
 		const factor float = 3.5
-		t1 := tuple(1, -2, 3, -4)
-		re := tuple(1*factor, -2*factor, 3*factor, -4*factor)
+		t1 := newTuple(1, -2, 3, -4)
+		re := newTuple(1*factor, -2*factor, 3*factor, -4*factor)
 		equalTuple(t, re, t1.multiplyBy(factor))
 	})
 	t.Run("Multiplying a tuple by a fraction", func(t *testing.T) {
 		const factor float = 0.5
-		t1 := tuple(1, -2, 3, -4)
-		re := tuple(1*factor, -2*factor, 3*factor, -4*factor)
+		t1 := newTuple(1, -2, 3, -4)
+		re := newTuple(1*factor, -2*factor, 3*factor, -4*factor)
 		equalTuple(t, re, t1.multiplyBy(factor))
 	})
 }
@@ -115,8 +115,8 @@ func TestTupleMultiply(t *testing.T) {
 func TestTupleDivide(t *testing.T) {
 	t.Run("Dividing a tuple by a scalar", func(t *testing.T) {
 		const factor float = 2
-		t1 := tuple(1, -2, 3, -4)
-		re := tuple(1/factor, -2/factor, 3/factor, -4/factor)
+		t1 := newTuple(1, -2, 3, -4)
+		re := newTuple(1/factor, -2/factor, 3/factor, -4/factor)
 		equalTuple(t, re, t1.divideBy(factor))
 	})
 }

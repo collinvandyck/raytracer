@@ -90,10 +90,6 @@ func (t tuple4) equal(o tuple4) bool {
 	return xe && ye && ze && we
 }
 
-func tuple(x, y, z, w float) tuple4 {
-	return tuple4{x, y, z, w}
-}
-
 func (t tuple4) isPoint() bool {
 	return t.w == 1
 }

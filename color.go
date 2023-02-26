@@ -3,7 +3,7 @@ package rt
 type Color tuple4
 
 func NewColor(r, g, b float) Color {
-	return Color(tuple(r, g, b, 0))
+	return Color(newTuple(r, g, b, 0))
 }
 
 func (c Color) Add(o Color) Color {
