@@ -206,6 +206,10 @@ func (m Matrix) Cofactor(row, col int) float {
 	return sm
 }
 
+func (m Matrix) IsInvertible() bool {
+	return false
+}
+
 func (m Matrix) String() string {
 	if m.Empty() {
 		return "<empty>"

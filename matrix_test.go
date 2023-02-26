@@ -290,6 +290,30 @@ func TestMatrix(t *testing.T) {
 			require.EqualValues(t, -25, m1.Cofactor(1, 0))
 		})
 	})
+	t.Run("Testing an invertible matrix for invertibility", func(t *testing.T) {
+		m1 := NewMatrixFromTable(`
+			+-------------------------+
+			| 6.0 |  4.0 | 4.0 |  4.0 |
+			| 5.0 |  5.0 | 7.0 |  6.0 |
+			| 4.0 | -9.0 | 3.0 | -7.0 |
+			| 9.0 |  1.0 | 7.0 | -6.0 |
+			+-------------------------+
+		`)
+		require.EqualValues(t, -2120, m1.Determinant())
+		require.True(t, m1.IsInvertible())
+	})
+	t.Run("Testing a noninvertible matrix for invertibility", func(t *testing.T) {
+		m1 := NewMatrixFromTable(`
+			+---------------------------+
+			| -4.0 |  2.0 | -2.0 | -3.0 |
+			|  9.0 |  6.0 |  2.0 |  6.0 |
+			|  0.0 | -5.0 |  1.0 | -5.0 |
+			|  0.0 |  0.0 |  0.0 |  0.0 |
+			+---------------------------+
+		`)
+		require.EqualValues(t, 0, m1.Determinant())
+		require.False(t, m1.IsInvertible())
+	})
 }
 
 func BenchmarkMatrix4x4Determinant(b *testing.B) {
