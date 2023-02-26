@@ -26,10 +26,10 @@ func TestMatrix(t *testing.T) {
 	})
 	t.Run("A 2x2 matrix ought to be representable", func(t *testing.T) {
 		m := NewMatrixFromTable(`
-		    +---------+
+			+---------+
 			| -3 |  5 |
 			|  1 | -2 |
-		    +---------+
+			+---------+
 		`)
 		require.Equal(t, -3.0, m.Get(0, 0))
 		require.Equal(t, 5.0, m.Get(0, 1))
@@ -38,11 +38,11 @@ func TestMatrix(t *testing.T) {
 	})
 	t.Run("A 3x3 matrix ought to be representable", func(t *testing.T) {
 		m := NewMatrixFromTable(`
-		    +---------------+
+			+---------------+
 			| -3 |  5 |  0  |
 			|  1 | -2 | -7  |
 			|  0 |  1 |  1  |
-		    +---------------+
+			+---------------+
 		`)
 		require.Equal(t, -3.0, m.Get(0, 0))
 		require.Equal(t, 5.0, m.Get(0, 1))
@@ -56,20 +56,20 @@ func TestMatrix(t *testing.T) {
 	})
 	t.Run("Matrix equality with identical matrices", func(t *testing.T) {
 		m1 := NewMatrixFromTable(`
-		    +---------------+
+			+---------------+
 			| 1 | 2 | 3 | 4 |
 			| 5 | 6 | 7 | 8 |
 			| 9 | 8 | 7 | 6 |
 			| 5 | 4 | 3 | 2 |
-		    +---------------+
+			+---------------+
 		`)
 		m2 := NewMatrixFromTable(`
-		    +---------------+
+			+---------------+
 			| 1 | 2 | 3 | 4 |
 			| 5 | 6 | 7 | 8 |
 			| 9 | 8 | 7 | 6 |
 			| 5 | 4 | 3 | 2 |
-		    +---------------+
+			+---------------+
 		`)
 		equalMatrix(t, m1, m2)
 	})
