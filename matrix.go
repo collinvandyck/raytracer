@@ -172,8 +172,8 @@ func (m Matrix) Determinant() float {
 	return m.Get(0, 0)*m.Get(1, 1) - m.Get(0, 1)*m.Get(1, 0)
 }
 
-func (m Matrix) Minor(skipr, skipc int) float {
-	sm := m.Submatrix(skipr, skipc)
+func (m Matrix) Minor(row, col int) float {
+	sm := m.Submatrix(row, col)
 	return sm.Determinant()
 }
 

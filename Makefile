@@ -4,11 +4,11 @@ run: lint
 	go test .
 
 fill:
-	go run ./cmd/exp/fill
+	go run ./cmd/fill
 	open fill.ppm
 
 cannon:
-	go run ./cmd/exp/cannon
+	go run ./cmd/cannon
 	open cannon.ppm
 
 lint:
