@@ -11,5 +11,8 @@ cannon:
 	go run ./cmd/cannon
 	open cannon.ppm
 
+table:
+	go run ./cmd/table
+
 lint:
 	golangci-lint run

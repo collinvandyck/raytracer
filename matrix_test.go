@@ -236,6 +236,18 @@ func TestMatrix(t *testing.T) {
 			require.EqualValues(t, 25, m2.Determinant())
 		})
 	})
+	t.Run("Cofactors", func(t *testing.T) {
+		t.Run("Calculating a cofactor of a 3x3 matrix", func(t *testing.T) {
+			m1 := NewMatrixFromTable(`
+				+-------------------+
+				| 3.0 |  5.0 |  0.0 |
+				| 2.0 | -1.0 | -7.0 |
+				| 6.0 | -1.0 |  5.0 |
+				+-------------------+
+			`)
+			require.EqualValues(t, -12, m1.Minor(0, 0))
+		})
+	})
 }
 
 func BenchmarkMatrixSubmatrix(b *testing.B) {
