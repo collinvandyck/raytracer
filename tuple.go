@@ -60,15 +60,6 @@ func (t Tuple4) divideBy(val float) Tuple4 {
 	}
 }
 
-func (t Tuple4) divide(o Tuple4) Tuple4 {
-	return Tuple4{
-		t.x / o.x,
-		t.y / o.y,
-		t.z / o.z,
-		t.w / o.w,
-	}
-}
-
 func (t Tuple4) dot(o Tuple4) float {
 	x2 := t.x * o.x
 	y2 := t.y * o.y

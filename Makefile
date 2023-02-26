@@ -1,6 +1,6 @@
-.PHONY: run
+.PHONY: run fill cannon lint
 
-run:
+run: lint
 	go test .
 
 fill:
@@ -10,3 +10,6 @@ fill:
 cannon:
 	go run ./cmd/exp/cannon
 	open cannon.ppm
+
+lint:
+	golangci-lint run
