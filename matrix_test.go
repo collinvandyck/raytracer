@@ -231,6 +231,7 @@ func TestMatrix(t *testing.T) {
 				| 6 | -1 |  5 |
 				+-------------+
 			`)
+			require.EqualValues(t, 25, m1.Minor(1, 0))
 			m2 := m1.Submatrix(1, 0)
 			require.EqualValues(t, 25, m2.Determinant())
 		})
