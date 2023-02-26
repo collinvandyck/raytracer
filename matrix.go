@@ -19,23 +19,23 @@ var MatrixIdentity4x4 = NewMatrixFromValues([][]float{
 	{0, 0, 0, 1},
 })
 
-func NewMatrix(rows, cols int) *Matrix {
-	m := &Matrix{vals: make([][]float, rows)}
+func NewMatrix(rows, cols int) Matrix {
+	m := Matrix{vals: make([][]float, rows)}
 	for i := range m.vals {
 		m.vals[i] = make([]float, cols)
 	}
 	return m
 }
 
-func NewMatrixFromValues(values [][]float) (res *Matrix) {
+func NewMatrixFromValues(values [][]float) (res Matrix) {
 	if len(values) == 0 {
 		return res
 	}
-	res = &Matrix{vals: values}
+	res = Matrix{vals: values}
 	return res
 }
 
-func NewMatrixFromTable(table string) (res *Matrix) {
+func NewMatrixFromTable(table string) (res Matrix) {
 	table = strings.TrimSpace(table)
 	s := bufio.NewScanner(strings.NewReader(table))
 	rows := make([][]float, 0)
@@ -68,26 +68,26 @@ func NewMatrixFromTable(table string) (res *Matrix) {
 	return
 }
 
-func (m *Matrix) Rows() int {
+func (m Matrix) Rows() int {
 	return len(m.vals)
 }
 
-func (m *Matrix) Cols() int {
+func (m Matrix) Cols() int {
 	if len(m.vals) == 0 {
 		return 0
 	}
 	return len(m.vals[0])
 }
 
-func (m *Matrix) Get(row int, column int) float {
+func (m Matrix) Get(row int, column int) float {
 	return m.vals[row][column]
 }
 
-func (m *Matrix) Set(row int, column int, val float) {
+func (m Matrix) Set(row int, column int, val float) {
 	m.vals[row][column] = val
 }
 
-func (m *Matrix) Equal(o *Matrix) bool {
+func (m Matrix) Equal(o Matrix) bool {
 	if !m.sameDimensions(o) {
 		return false
 	}
@@ -103,7 +103,7 @@ func (m *Matrix) Equal(o *Matrix) bool {
 	return true
 }
 
-func (m *Matrix) Multiply(o *Matrix) (res *Matrix) {
+func (m Matrix) Multiply(o Matrix) (res Matrix) {
 	if !m.sameDimensions(o) {
 		panic("can't multiply matrices with different dimensions")
 	}
@@ -122,7 +122,7 @@ func (m *Matrix) Multiply(o *Matrix) (res *Matrix) {
 	return
 }
 
-func (m *Matrix) MultiplyTuple4(t1 Tuple4) (res Tuple4) {
+func (m Matrix) MultiplyTuple4(t1 Tuple4) (res Tuple4) {
 	if m.Rows() != 4 || m.Cols() != 4 {
 		panic("must be a 4x4")
 	}
@@ -136,7 +136,7 @@ func (m *Matrix) MultiplyTuple4(t1 Tuple4) (res Tuple4) {
 	return NewTuple(vals[0], vals[1], vals[2], vals[3])
 }
 
-func (m *Matrix) Transpose() *Matrix {
+func (m Matrix) Transpose() Matrix {
 	rows, cols := m.Rows(), m.Cols()
 	res := NewMatrix(cols, rows)
 	for r := 0; r < rows; r++ {
@@ -147,7 +147,7 @@ func (m *Matrix) Transpose() *Matrix {
 	return res
 }
 
-func (m *Matrix) Submatrix(row, col int) *Matrix {
+func (m Matrix) Submatrix(row, col int) Matrix {
 	if m.Rows() <= 1 || m.Cols() <= 1 {
 		panic("matrix must have dimension of at least2")
 	}
@@ -259,6 +259,6 @@ func (m Matrix) Empty() bool {
 	return m.Rows() == 0 || m.Cols() == 0
 }
 
-func (m Matrix) sameDimensions(o *Matrix) bool {
+func (m Matrix) sameDimensions(o Matrix) bool {
 	return m.Rows() == o.Rows() && m.Cols() == o.Cols()
 }

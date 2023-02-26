@@ -348,12 +348,12 @@ func BenchmarkMatrixMultiply(b *testing.B) {
 	}
 }
 
-func notEqualMatrix(t *testing.T, m1, m2 *Matrix) {
+func notEqualMatrix(t *testing.T, m1, m2 Matrix) {
 	require.False(t, m1.Equal(m2))
 	require.False(t, m2.Equal(m1))
 }
 
-func equalMatrix(t *testing.T, me, m1 *Matrix) {
+func equalMatrix(t *testing.T, me, m1 Matrix) {
 	require.True(t, me.Equal(m1), "me:\n%s\nwas not equal to\nm1:\n%s", me, m1)
 	require.True(t, m1.Equal(me), "m1:\n%s\nwas not equal to\nme:\n%s", m1, me)
 }
