@@ -137,11 +137,30 @@ func (m Matrix) Transpose() Matrix {
 	return res
 }
 
-func (m Matrix) Submatrix(row, col int) Matrix {
+func (m Matrix) Submatrix(skipr, skipc int) Matrix {
 	if m.Rows() <= 1 || m.Cols() <= 1 {
 		panic("matrix must have dimension of at least2")
 	}
 	res := NewMatrix(m.Rows()-1, m.Cols()-1)
+	for ri := 0; ri < m.Rows(); ri++ {
+		if ri == skipr {
+			continue
+		}
+		for ci := 0; ci < m.Cols(); ci++ {
+			if ci == skipc {
+				continue
+			}
+			resri := ri
+			if resri > skipr {
+				resri -= 1
+			}
+			resci := ci
+			if resci > skipc {
+				resci -= 1
+			}
+			res.Set(resri, resci, m.Get(ri, ci))
+		}
+	}
 	return res
 }
 
