@@ -314,6 +314,22 @@ func TestMatrix(t *testing.T) {
 		require.EqualValues(t, 0, m1.Determinant())
 		require.False(t, m1.IsInvertible())
 	})
+	t.Run("Calculating the inverse of a matrix", func(t *testing.T) {
+		m1 := NewMatrixFromTable(`
+			+---------------------------+
+			| -5.0 |  2.0 |  6.0 | -8.0 |
+			|  1.0 | -5.0 |  1.0 |  8.0 |
+			|  7.0 |  7.0 | -6.0 | -7.0 |
+			|  1.0 | -3.0 |  7.0 |  4.0 |
+			+---------------------------+
+		`)
+		i1 := m1.Inverse()
+		require.EqualValues(t, 532, m1.Determinant())
+		require.EqualValues(t, -160, m1.Cofactor(2, 3))
+		require.EqualValues(t, -160.0/532.0, i1.Get(3, 2))
+		require.EqualValues(t, 105, m1.Cofactor(3, 2))
+		require.EqualValues(t, -160.0/532.0, i1.Get(2, 3))
+	})
 }
 
 func BenchmarkMatrix4x4Determinant(b *testing.B) {

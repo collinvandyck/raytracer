@@ -206,6 +206,10 @@ func (m Matrix) Cofactor(row, col int) float {
 	return sm
 }
 
+func (m Matrix) Inverse() Matrix {
+	return m
+}
+
 func (m Matrix) IsInvertible() bool {
 	return m.Determinant() != 0
 }
