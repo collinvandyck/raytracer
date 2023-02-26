@@ -177,6 +177,10 @@ func (m Matrix) Minor(row, col int) float {
 	return sm.Determinant()
 }
 
+func (m Matrix) Cofactor(row, col int) float {
+	return 0
+}
+
 func (m Matrix) String() string {
 	if m.Empty() {
 		return "<empty>"

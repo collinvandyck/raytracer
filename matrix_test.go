@@ -246,6 +246,9 @@ func TestMatrix(t *testing.T) {
 				+-------------------+
 			`)
 			require.EqualValues(t, -12, m1.Minor(0, 0))
+			require.EqualValues(t, -12, m1.Cofactor(0, 0))
+			require.EqualValues(t, 25, m1.Minor(1, 0))
+			require.EqualValues(t, -25, m1.Cofactor(1, 0))
 		})
 	})
 }
