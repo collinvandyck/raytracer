@@ -196,11 +196,9 @@ func BenchmarkMatrixMultiply(b *testing.B) {
 		`)
 	b.ResetTimer()
 	b.ReportAllocs()
-	var store Matrix
 	for i := 0; i < b.N; i++ {
-		store = m1.Multiply(m2)
+		m1.Multiply(m2)
 	}
-	_ = store
 }
 
 func notEqualMatrix(t *testing.T, m1, m2 Matrix) {
