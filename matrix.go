@@ -49,6 +49,17 @@ func NewMatrixFromTable(table string) (res Matrix) {
 	return
 }
 
+func (m Matrix) Rows() int {
+	return len(m)
+}
+
+func (m Matrix) Cols() int {
+	if len(m) == 0 {
+		return 0
+	}
+	return len(m[0])
+}
+
 func (m Matrix) Get(row int, column int) float {
 	return m[row][column]
 }
@@ -70,6 +81,9 @@ func (m Matrix) Equal(o Matrix) bool {
 }
 
 func (m Matrix) Multiply(o Matrix) Matrix {
+	if !m.sameDimensions(o) {
+		panic("can't multiply matrices with different dimensions")
+	}
 	return m
 }
 
