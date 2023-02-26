@@ -299,8 +299,11 @@ func (m Matrix) Empty() bool {
 }
 
 func (m *Matrix) SetDebug(b bool) {
-	fmt.Println(m.verbose)
 	m.verbose = b
+}
+
+func (m *Matrix) SetOptimize(b bool) {
+	m.optimize = b
 }
 
 func (m Matrix) debug(msg string, args ...any) {
