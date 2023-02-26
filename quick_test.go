@@ -55,6 +55,8 @@ func TestQuickCofactor(t *testing.T) {
 		| -6.0 |  7.0 |  7.0 | -9.0 |
 		+---------------------------+
 	`)
+	m1.SetDebug(true)
+
 	require.EqualValues(t, 690, m1.Cofactor(0, 0))
 	require.EqualValues(t, 447, m1.Cofactor(0, 1))
 	require.EqualValues(t, 210, m1.Cofactor(0, 2))

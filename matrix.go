@@ -9,10 +9,12 @@ import (
 )
 
 type Matrix struct {
-	vals   [][]float
-	parent *Matrix // submatrices will have this set
-	smr    int     // submatrix row omitted
-	smc    int     // submatrix column omitted
+	vals     [][]float
+	parent   *Matrix // submatrices will have this set
+	smr      int     // submatrix row omitted
+	smc      int     // submatrix column omitted
+	verbose  bool
+	optimize bool
 }
 
 var MatrixIdentity4x4 = NewMatrixFromValues([][]float{
@@ -162,10 +164,34 @@ func (m Matrix) Submatrix(row, col int) Matrix {
 	if m.Rows() <= 1 || m.Cols() <= 1 {
 		panic("matrix must have dimension of at least2")
 	}
-	return Matrix{parent: &m, smr: row, smc: col, vals: m.vals}
+	if m.optimize {
+		return Matrix{parent: &m, smr: row, smc: col, vals: m.vals, verbose: m.verbose, optimize: m.optimize}
+	}
+	res := NewMatrix(m.Rows()-1, m.Cols()-1)
+	for ri := 0; ri < m.Rows(); ri++ {
+		if ri == row {
+			continue
+		}
+		for ci := 0; ci < m.Cols(); ci++ {
+			if ci == col {
+				continue
+			}
+			resri := ri
+			if resri > row {
+				resri -= 1
+			}
+			resci := ci
+			if resci > col {
+				resci -= 1
+			}
+			res.Set(resri, resci, m.Get(ri, ci))
+		}
+	}
+	return res
 }
 
 func (m Matrix) Determinant() float {
+	m.debug("Determinant\n%s", m)
 	if m.Empty() {
 		panic("determinant on empty matrix")
 	}
@@ -174,13 +200,18 @@ func (m Matrix) Determinant() float {
 		panic("determinant on small matrix")
 	}
 	if rows == 2 && cols == 2 {
-		return m.Get(0, 0)*m.Get(1, 1) - m.Get(0, 1)*m.Get(1, 0)
+		res := m.Get(0, 0)*m.Get(1, 1) - m.Get(0, 1)*m.Get(1, 0)
+		m.debug("Determinant result: %v", res)
+		return res
 	}
 	var res float
+	cofactors := make([]float, m.Cols())
 	for i := 0; i < m.Cols(); i++ {
 		cf := m.Cofactor(0, i)
+		cofactors[i] = cf
 		res += cf * m.Get(0, i)
 	}
+	m.debug("Determinant result (cofactors:%v): %v", cofactors, res)
 	return res
 }
 
@@ -190,7 +221,7 @@ func (m Matrix) Minor(row, col int) float {
 }
 
 func (m Matrix) Cofactor(row, col int) float {
-	fmt.Printf("Cofactor (%d, %d)\n", row, col)
+	m.debug("Cofactor (%d, %d) \n%s", row, col, m)
 	sm := m.Minor(row, col)
 	if (row+col)%2 == 1 {
 		sm *= -1
@@ -257,6 +288,16 @@ func (m Matrix) String() string {
 
 func (m Matrix) Empty() bool {
 	return m.Rows() == 0 || m.Cols() == 0
+}
+
+func (m *Matrix) SetDebug(b bool) {
+	m.verbose = b
+}
+
+func (m Matrix) debug(msg string, args ...any) {
+	if m.verbose {
+		fmt.Printf(msg+"\n", args...)
+	}
 }
 
 func (m Matrix) sameDimensions(o Matrix) bool {
