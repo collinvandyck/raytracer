@@ -6,10 +6,6 @@ import (
 	"strings"
 )
 
-type MatrixI interface {
-	Multiply(o MatrixI) MatrixI
-}
-
 type Matrix [][]float
 
 var MatrixIdentity4x4 = Matrix{
