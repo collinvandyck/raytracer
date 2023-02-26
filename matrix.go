@@ -54,13 +54,7 @@ func (m Matrix) Get(row int, column int) float {
 }
 
 func (m Matrix) Equal(o Matrix) bool {
-	if len(m) != len(o) {
-		return false
-	}
-	if len(m) == 0 && len(o) == 0 {
-		return true
-	}
-	if len(m[0]) != len(o[0]) {
+	if !m.sameDimensions(o) {
 		return false
 	}
 	for r := 0; r < len(m); r++ {
@@ -77,4 +71,17 @@ func (m Matrix) Equal(o Matrix) bool {
 
 func (m Matrix) Multiply(o Matrix) Matrix {
 	return m
+}
+
+func (m Matrix) sameDimensions(o Matrix) bool {
+	if len(m) != len(o) {
+		return false
+	}
+	if len(m) == 0 && len(o) == 0 {
+		return true
+	}
+	if len(m[0]) != len(o[0]) {
+		return false
+	}
+	return true
 }
