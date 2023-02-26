@@ -19,11 +19,11 @@ func TestTuple(t *testing.T) {
 	})
 	t.Run("A point creates a tuple with w=1", func(t *testing.T) {
 		p1 := NewPoint(4, -4, 3)
-		require.Equal(t, Point(tuple4{4, -4, 3, 1}), p1)
+		require.Equal(t, Point(Tuple4{4, -4, 3, 1}), p1)
 	})
 	t.Run("A vector creates a tuple with w=0", func(t *testing.T) {
 		v1 := NewVector(4, -4, 3)
-		require.Equal(t, Vector(tuple4{4, -4, 3, 0}), v1)
+		require.Equal(t, Vector(Tuple4{4, -4, 3, 0}), v1)
 	})
 	t.Run("A tuple with w=0 is a vector", func(t *testing.T) {
 		tup := newTuple(4.3, -4.2, 3.1, 0.0)
@@ -177,7 +177,7 @@ func TestVectorCrossProduct(t *testing.T) {
 	})
 }
 
-func equalTuple(t *testing.T, t1, t2 tuple4) {
+func equalTuple(t *testing.T, t1, t2 Tuple4) {
 	t.Helper()
 	require.EqualValues(t, t1, t2)
 	require.True(t, t1.equal(t2))
