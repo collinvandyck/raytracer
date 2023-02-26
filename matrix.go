@@ -54,5 +54,23 @@ func (m Matrix) Get(row int, column int) float {
 }
 
 func (m Matrix) Equal(o Matrix) bool {
-	return false
+	if len(m) != len(o) {
+		return false
+	}
+	if len(m) == 0 && len(o) == 0 {
+		return true
+	}
+	if len(m[0]) != len(o[0]) {
+		return false
+	}
+	for r := 0; r < len(m); r++ {
+		r1 := m[r]
+		r2 := o[r]
+		for x := 0; x < len(r1); x++ {
+			if !floatsEqual(r1[x], r2[x]) {
+				return false
+			}
+		}
+	}
+	return true
 }

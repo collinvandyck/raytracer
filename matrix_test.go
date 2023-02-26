@@ -77,4 +77,6 @@ func TestMatrix(t *testing.T) {
 
 func equalMatrix(t *testing.T, m1, m2 Matrix) {
 	require.Equal(t, m1, m2)
+	require.True(t, m1.Equal(m2))
+	require.True(t, m2.Equal(m1))
 }
