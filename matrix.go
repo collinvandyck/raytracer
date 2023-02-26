@@ -87,7 +87,8 @@ func (m Matrix) Multiply(o Matrix) (res Matrix) {
 	res = NewMatrix(m.Rows(), m.Cols())
 	for ri := 0; ri < m.Rows(); ri++ {
 		for ci := 0; ci < m.Cols(); ci++ {
-
+			var val float
+			res[ri][ci] = val
 		}
 	}
 	return
