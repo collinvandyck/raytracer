@@ -130,8 +130,7 @@ func TestMatrix(t *testing.T) {
 		`)
 		t1 := NewTuple(1, 2, 3, 1)
 		te := NewTuple(18, 24, 33, 1)
-		_, _, _ = m1, t1, te
-		//equalTuple(t, te, m1.MultiplyByTuple(t1))
+		equalTuple(t, te, m1.MultiplyTuple4(t1))
 	})
 }
 

@@ -97,7 +97,8 @@ func (m Matrix) Multiply(o Matrix) (res Matrix) {
 	return
 }
 
-func (m Matrix) MultiplyTuple4(t4 Tuple4) {
+func (m Matrix) MultiplyTuple4(t1 Tuple4) Tuple4 {
+	return Tuple4{}
 }
 
 func (m Matrix) sameDimensions(o Matrix) bool {
