@@ -27,6 +27,7 @@ func TestQuickSubmatrixRegression(t *testing.T) {
 		+-----------+
 	`), m2)
 	m3 := m2.Submatrix(0, 1)
+	require.EqualValues(t, 8, m3.Get(0, 0))
 	equalMatrix(t, NewMatrixFromTable(`
 		+-------+
 		| 8 | 6 |
