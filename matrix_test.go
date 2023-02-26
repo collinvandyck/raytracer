@@ -224,6 +224,22 @@ func TestMatrix(t *testing.T) {
 	})
 }
 
+func BenchmarkMatrixSubmatrix(b *testing.B) {
+	m1 := NewMatrixFromTable(`
+			+---------------+
+			| 1 | 2 | 3 | 4 |
+			| 5 | 6 | 7 | 8 |
+			| 9 | 8 | 7 | 6 |
+			| 5 | 4 | 3 | 2 |
+			+---------------+
+		`)
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		m1.Submatrix(1, 2)
+	}
+}
+
 func BenchmarkMatrixMultiply(b *testing.B) {
 	m1 := NewMatrixFromTable(`
 			+---------------+
