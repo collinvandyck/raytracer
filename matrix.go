@@ -84,6 +84,10 @@ func (m Matrix) Multiply(o Matrix) Matrix {
 	if !m.sameDimensions(o) {
 		panic("can't multiply matrices with different dimensions")
 	}
+	for ri := 0; ri < m.Rows(); ri++ {
+		for ci := 0; ci < m.Cols(); ci++ {
+		}
+	}
 	return m
 }
 
