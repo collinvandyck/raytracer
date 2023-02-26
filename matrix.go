@@ -165,9 +165,17 @@ func (m Matrix) Submatrix(row, col int) Matrix {
 		panic("matrix must have dimension of at least2")
 	}
 	if m.optimize {
-		return Matrix{parent: &m, smr: row, smc: col, vals: m.vals, verbose: m.verbose, optimize: m.optimize}
+		return Matrix{
+			parent:   &m,
+			smr:      row,
+			smc:      col,
+			vals:     m.vals,
+			verbose:  m.verbose,
+			optimize: m.optimize,
+		}
 	}
 	res := NewMatrix(m.Rows()-1, m.Cols()-1)
+	res.verbose = m.verbose
 	for ri := 0; ri < m.Rows(); ri++ {
 		if ri == row {
 			continue
