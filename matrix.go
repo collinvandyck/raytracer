@@ -80,15 +80,17 @@ func (m Matrix) Equal(o Matrix) bool {
 	return true
 }
 
-func (m Matrix) Multiply(o Matrix) Matrix {
+func (m Matrix) Multiply(o Matrix) (res Matrix) {
 	if !m.sameDimensions(o) {
 		panic("can't multiply matrices with different dimensions")
 	}
+	res = NewMatrix(m.Rows(), m.Cols())
 	for ri := 0; ri < m.Rows(); ri++ {
 		for ci := 0; ci < m.Cols(); ci++ {
+
 		}
 	}
-	return m
+	return
 }
 
 func (m Matrix) sameDimensions(o Matrix) bool {
