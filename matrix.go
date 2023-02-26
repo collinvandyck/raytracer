@@ -98,6 +98,9 @@ func (m Matrix) Multiply(o Matrix) (res Matrix) {
 }
 
 func (m Matrix) MultiplyTuple4(t1 Tuple4) Tuple4 {
+	if m.Rows() != 4 || m.Cols() != 4 {
+		panic("must be a 4x4")
+	}
 	return Tuple4{}
 }
 
