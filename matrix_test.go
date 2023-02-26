@@ -168,7 +168,7 @@ func TestMatrix(t *testing.T) {
 			| 0 | 8 | 3 | 8 |
 			+---------------+
 		`)
-		equalMatrix(t, me, m1)
+		equalMatrix(t, me, m1.Transpose())
 	})
 }
 

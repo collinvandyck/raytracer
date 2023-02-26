@@ -71,6 +71,10 @@ func (m Matrix) Get(row int, column int) float {
 	return m[row][column]
 }
 
+func (m Matrix) Set(row int, column int, val float) {
+	m[row][column] = val
+}
+
 func (m Matrix) Equal(o Matrix) bool {
 	if !m.sameDimensions(o) {
 		return false
@@ -119,7 +123,14 @@ func (m Matrix) MultiplyTuple4(t1 Tuple4) (res Tuple4) {
 }
 
 func (m Matrix) Transpose() Matrix {
-	return m
+	rows, cols := m.Rows(), m.Cols()
+	res := NewMatrix(cols, rows)
+	for r := 0; r < rows; r++ {
+		for c := 0; c < cols; c++ {
+			res.Set(c, r, m.Get(r, c))
+		}
+	}
+	return res
 }
 
 func (m Matrix) sameDimensions(o Matrix) bool {
