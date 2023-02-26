@@ -8,7 +8,9 @@ import (
 )
 
 type Matrix struct {
-	vals [][]float
+	vals     [][]float
+	parent   *Matrix // submatrices will have this set
+	row, col int     // submatrix row and column
 }
 
 var MatrixIdentity4x4 = NewMatrixFromValues([][]float{
