@@ -222,6 +222,19 @@ func TestMatrix(t *testing.T) {
 			equalMatrix(t, me, m1.Submatrix(2, 1))
 		})
 	})
+	t.Run("Minors", func(t *testing.T) {
+		t.Run("Calculating a minor of a 3x3 matrix", func(t *testing.T) {
+			m1 := NewMatrixFromTable(`
+				+-------------+
+				| 3 |  5 |  0 |
+				| 2 | -1 | -7 |
+				| 6 | -1 |  5 |
+				+-------------+
+			`)
+			m2 := m1.Submatrix(1, 0)
+			require.EqualValues(t, 25, m2.Determinant())
+		})
+	})
 }
 
 func BenchmarkMatrixSubmatrix(b *testing.B) {
