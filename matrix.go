@@ -118,6 +118,10 @@ func (m Matrix) MultiplyTuple4(t1 Tuple4) (res Tuple4) {
 	return NewTuple(vals[0], vals[1], vals[2], vals[3])
 }
 
+func (m Matrix) Transpose() Matrix {
+	return m
+}
+
 func (m Matrix) sameDimensions(o Matrix) bool {
 	return m.Rows() == o.Rows() && m.Cols() == o.Cols()
 }

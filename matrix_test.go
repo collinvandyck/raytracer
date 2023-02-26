@@ -151,6 +151,25 @@ func TestMatrix(t *testing.T) {
 		`)
 		equalMatrix(t, e1, m1.Multiply(MatrixIdentity4x4))
 	})
+	t.Run("Transposing a matrix", func(t *testing.T) {
+		m1 := NewMatrixFromTable(`
+			+---------------+
+			| 0 | 9 | 3 | 0 |
+			| 9 | 8 | 0 | 8 |
+			| 1 | 8 | 5 | 3 |
+			| 0 | 0 | 5 | 8 |
+			+---------------+
+		`)
+		me := NewMatrixFromTable(`
+			+---------------+
+			| 0 | 9 | 1 | 0 |
+			| 9 | 8 | 8 | 0 |
+			| 3 | 0 | 5 | 5 |
+			| 0 | 8 | 3 | 8 |
+			+---------------+
+		`)
+		equalMatrix(t, me, m1)
+	})
 }
 
 func notEqualMatrix(t *testing.T, m1, m2 Matrix) {
