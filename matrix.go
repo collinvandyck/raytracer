@@ -8,9 +8,10 @@ import (
 )
 
 type Matrix struct {
-	vals     [][]float
-	parent   *Matrix // submatrices will have this set
-	row, col int     // submatrix row and column
+	vals   [][]float
+	parent *Matrix // submatrices will have this set
+	smr    int     // submatrix row omitted
+	smc    int     // submatrix column omitted
 }
 
 var MatrixIdentity4x4 = NewMatrixFromValues([][]float{
@@ -70,33 +71,63 @@ func NewMatrixFromTable(table string) (res Matrix) {
 }
 
 func (m Matrix) Rows() int {
+	if m.parent != nil {
+		return m.parent.Rows() - 1
+	}
 	return len(m.vals)
 }
 
 func (m Matrix) Cols() int {
+	if m.parent != nil {
+		return m.parent.Cols() - 1
+	}
 	if len(m.vals) == 0 {
 		return 0
 	}
 	return len(m.vals[0])
 }
 
-func (m Matrix) Get(row int, column int) float {
-	return m.vals[row][column]
+func (m Matrix) Get(row int, col int) float {
+	row, col = m.resolveRow(row), m.resolveCol(col)
+	return m.vals[row][col]
 }
 
-func (m Matrix) Set(row int, column int, val float) {
-	m.vals[row][column] = val
+func (m Matrix) Set(row int, col int, val float) {
+	row, col = m.resolveRow(row), m.resolveCol(col)
+	m.vals[row][col] = val
+}
+
+func (m Matrix) resolveRow(row int) int {
+	if m.parent == nil {
+		return row
+	}
+	res := m.parent.resolveRow(row)
+	if m.smr <= res {
+		res += 1
+	}
+	return res
+}
+
+func (m Matrix) resolveCol(col int) int {
+	if m.parent == nil {
+		return col
+	}
+	res := m.parent.resolveCol(col)
+	if m.smc <= res {
+		res += 1
+	}
+	return res
 }
 
 func (m Matrix) Equal(o Matrix) bool {
 	if !m.sameDimensions(o) {
 		return false
 	}
-	for r := 0; r < len(m.vals); r++ {
-		r1 := m.vals[r]
-		r2 := o.vals[r]
-		for x := 0; x < len(r1); x++ {
-			if !floatsEqual(r1[x], r2[x]) {
+	for ri := 0; ri < m.Rows(); ri++ {
+		for ci := 0; ci < m.Cols(); ci++ {
+			lhs := m.Get(ri, ci)
+			rhs := o.Get(ri, ci)
+			if !floatsEqual(lhs, rhs) {
 				return false
 			}
 		}
@@ -152,27 +183,7 @@ func (m Matrix) Submatrix(row, col int) Matrix {
 	if m.Rows() <= 1 || m.Cols() <= 1 {
 		panic("matrix must have dimension of at least2")
 	}
-	res := NewMatrix(m.Rows()-1, m.Cols()-1)
-	for ri := 0; ri < m.Rows(); ri++ {
-		if ri == row {
-			continue
-		}
-		for ci := 0; ci < m.Cols(); ci++ {
-			if ci == col {
-				continue
-			}
-			resri := ri
-			if resri > row {
-				resri -= 1
-			}
-			resci := ci
-			if resci > col {
-				resci -= 1
-			}
-			res.Set(resri, resci, m.Get(ri, ci))
-		}
-	}
-	return res
+	return Matrix{parent: &m, smr: row, smc: col, vals: m.vals}
 }
 
 func (m Matrix) Determinant() float {
