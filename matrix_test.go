@@ -177,6 +177,32 @@ func TestMatrix(t *testing.T) {
 	})
 }
 
+func BenchmarkMatrixMultiply(b *testing.B) {
+	m1 := NewMatrixFromTable(`
+			+---------------+
+			| 1 | 2 | 3 | 4 |
+			| 5 | 6 | 7 | 8 |
+			| 9 | 8 | 7 | 6 |
+			| 5 | 4 | 3 | 2 |
+			+---------------+
+		`)
+	m2 := NewMatrixFromTable(`
+			+-----------------+
+			| -2 | 1 | 2 | 3  |
+			| 3  | 2 | 1 | -1 |
+			| 4  | 3 | 6 | 5  |
+			| 1  | 2 | 7 | 8  |
+			+-----------------+
+		`)
+	b.ResetTimer()
+	b.ReportAllocs()
+	var store Matrix
+	for i := 0; i < b.N; i++ {
+		store = m1.Multiply(m2)
+	}
+	_ = store
+}
+
 func notEqualMatrix(t *testing.T, m1, m2 Matrix) {
 	require.NotEqual(t, m1, m2)
 	require.False(t, m1.Equal(m2))
