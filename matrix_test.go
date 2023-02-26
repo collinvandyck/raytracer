@@ -128,8 +128,8 @@ func TestMatrix(t *testing.T) {
 			| 0 | 0 | 0 | 1 |
 			+---------------+
 		`)
-		t1 := newTuple(1, 2, 3, 1)
-		te := newTuple(18, 24, 33, 1)
+		t1 := NewTuple(1, 2, 3, 1)
+		te := NewTuple(18, 24, 33, 1)
 		_, _, _ = m1, t1, te
 		//equalTuple(t, te, m1.MultiplyByTuple(t1))
 	})

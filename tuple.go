@@ -97,14 +97,14 @@ func (t Tuple4) isPoint() bool {
 func (t Tuple4) isVector() bool {
 	return t.w == 0
 }
-func newTuple(x, y, z, w float) Tuple4 {
+func NewTuple(x, y, z, w float) Tuple4 {
 	return Tuple4{x, y, z, w}
 }
 
 type Point Tuple4
 
 func NewPoint(x, y, z float) Point {
-	return Point(newTuple(x, y, z, 1))
+	return Point(NewTuple(x, y, z, 1))
 }
 
 func (p Point) Scale(o Point) Point {
@@ -142,7 +142,7 @@ func (p Point) Z() float {
 type Vector Tuple4
 
 func NewVector(x, y, z float) Vector {
-	return Vector(newTuple(x, y, z, 0))
+	return Vector(NewTuple(x, y, z, 0))
 }
 
 func (v Vector) AddVector(o Vector) Vector {
