@@ -92,6 +92,33 @@ func TestMatrix(t *testing.T) {
 		`)
 		notEqualMatrix(t, m1, m2)
 	})
+	t.Run("Multiplying two matrices", func(t *testing.T) {
+		m1 := NewMatrixFromTable(`
+			+---------------+
+			| 1 | 2 | 3 | 4 |
+			| 5 | 6 | 7 | 8 |
+			| 9 | 8 | 7 | 6 |
+			| 5 | 4 | 3 | 2 |
+			+---------------+
+		`)
+		m2 := NewMatrixFromTable(`
+			+-----------------+
+			| -2 | 1 | 2 | 3  |
+			| 3  | 2 | 1 | -1 |
+			| 4  | 3 | 6 | 5  |
+			| 1  | 2 | 7 | 8  |
+			+-----------------+
+		`)
+		me := NewMatrixFromTable(`
+			+---------------------+
+			| 20 | 22 | 50  | 48  |
+			| 44 | 54 | 114 | 108 |
+			| 40 | 58 | 110 | 102 |
+			| 16 | 26 | 46  | 42  |
+			+---------------------+
+		`)
+		equalMatrix(t, me, m1.Multiply(m2))
+	})
 }
 
 func notEqualMatrix(t *testing.T, m1, m2 Matrix) {

@@ -74,3 +74,7 @@ func (m Matrix) Equal(o Matrix) bool {
 	}
 	return true
 }
+
+func (m Matrix) Multiply(o Matrix) Matrix {
+	return m
+}
