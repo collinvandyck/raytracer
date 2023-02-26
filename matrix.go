@@ -207,7 +207,7 @@ func (m Matrix) Cofactor(row, col int) float {
 }
 
 func (m Matrix) IsInvertible() bool {
-	return false
+	return m.Determinant() != 0
 }
 
 func (m Matrix) String() string {
