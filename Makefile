@@ -1,7 +1,10 @@
-.PHONY: run fill cannon lint
+.PHONY: test bench fill cannon lint
 
-run: lint
+test: lint
 	go test .
+
+bench: lint
+	go test . -bench .
 
 fill:
 	go run ./cmd/fill

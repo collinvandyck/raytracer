@@ -179,10 +179,12 @@ func (m Matrix) Determinant() float {
 		panic("determinant on empty matrix")
 	}
 	rows, cols := m.Rows(), m.Cols()
+	if rows < 2 || cols < 2 {
+		panic("determinant on small matrix")
+	}
 	if rows == 2 && cols == 2 {
 		return m.Get(0, 0)*m.Get(1, 1) - m.Get(0, 1)*m.Get(1, 0)
 	}
-
 	var res float
 	for i := 0; i < m.Cols(); i++ {
 		cf := m.Cofactor(0, i)

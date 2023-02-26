@@ -292,7 +292,23 @@ func TestMatrix(t *testing.T) {
 	})
 }
 
-func BenchmarkMatrixSubmatrix(b *testing.B) {
+func BenchmarkMatrix4x4Determinant(b *testing.B) {
+	m1 := NewMatrixFromTable(`
+		+---------------------------+
+		| -2.0 | -8.0 |  3.0 |  5.0 |
+		| -3.0 |  1.0 |  7.0 |  3.0 |
+		|  1.0 |  2.0 | -9.0 |  6.0 |
+		| -6.0 |  7.0 |  7.0 | -9.0 |
+		+---------------------------+
+	`)
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		_ = m1.Determinant()
+	}
+}
+
+func BenchmarkMatrix4x4Submatrix(b *testing.B) {
 	m1 := NewMatrixFromTable(`
 			+---------------+
 			| 1 | 2 | 3 | 4 |
