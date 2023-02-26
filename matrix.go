@@ -263,7 +263,7 @@ func (m Matrix) sameDimensions(o Matrix) bool {
 
 func (m Matrix) resolveRow(row int) int {
 	res := row
-	for p := m.parent; p != nil; p = p.parent {
+	for p := &m; p != nil && p.parent != nil; p = p.parent {
 		if res >= m.smr {
 			res++
 		}
@@ -273,7 +273,7 @@ func (m Matrix) resolveRow(row int) int {
 
 func (m Matrix) resolveCol(col int) int {
 	res := col
-	for p := m.parent; p != nil; p = p.parent {
+	for p := &m; p != nil && p.parent != nil; p = p.parent {
 		if res >= m.smc {
 			res++
 		}
