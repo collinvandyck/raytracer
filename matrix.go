@@ -299,6 +299,7 @@ func (m Matrix) Empty() bool {
 }
 
 func (m *Matrix) SetDebug(b bool) {
+	fmt.Println(m.verbose)
 	m.verbose = b
 }
 
