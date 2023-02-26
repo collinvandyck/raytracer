@@ -175,6 +175,15 @@ func TestMatrix(t *testing.T) {
 		me := MatrixIdentity4x4
 		equalMatrix(t, me, m1.Transpose())
 	})
+	t.Run("Calculating the determinant of a 2x2 matrix", func(t *testing.T) {
+		m1 := NewMatrixFromTable(`
+			+--------+
+			|  1 | 5 |
+			| -3 | 2 |
+			+--------+
+		`)
+		require.EqualValues(t, 17, m1.Determinant())
+	})
 }
 
 func BenchmarkMatrixMultiply(b *testing.B) {

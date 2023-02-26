@@ -133,6 +133,14 @@ func (m Matrix) Transpose() Matrix {
 	return res
 }
 
+func (m Matrix) Determinant() float {
+	rows, cols := m.Rows(), m.Cols()
+	if rows != 2 || cols != 2 {
+		panic("only 2x2 matrixes supported")
+	}
+	return m.Get(0, 0)*m.Get(1, 1) - m.Get(0, 1)*m.Get(1, 0)
+}
+
 func (m Matrix) sameDimensions(o Matrix) bool {
 	return m.Rows() == o.Rows() && m.Cols() == o.Cols()
 }
