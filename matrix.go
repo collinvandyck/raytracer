@@ -2,6 +2,7 @@ package rt
 
 import (
 	"bufio"
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -133,6 +134,23 @@ func (m Matrix) Transpose() Matrix {
 		}
 	}
 	return res
+}
+
+func (m Matrix) Submatrix(row, col int) Matrix {
+	return m
+}
+
+func (m Matrix) String() string {
+	rows := make([][]string, 0)
+	for ri := 0; ri < m.Rows(); ri++ {
+		row := make([]string, 0)
+		for ci := 0; ci < m.Cols(); ci++ {
+			str := fmt.Sprintf("%f", m.Get(ri, ci))
+			row = append(row, str)
+		}
+		rows = append(rows, row)
+	}
+	return fmt.Sprintf("%v", rows)
 }
 
 func (m Matrix) Determinant() float {

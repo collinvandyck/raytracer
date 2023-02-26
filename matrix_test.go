@@ -175,14 +175,34 @@ func TestMatrix(t *testing.T) {
 		me := MatrixIdentity4x4
 		equalMatrix(t, me, m1.Transpose())
 	})
-	t.Run("Calculating the determinant of a 2x2 matrix", func(t *testing.T) {
-		m1 := NewMatrixFromTable(`
-			+--------+
-			|  1 | 5 |
-			| -3 | 2 |
-			+--------+
-		`)
-		require.EqualValues(t, 17, m1.Determinant())
+	t.Run("Determinants", func(t *testing.T) {
+		t.Run("Calculating the determinant of a 2x2 matrix", func(t *testing.T) {
+			m1 := NewMatrixFromTable(`
+				+--------+
+				|  1 | 5 |
+				| -3 | 2 |
+				+--------+
+			`)
+			require.EqualValues(t, 17, m1.Determinant())
+		})
+	})
+	t.Run("Submatrixes", func(t *testing.T) {
+		t.Run("A submatrix of a 3x3 matrix is a 2x2 matrix", func(t *testing.T) {
+			m1 := NewMatrixFromTable(`
+				+---------------+
+				|  1 | 5 |  0  |
+				| -3 | 2 |  7  |
+				|  0 | 6 | -3  |
+				+---------------+
+			`)
+			me := NewMatrixFromTable(`
+				+--------+
+				| -3 | 2 |
+				|  0 | 6 |
+				+--------+
+			`)
+			equalMatrix(t, me, m1.Submatrix(0, 2))
+		})
 	})
 }
 
@@ -211,13 +231,11 @@ func BenchmarkMatrixMultiply(b *testing.B) {
 }
 
 func notEqualMatrix(t *testing.T, m1, m2 Matrix) {
-	require.NotEqual(t, m1, m2)
 	require.False(t, m1.Equal(m2))
 	require.False(t, m2.Equal(m1))
 }
 
 func equalMatrix(t *testing.T, m1, m2 Matrix) {
-	require.Equal(t, m1, m2)
-	require.True(t, m1.Equal(m2))
-	require.True(t, m2.Equal(m1))
+	require.True(t, m1.Equal(m2), "m1:\n%s\nwas not equal to\nm2:\n%s", m1, m2)
+	require.True(t, m2.Equal(m1), "m2:\n%s\nwas not equal to\nm1:\n%s", m2, m1)
 }
