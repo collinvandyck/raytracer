@@ -138,7 +138,11 @@ func (m Matrix) Transpose() Matrix {
 }
 
 func (m Matrix) Submatrix(row, col int) Matrix {
-	return m
+	if m.Rows() <= 1 || m.Cols() <= 1 {
+		panic("matrix must have dimension of at least2")
+	}
+	res := NewMatrix(m.Rows()-1, m.Cols()-1)
+	return res
 }
 
 func (m Matrix) String() string {
@@ -171,7 +175,7 @@ func (m Matrix) String() string {
 	}
 	header := "+"
 	header += strings.Repeat("-", widthSum-1)
-	header += strings.Repeat("-", m.Cols()*3) // table borders
+	header += strings.Repeat("-", m.Cols()*3) // cell borders
 	header += "+"
 	buf := new(bytes.Buffer)
 	buf.WriteString(header + "\n")
