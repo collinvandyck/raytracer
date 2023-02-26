@@ -8,6 +8,13 @@ import (
 
 type Matrix [][]float
 
+var MatrixIdentity4x4 = Matrix{
+	{1, 0, 0, 0},
+	{0, 1, 0, 0},
+	{0, 0, 1, 0},
+	{0, 0, 0, 1},
+}
+
 func NewMatrix(rows, cols int) Matrix {
 	m := make(Matrix, rows)
 	for i := range m {

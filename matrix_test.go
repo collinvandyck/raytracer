@@ -132,6 +132,25 @@ func TestMatrix(t *testing.T) {
 		te := NewTuple(18, 24, 33, 1)
 		equalTuple(t, te, m1.MultiplyTuple4(t1))
 	})
+	t.Run("Multiplying a matrix by the identity matrix", func(t *testing.T) {
+		m1 := NewMatrixFromTable(`
+			+-----------------+
+			| 0 | 1 | 2  | 4  |
+			| 1 | 2 | 4  | 8  |
+			| 2 | 4 | 8  | 16 |
+			| 4 | 8 | 16 | 32 |
+			+-----------------+
+		`)
+		e1 := NewMatrixFromTable(`
+			+-----------------+
+			| 0 | 1 | 2  | 4  |
+			| 1 | 2 | 4  | 8  |
+			| 2 | 4 | 8  | 16 |
+			| 4 | 8 | 16 | 32 |
+			+-----------------+
+		`)
+		equalMatrix(t, e1, m1.Multiply(MatrixIdentity4x4))
+	})
 }
 
 func notEqualMatrix(t *testing.T, m1, m2 Matrix) {
