@@ -16,7 +16,7 @@ func TestQuickSubmatrixRegression(t *testing.T) {
 		+---------------+
 	`)
 	m1.SetOptimize(true)
-	m1.SetDebug(true)
+	m1.SetVerbose(true)
 
 	m2 := m1.Submatrix(0, 0)
 	equalMatrix(t, NewMatrixFromTable(`
@@ -85,7 +85,7 @@ func TestQuickCofactorNoOptimize(t *testing.T) {
 		| -6.0 |  7.0 |  7.0 | -9.0 |
 		+---------------------------+
 	`)
-	m1.SetDebug(true)
+	m1.SetVerbose(true)
 
 	require.EqualValues(t, 690, m1.Cofactor(0, 0))
 	/*
@@ -105,7 +105,7 @@ func TestQuickCofactorOptimize(t *testing.T) {
 		| -6.0 |  7.0 |  7.0 | -9.0 |
 		+---------------------------+
 	`)
-	m1.SetDebug(true)
+	m1.SetVerbose(true)
 	m1.SetOptimize(true)
 
 	require.EqualValues(t, 690, m1.Cofactor(0, 0))

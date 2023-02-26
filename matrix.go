@@ -298,7 +298,7 @@ func (m Matrix) Empty() bool {
 	return m.Rows() == 0 || m.Cols() == 0
 }
 
-func (m *Matrix) SetDebug(b bool) {
+func (m *Matrix) SetVerbose(b bool) {
 	m.verbose = b
 }
 
