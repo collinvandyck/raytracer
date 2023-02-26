@@ -188,7 +188,11 @@ func (m Matrix) Minor(row, col int) float {
 }
 
 func (m Matrix) Cofactor(row, col int) float {
-	return 0
+	sm := m.Minor(row, col)
+	if (row+col)%2 == 1 {
+		sm *= -1
+	}
+	return sm
 }
 
 func (m Matrix) String() string {
