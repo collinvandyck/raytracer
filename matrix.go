@@ -175,11 +175,20 @@ func (m Matrix) Submatrix(row, col int) Matrix {
 }
 
 func (m Matrix) Determinant() float {
-	rows, cols := m.Rows(), m.Cols()
-	if rows != 2 || cols != 2 {
-		panic("only 2x2 matrixes supported")
+	if m.Empty() {
+		panic("determinant on empty matrix")
 	}
-	return m.Get(0, 0)*m.Get(1, 1) - m.Get(0, 1)*m.Get(1, 0)
+	rows, cols := m.Rows(), m.Cols()
+	if rows == 2 && cols == 2 {
+		return m.Get(0, 0)*m.Get(1, 1) - m.Get(0, 1)*m.Get(1, 0)
+	}
+
+	var res float
+	for i := 0; i < m.Cols(); i++ {
+		cf := m.Cofactor(0, i)
+		res += cf * m.Get(0, i)
+	}
+	return res
 }
 
 func (m Matrix) Minor(row, col int) float {
