@@ -3,6 +3,7 @@ package rt
 import (
 	"bufio"
 	"bytes"
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -189,6 +190,7 @@ func (m Matrix) Minor(row, col int) float {
 }
 
 func (m Matrix) Cofactor(row, col int) float {
+	fmt.Printf("Cofactor (%d, %d)\n", row, col)
 	sm := m.Minor(row, col)
 	if (row+col)%2 == 1 {
 		sm *= -1
