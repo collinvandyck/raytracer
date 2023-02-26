@@ -215,12 +215,14 @@ func TestMatrix(t *testing.T) {
 			cf00 := m1.Cofactor(0, 0)
 			cf01 := m1.Cofactor(0, 1)
 			cf02 := m1.Cofactor(0, 2)
+			cf03 := m1.Cofactor(0, 3)
 			dt1 := m1.Determinant()
 
-			require.EqualValues(t, 56, cf00)
-			require.EqualValues(t, 12, cf01)
-			require.EqualValues(t, -46, cf02)
-			require.EqualValues(t, -196, dt1)
+			require.EqualValues(t, 690, cf00)
+			require.EqualValues(t, 447, cf01)
+			require.EqualValues(t, 210, cf02)
+			require.EqualValues(t, 51, cf03)
+			require.EqualValues(t, -4071, dt1)
 		})
 	})
 	t.Run("Submatrixes", func(t *testing.T) {
