@@ -54,4 +54,27 @@ func TestMatrix(t *testing.T) {
 		require.Equal(t, 1.0, m.Get(2, 1))
 		require.Equal(t, 1.0, m.Get(2, 2))
 	})
+	t.Run("Matrix equality with identical matrices", func(t *testing.T) {
+		m1 := NewMatrixFromTable(`
+		    +---------------+
+			| 1 | 2 | 3 | 4 |
+			| 5 | 6 | 7 | 8 |
+			| 9 | 8 | 7 | 6 |
+			| 5 | 4 | 3 | 2 |
+		    +---------------+
+		`)
+		m2 := NewMatrixFromTable(`
+		    +---------------+
+			| 1 | 2 | 3 | 4 |
+			| 5 | 6 | 7 | 8 |
+			| 9 | 8 | 7 | 6 |
+			| 5 | 4 | 3 | 2 |
+		    +---------------+
+		`)
+		equalMatrix(t, m1, m2)
+	})
+}
+
+func equalMatrix(t *testing.T, m1, m2 Matrix) {
+	require.Equal(t, m1, m2)
 }
