@@ -73,6 +73,31 @@ func TestMatrix(t *testing.T) {
 		`)
 		equalMatrix(t, m1, m2)
 	})
+	t.Run("Matrix equality with different matrices", func(t *testing.T) {
+		m1 := NewMatrixFromTable(`
+			+---------------+
+			| 1 | 2 | 3 | 4 |
+			| 5 | 6 | 7 | 8 |
+			| 9 | 8 | 7 | 6 |
+			| 5 | 4 | 3 | 2 |
+			+---------------+
+		`)
+		m2 := NewMatrixFromTable(`
+			+---------------+
+			| 2 | 3 | 4 | 5 |
+			| 6 | 7 | 8 | 9 |
+			| 8 | 7 | 6 | 5 |
+			| 4 | 3 | 2 | 1 |
+			+---------------+
+		`)
+		notEqualMatrix(t, m1, m2)
+	})
+}
+
+func notEqualMatrix(t *testing.T, m1, m2 Matrix) {
+	require.NotEqual(t, m1, m2)
+	require.False(t, m1.Equal(m2))
+	require.False(t, m2.Equal(m1))
 }
 
 func equalMatrix(t *testing.T, m1, m2 Matrix) {
