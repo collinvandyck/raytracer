@@ -16,7 +16,6 @@ func TestQuickSubmatrixRegression(t *testing.T) {
 		+---------------+
 	`)
 	m1.SetOptimize(true)
-	m1.SetVerbose(true)
 
 	m2 := m1.Submatrix(0, 0)
 	equalMatrix(t, NewMatrixFromTable(`
@@ -27,6 +26,8 @@ func TestQuickSubmatrixRegression(t *testing.T) {
 		+-----------+
 	`), m2)
 	m3 := m2.Submatrix(0, 1)
+	m3.SetVerbose(true)
+
 	require.EqualValues(t, 8, m3.Get(0, 0))
 	equalMatrix(t, NewMatrixFromTable(`
 		+-------+

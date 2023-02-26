@@ -92,6 +92,7 @@ func (m Matrix) Cols() int {
 
 func (m Matrix) Get(row int, col int) float {
 	nrow, ncol := m.resolveRow(row), m.resolveCol(col)
+	m.debug("Get (%d,%d) -> (%d,%d)", row, col, nrow, ncol)
 	return m.vals[nrow][ncol]
 }
 
@@ -317,9 +318,10 @@ func (m Matrix) sameDimensions(o Matrix) bool {
 }
 
 func (m Matrix) resolveRow(row int) int {
+	m.debug("resolveRow(%d)", row)
 	res := row
 	for p := &m; p != nil && p.parent != nil; p = p.parent {
-		if res >= m.smr {
+		if res >= p.smr {
 			res++
 		}
 	}
@@ -329,7 +331,7 @@ func (m Matrix) resolveRow(row int) int {
 func (m Matrix) resolveCol(col int) int {
 	res := col
 	for p := &m; p != nil && p.parent != nil; p = p.parent {
-		if res >= m.smc {
+		if res >= p.smc {
 			res++
 		}
 	}
