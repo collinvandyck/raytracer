@@ -38,6 +38,11 @@ func NewMatrixFromTable(table string) (res Matrix) {
 			}
 			row = append(row, num)
 		}
+		if len(rows) > 0 {
+			if len(row) != len(rows[0]) {
+				panic("inconsistent rows")
+			}
+		}
 		rows = append(rows, row)
 	}
 	res = Matrix(rows)
@@ -46,4 +51,8 @@ func NewMatrixFromTable(table string) (res Matrix) {
 
 func (m Matrix) Get(row int, column int) float {
 	return m[row][column]
+}
+
+func (m Matrix) Equal(o Matrix) bool {
+	return false
 }
