@@ -97,11 +97,20 @@ func (m Matrix) Multiply(o Matrix) (res Matrix) {
 	return
 }
 
-func (m Matrix) MultiplyTuple4(t1 Tuple4) Tuple4 {
+func (m Matrix) MultiplyTuple4(t1 Tuple4) (res Tuple4) {
 	if m.Rows() != 4 || m.Cols() != 4 {
 		panic("must be a 4x4")
 	}
-	return Tuple4{}
+	vals := [4]float{}
+	for ri := 0; ri < m.Rows(); ri++ {
+		for lhsi := 0; lhsi < m.Cols(); lhsi++ {
+			lhs := m.Get(ri, lhsi)
+			//vals[ri] += val
+			_ = lhs
+		}
+	}
+	res.x, res.y, res.z, res.w = vals[0], vals[1], vals[2], vals[3]
+	return
 }
 
 func (m Matrix) sameDimensions(o Matrix) bool {
