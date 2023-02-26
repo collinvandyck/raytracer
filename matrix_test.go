@@ -119,6 +119,19 @@ func TestMatrix(t *testing.T) {
 		`)
 		equalMatrix(t, me, m1.Multiply(m2))
 	})
+	t.Run("A matrix multiplied by a tuple", func(t *testing.T) {
+		m1 := NewMatrixFromTable(`
+			+---------------+
+			| 1 | 2 | 3 | 4 |
+			| 2 | 4 | 4 | 2 |
+			| 8 | 6 | 4 | 1 |
+			| 0 | 0 | 0 | 1 |
+			+---------------+
+		`)
+		t1 := tuple(1, 2, 3, 1)
+		_ = m1
+		_ = t1
+	})
 }
 
 func notEqualMatrix(t *testing.T, m1, m2 Matrix) {

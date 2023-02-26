@@ -98,14 +98,7 @@ func (m Matrix) Multiply(o Matrix) (res Matrix) {
 }
 
 func (m Matrix) sameDimensions(o Matrix) bool {
-	if len(m) != len(o) {
-		return false
-	}
-	if len(m) == 0 && len(o) == 0 {
-		return true
-	}
-	if len(m[0]) != len(o[0]) {
-		return false
-	}
-	return true
+	mr, or := m.Rows(), o.Rows()
+	mc, oc := m.Cols(), o.Cols()
+	return mr == or && mc == oc
 }
