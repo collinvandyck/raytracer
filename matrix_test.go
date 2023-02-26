@@ -1,6 +1,7 @@
 package rt
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -286,10 +287,16 @@ func TestMatrix(t *testing.T) {
 				| -7 | 1 |
 				+--------+
 			`)
-			require.EqualValues(t, -6, m2x2.Get(0, 0))
-			require.EqualValues(t, 6, m2x2.Get(0, 1))
+			fmt.Println("")
+			fmt.Println("")
+
+			// it fails here
 			require.EqualValues(t, -7, m2x2.Get(1, 0))
+
 			require.EqualValues(t, 1, m2x2.Get(1, 1))
+			require.EqualValues(t, 6, m2x2.Get(0, 1))
+			require.EqualValues(t, -6, m2x2.Get(0, 0))
+
 			equalMatrix(t, ex2x2, m2x2)
 		})
 	})
