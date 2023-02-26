@@ -25,6 +25,14 @@ func NewMatrix(rows, cols int) Matrix {
 	return m
 }
 
+func NewMatrixFromValues(values [][]float) (res Matrix) {
+	if len(values) == 0 {
+		return res
+	}
+	res = Matrix(values)
+	return res
+}
+
 func NewMatrixFromTable(table string) (res Matrix) {
 	table = strings.TrimSpace(table)
 	s := bufio.NewScanner(strings.NewReader(table))

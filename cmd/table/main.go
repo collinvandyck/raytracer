@@ -40,7 +40,7 @@ func main() {
 	if len(rows) == 0 {
 		log.Fatal("No rows")
 	}
-	m := rt.Matrix(rows)
+	m := rt.NewMatrixFromValues(rows)
 	fmt.Println(m)
 
 }
