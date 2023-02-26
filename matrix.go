@@ -3,7 +3,6 @@ package rt
 import (
 	"bufio"
 	"bytes"
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -222,7 +221,7 @@ func (m Matrix) String() string {
 	for ri := 0; ri < m.Rows(); ri++ {
 		row := make([]string, 0)
 		for ci := 0; ci < m.Cols(); ci++ {
-			str := fmt.Sprintf("%.1f", m.Get(ri, ci))
+			str := strconv.FormatFloat(m.Get(ri, ci), 'f', -1, 64)
 			row = append(row, str)
 		}
 		rows = append(rows, row)
