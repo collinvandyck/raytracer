@@ -108,8 +108,7 @@ func (m Matrix) MultiplyTuple4(t1 Tuple4) (res Tuple4) {
 		vals[ri] += m.Get(ri, 2) * t1.z
 		vals[ri] += m.Get(ri, 3) * t1.w
 	}
-	res.x, res.y, res.z, res.w = vals[0], vals[1], vals[2], vals[3]
-	return
+	return NewTuple(vals[0], vals[1], vals[2], vals[3])
 }
 
 func (m Matrix) sameDimensions(o Matrix) bool {
