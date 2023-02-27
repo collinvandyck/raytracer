@@ -379,6 +379,26 @@ func TestMatrix(t *testing.T) {
 		`)
 		equalMatrix(t, ie, b1)
 	})
+	t.Run("Multiplying a product by its inverse", func(t *testing.T) {
+		a1 := NewMatrixFromTable(`
+			+-------------------+
+			|  3 | -9 |  7 |  3 |
+			|  3 | -8 |  2 | -9 |
+			| -4 |  4 |  4 |  1 |
+			| -6 |  5 | -1 |  1 |
+			+-------------------+
+		`)
+		b1 := NewMatrixFromTable(`
+			+----------------+
+			| 8 |  2 | 2 | 2 |
+			| 3 | -1 | 7 | 0 |
+			| 7 |  0 | 5 | 4 |
+			| 6 | -2 | 0 | 5 |
+			+----------------+
+		`)
+		c1 := a1.Multiply(b1)
+		equalMatrix(t, a1, c1.Multiply(b1.Inverse()))
+	})
 }
 
 func notEqualMatrix(t *testing.T, m1, m2 Matrix) {
