@@ -359,6 +359,22 @@ func BenchmarkMatrix4x4Get(b *testing.B) {
 	}
 }
 
+func BenchmarkMatrix4x4Minor(b *testing.B) {
+	m1 := NewMatrixFromTable(`
+		+---------------------------+
+		| -2.0 | -8.0 |  3.0 |  5.0 |
+		| -3.0 |  1.0 |  7.0 |  3.0 |
+		|  1.0 |  2.0 | -9.0 |  6.0 |
+		| -6.0 |  7.0 |  7.0 | -9.0 |
+		+---------------------------+
+	`)
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		_ = m1.Minor(0, 0)
+	}
+}
+
 func BenchmarkMatrix4x4Cofactor(b *testing.B) {
 	m1 := NewMatrixFromTable(`
 		+---------------------------+
