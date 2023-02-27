@@ -9,12 +9,11 @@ import (
 )
 
 type Matrix struct {
-	vals     [][]float
-	parent   *Matrix // submatrices will have this set
-	smr      int     // submatrix row omitted
-	smc      int     // submatrix column omitted
-	verbose  bool
-	optimize bool
+	vals    [][]float
+	parent  *Matrix // submatrices will have this set
+	smr     int     // submatrix row omitted
+	smc     int     // submatrix column omitted
+	verbose bool
 }
 
 var MatrixIdentity4x4 = NewMatrixFromValues([][]float{
@@ -165,38 +164,13 @@ func (m Matrix) Submatrix(row, col int) Matrix {
 	if m.Rows() <= 1 || m.Cols() <= 1 {
 		panic("matrix must have dimension of at least2")
 	}
-	if m.optimize {
-		return Matrix{
-			parent:   &m,
-			smr:      row,
-			smc:      col,
-			vals:     m.vals,
-			verbose:  m.verbose,
-			optimize: m.optimize,
-		}
+	return Matrix{
+		parent:  &m,
+		smr:     row,
+		smc:     col,
+		vals:    m.vals,
+		verbose: m.verbose,
 	}
-	res := NewMatrix(m.Rows()-1, m.Cols()-1)
-	res.verbose = m.verbose
-	for ri := 0; ri < m.Rows(); ri++ {
-		if ri == row {
-			continue
-		}
-		for ci := 0; ci < m.Cols(); ci++ {
-			if ci == col {
-				continue
-			}
-			resri := ri
-			if resri > row {
-				resri -= 1
-			}
-			resci := ci
-			if resci > col {
-				resci -= 1
-			}
-			res.Set(resri, resci, m.Get(ri, ci))
-		}
-	}
-	return res
 }
 
 func (m Matrix) Determinant() float {
@@ -301,10 +275,6 @@ func (m Matrix) Empty() bool {
 
 func (m *Matrix) SetVerbose(b bool) {
 	m.verbose = b
-}
-
-func (m *Matrix) SetOptimize(b bool) {
-	m.optimize = b
 }
 
 func (m Matrix) debug(msg string, args ...any) {

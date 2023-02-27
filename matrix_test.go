@@ -388,7 +388,6 @@ func BenchmarkMatrix4x4Determinant(b *testing.B) {
 		| -6.0 |  7.0 |  7.0 | -9.0 |
 		+---------------------------+
 	`)
-	m1.SetOptimize(true)
 	b.ResetTimer()
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
@@ -405,7 +404,6 @@ func BenchmarkMatrix4x4Submatrix(b *testing.B) {
 			| 5 | 4 | 3 | 2 |
 			+---------------+
 		`)
-	m1.SetOptimize(true)
 	b.ResetTimer()
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
@@ -430,8 +428,6 @@ func BenchmarkMatrixMultiply(b *testing.B) {
 			| 1  | 2 | 7 | 8  |
 			+-----------------+
 		`)
-	m1.SetOptimize(true)
-	m2.SetOptimize(true)
 	b.ResetTimer()
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
