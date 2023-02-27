@@ -201,7 +201,7 @@ func (m Matrix) Determinant() float {
 
 func (m Matrix) Minor(row, col int) float {
 	sm := m.Submatrix(row, col)
-	defer sm.done()
+	defer sm.Release()
 	return sm.Determinant()
 }
 
@@ -214,7 +214,18 @@ func (m Matrix) Cofactor(row, col int) float {
 }
 
 func (m Matrix) Inverse() Matrix {
-	return m
+	if !m.IsInvertible() {
+		panic("matrix is not invertible")
+	}
+	dt := m.Determinant()
+	m2 := NewMatrix(m.Rows(), m.Cols())
+	for ri := 0; ri < m2.Rows(); ri++ {
+		for ci := 0; ci < m2.Cols(); ci++ {
+			c := m.Cofactor(ri, ci)
+			m2.Set(ci, ri, c/dt)
+		}
+	}
+	return m2
 }
 
 func (m Matrix) IsInvertible() bool {
@@ -279,7 +290,7 @@ func (m Matrix) sameDimensions(o Matrix) bool {
 }
 
 // signifies that this matrix is no longer needed
-func (m *Matrix) done() {
+func (m *Matrix) Release() {
 	mstore.Put(m)
 }
 

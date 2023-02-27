@@ -328,7 +328,7 @@ func TestMatrix(t *testing.T) {
 		require.EqualValues(t, -160, a1.Cofactor(2, 3))
 		require.EqualValues(t, -160.0/532.0, b1.Get(3, 2))
 		require.EqualValues(t, 105, a1.Cofactor(3, 2))
-		require.EqualValues(t, -105.0/532.0, b1.Get(2, 3))
+		require.EqualValues(t, 105.0/532.0, b1.Get(2, 3))
 		ie := NewMatrixFromTable(`
 			+-------------------------------------------+
 			|  0.21805 |  0.45113 |   0.2406 | -0.04511 |

@@ -50,6 +50,22 @@ func BenchmarkMatrix4x4Cofactor(b *testing.B) {
 	}
 }
 
+func BenchmarkMatrix4x4Inverse(b *testing.B) {
+	m1 := NewMatrixFromTable(`
+		+---------------------------+
+		| -5.0 |  2.0 |  6.0 | -8.0 |
+		|  1.0 | -5.0 |  1.0 |  8.0 |
+		|  7.0 |  7.0 | -6.0 | -7.0 |
+		|  1.0 | -3.0 |  7.0 |  4.0 |
+		+---------------------------+
+	`)
+	b.ResetTimer()
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		_ = m1.Inverse()
+	}
+}
+
 func BenchmarkMatrix4x4Determinant(b *testing.B) {
 	m1 := NewMatrixFromTable(`
 		+---------------------------+
