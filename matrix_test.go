@@ -429,6 +429,21 @@ func TestMatrix(t *testing.T) {
 		r2 := a1.Inverse().Transpose()
 		equalMatrix(t, r1, r2)
 	})
+	t.Run("Multiplying identity and non-identity by a tuple", func(t *testing.T) {
+		t1 := Tuple4{1, 2, 3, 4}
+		m1 := MatrixIdentity4x4
+		equalTuple(t, t1, m1.MultiplyTuple4(t1))
+
+		i2 := NewMatrixFromTable(`
+			+---------------+
+			| 1 | 0 | 0 | 0 |
+			| 0 | 1 | 0 | 0 |
+			| 0 | 0 | 2 | 0 |
+			| 0 | 0 | 0 | 1 |
+			+---------------+
+		`)
+		equalTuple(t, NewTuple(1, 2, 6, 4), i2.MultiplyTuple4(t1))
+	})
 }
 
 func notEqualMatrix(t *testing.T, m1, m2 Matrix) {
