@@ -213,6 +213,10 @@ func (m Matrix) IsInvertible() bool {
 	return m.Determinant() != 0
 }
 
+func (m Matrix) Empty() bool {
+	return m.Rows() == 0 || m.Cols() == 0
+}
+
 func (m Matrix) String() string {
 	if m.Empty() {
 		return "<empty>"
@@ -260,10 +264,6 @@ func (m Matrix) String() string {
 	}
 	buf.WriteString(header + "\n")
 	return buf.String()
-}
-
-func (m Matrix) Empty() bool {
-	return m.Rows() == 0 || m.Cols() == 0
 }
 
 func (m Matrix) sameDimensions(o Matrix) bool {
