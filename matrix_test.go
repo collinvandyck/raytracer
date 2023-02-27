@@ -405,15 +405,16 @@ func TestMatrix(t *testing.T) {
 	})
 	t.Run("Multiplying a matrix by its inverse", func(t *testing.T) {
 		a1 := NewMatrixFromTable(`
-			+--------------+
-			|  3 | -8 |  2 |
-			| -4 |  4 |  4 |
-			| -6 |  5 | -1 |
-			+--------------+
+			+------------------+
+			|  3 | -8 |  2 | 1 |
+			| -4 |  4 |  4 | 2 |
+			| -6 |  5 | -1 | 3 |
+			| -5 |  4 | -2 | 2 |
+			+------------------+
 		`)
 		i1 := a1.Inverse()
 		r1 := a1.Multiply(i1)
-		equalMatrix(t, MatrixIdentity3x3, r1)
+		equalMatrix(t, MatrixIdentity4x4, r1)
 	})
 }
 
