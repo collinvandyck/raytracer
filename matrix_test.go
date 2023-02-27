@@ -442,7 +442,7 @@ func TestMatrix(t *testing.T) {
 			| 0 | 0 | 0 | 1 |
 			+---------------+
 		`)
-		equalTuple(t, NewTuple(1, 2, 6, 4), i2.MultiplyTuple4(t1))
+		equalTuple(t, NewTuple(37, 34, 34, 4), i2.MultiplyTuple4(t1))
 	})
 }
 
