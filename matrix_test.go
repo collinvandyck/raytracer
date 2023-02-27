@@ -315,7 +315,7 @@ func TestMatrix(t *testing.T) {
 		require.False(t, m1.IsInvertible())
 	})
 	t.Run("Calculating the inverse of a matrix", func(t *testing.T) {
-		m1 := NewMatrixFromTable(`
+		a1 := NewMatrixFromTable(`
 			+---------------------------+
 			| -5.0 |  2.0 |  6.0 | -8.0 |
 			|  1.0 | -5.0 |  1.0 |  8.0 |
@@ -323,12 +323,12 @@ func TestMatrix(t *testing.T) {
 			|  1.0 | -3.0 |  7.0 |  4.0 |
 			+---------------------------+
 		`)
-		i1 := m1.Inverse()
-		require.EqualValues(t, 532, m1.Determinant())
-		require.EqualValues(t, -160, m1.Cofactor(2, 3))
-		require.EqualValues(t, -160.0/532.0, i1.Get(3, 2))
-		require.EqualValues(t, 105, m1.Cofactor(3, 2))
-		require.EqualValues(t, -105.0/532.0, i1.Get(2, 3))
+		b1 := a1.Inverse()
+		require.EqualValues(t, 532, a1.Determinant())
+		require.EqualValues(t, -160, a1.Cofactor(2, 3))
+		require.EqualValues(t, -160.0/532.0, b1.Get(3, 2))
+		require.EqualValues(t, 105, a1.Cofactor(3, 2))
+		require.EqualValues(t, -105.0/532.0, b1.Get(2, 3))
 		ie := NewMatrixFromTable(`
 			+-------------------------------------------+
 			|  0.21805 |  0.45113 |   0.2406 | -0.04511 |
@@ -337,7 +337,7 @@ func TestMatrix(t *testing.T) {
 			| -0.52256 | -0.81391 | -0.30075 |  0.30639 |
 			+-------------------------------------------+
 		`)
-		equalMatrix(t, ie, i1)
+		equalMatrix(t, ie, b1)
 	})
 }
 
