@@ -13,6 +13,12 @@ type Matrix struct {
 
 var mstore = newMatrixPool()
 
+var MatrixIdentity3x3 = NewMatrixFromValues([][]float{
+	{1, 0, 0},
+	{0, 1, 0},
+	{0, 0, 1},
+})
+
 var MatrixIdentity4x4 = NewMatrixFromValues([][]float{
 	{1, 0, 0, 0},
 	{0, 1, 0, 0},

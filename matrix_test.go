@@ -403,6 +403,18 @@ func TestMatrix(t *testing.T) {
 		a1 := MatrixIdentity4x4.Inverse()
 		equalMatrix(t, MatrixIdentity4x4, a1)
 	})
+	t.Run("Multiplying a matrix by its inverse", func(t *testing.T) {
+		a1 := NewMatrixFromTable(`
+			+--------------+
+			|  3 | -8 |  2 |
+			| -4 |  4 |  4 |
+			| -6 |  5 | -1 |
+			+--------------+
+		`)
+		i1 := a1.Inverse()
+		r1 := a1.Multiply(i1)
+		equalMatrix(t, MatrixIdentity3x3, r1)
+	})
 }
 
 func notEqualMatrix(t *testing.T, m1, m2 Matrix) {
