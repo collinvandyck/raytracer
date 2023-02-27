@@ -4,7 +4,7 @@ test: lint
 	go test .
 
 bench: lint
-	go test . -bench .
+	go test . -bench . -memprofile mem.out -cpuprofile cpu.out
 
 fill:
 	go run ./cmd/fill
