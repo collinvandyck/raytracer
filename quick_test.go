@@ -25,7 +25,6 @@ func TestQuickSubmatrixRegression(t *testing.T) {
 		+-----------+
 	`), m2)
 	m3 := m2.Submatrix(0, 1)
-	m3.SetVerbose(true)
 
 	require.EqualValues(t, 8, m3.Get(0, 0))
 	equalMatrix(t, NewMatrixFromTable(`
@@ -85,8 +84,6 @@ func TestQuickCofactorNoOptimize(t *testing.T) {
 		| -6.0 |  7.0 |  7.0 | -9.0 |
 		+---------------------------+
 	`)
-	m1.SetVerbose(true)
-
 	require.EqualValues(t, 690, m1.Cofactor(0, 0))
 	require.EqualValues(t, 447, m1.Cofactor(0, 1))
 	require.EqualValues(t, 210, m1.Cofactor(0, 2))
@@ -103,13 +100,9 @@ func TestQuickCofactorOptimize(t *testing.T) {
 		| -6.0 |  7.0 |  7.0 | -9.0 |
 		+---------------------------+
 	`)
-	m1.SetVerbose(true)
-
 	require.EqualValues(t, 690, m1.Cofactor(0, 0))
-	/*
-		require.EqualValues(t, 447, m1.Cofactor(0, 1))
-		require.EqualValues(t, 210, m1.Cofactor(0, 2))
-		require.EqualValues(t, 51, m1.Cofactor(0, 3))
-		require.EqualValues(t, -4071, m1.Determinant())
-	*/
+	require.EqualValues(t, 447, m1.Cofactor(0, 1))
+	require.EqualValues(t, 210, m1.Cofactor(0, 2))
+	require.EqualValues(t, 51, m1.Cofactor(0, 3))
+	require.EqualValues(t, -4071, m1.Determinant())
 }
