@@ -3,8 +3,11 @@
 test: lint
 	go test .
 
-bench: lint
+benchprofile: lint
 	go test -run notests -bench . -memprofile mem.out -cpuprofile cpu.out
+
+bench: lint
+	go test -run notests -bench . 
 
 fill:
 	go run ./cmd/fill
