@@ -201,7 +201,7 @@ func (m Matrix) Determinant() float {
 
 func (m Matrix) Minor(row, col int) float {
 	sm := m.Submatrix(row, col)
-	defer mstore.Return(&sm)
+	defer mstore.Put(&sm)
 	return sm.Determinant()
 }
 
@@ -276,6 +276,11 @@ func (m Matrix) String() string {
 
 func (m Matrix) sameDimensions(o Matrix) bool {
 	return m.Rows() == o.Rows() && m.Cols() == o.Cols()
+}
+
+// signifies that this matrix is no longer needed
+func (m *Matrix) done() {
+	mstore.Put(m)
 }
 
 func (m Matrix) reset() {
