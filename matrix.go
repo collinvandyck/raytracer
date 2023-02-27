@@ -11,6 +11,8 @@ type Matrix struct {
 	vals [][]float
 }
 
+var mstore = newMatrixPool()
+
 var MatrixIdentity4x4 = NewMatrixFromValues([][]float{
 	{1, 0, 0, 0},
 	{0, 1, 0, 0},
@@ -24,6 +26,11 @@ func NewMatrix(rows, cols int) Matrix {
 		m.vals[i] = make([]float, cols)
 	}
 	return m
+}
+
+func NewMatrixRef(rows, cols int) *Matrix {
+	res := NewMatrix(rows, cols)
+	return &res
 }
 
 func NewMatrixFromValues(values [][]float) (res Matrix) {
@@ -147,10 +154,10 @@ func (m Matrix) Transpose() Matrix {
 }
 
 func (m Matrix) Submatrix(row, col int) Matrix {
+	res := *(mstore.New(m.Rows()-1, m.Cols()-1))
 	if m.Rows() <= 1 || m.Cols() <= 1 {
 		panic("matrix must have dimension of at least2")
 	}
-	res := NewMatrix(m.Rows()-1, m.Cols()-1)
 	for ri := 0; ri < m.Rows(); ri++ {
 		if ri == row {
 			continue
@@ -194,6 +201,7 @@ func (m Matrix) Determinant() float {
 
 func (m Matrix) Minor(row, col int) float {
 	sm := m.Submatrix(row, col)
+	defer mstore.Return(&sm)
 	return sm.Determinant()
 }
 
@@ -268,4 +276,11 @@ func (m Matrix) String() string {
 
 func (m Matrix) sameDimensions(o Matrix) bool {
 	return m.Rows() == o.Rows() && m.Cols() == o.Cols()
+}
+
+func (m Matrix) reset() {
+	zero := []float{0, 0, 0, 0, 0, 0, 0, 0}
+	for i := 0; i < len(m.vals); i++ {
+		copy(m.vals[i], zero)
+	}
 }
