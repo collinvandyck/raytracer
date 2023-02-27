@@ -10,3 +10,7 @@ func Translation(x, y, z float) Translator {
 func (t Translator) MultiplyPoint(point Point) Point {
 	return point
 }
+
+func (t Translator) Inverse() Translator {
+	return Translator(Matrix(t).Inverse())
+}
