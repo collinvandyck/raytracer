@@ -1,1 +1,4 @@
 *.ppm
+cpu.out
+mem.out
+rt.test
