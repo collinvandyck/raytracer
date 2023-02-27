@@ -154,7 +154,7 @@ func (m Matrix) Transpose() Matrix {
 }
 
 func (m Matrix) Submatrix(row, col int) Matrix {
-	res := *(mstore.New(m.Rows()-1, m.Cols()-1))
+	res := NewMatrix(m.Rows()-1, m.Cols()-1)
 	if m.Rows() <= 1 || m.Cols() <= 1 {
 		panic("matrix must have dimension of at least2")
 	}
@@ -201,7 +201,7 @@ func (m Matrix) Determinant() float {
 
 func (m Matrix) Minor(row, col int) float {
 	sm := m.Submatrix(row, col)
-	defer mstore.Put(&sm)
+	defer sm.done()
 	return sm.Determinant()
 }
 
