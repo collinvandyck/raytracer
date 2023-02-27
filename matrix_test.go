@@ -416,6 +416,19 @@ func TestMatrix(t *testing.T) {
 		r1 := a1.Multiply(i1)
 		equalMatrix(t, MatrixIdentity4x4, r1)
 	})
+	t.Run("Comparing inverting transpose vs transposing inverted", func(t *testing.T) {
+		a1 := NewMatrixFromTable(`
+			+------------------+
+			|  3 | -8 |  2 | 1 |
+			| -4 |  4 |  4 | 2 |
+			| -6 |  5 | -1 | 3 |
+			| -5 |  4 | -2 | 2 |
+			+------------------+
+		`)
+		r1 := a1.Transpose().Inverse()
+		r2 := a1.Inverse().Transpose()
+		equalMatrix(t, r1, r2)
+	})
 }
 
 func notEqualMatrix(t *testing.T, m1, m2 Matrix) {
