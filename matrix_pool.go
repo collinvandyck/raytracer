@@ -38,9 +38,8 @@ func (p *matrixPool) New(rows, cols int) *Matrix {
 		return p.pool3x3.Get().(*Matrix)
 	case rows == cols && rows == 4:
 		return p.pool4x4.Get().(*Matrix)
-	default:
-		return AllocateMatrix(rows, cols)
 	}
+	return AllocateMatrix(rows, cols)
 }
 
 func (p *matrixPool) Put(m *Matrix) {
