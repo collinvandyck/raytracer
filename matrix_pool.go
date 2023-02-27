@@ -1,7 +1,6 @@
 package rt
 
 import (
-	"fmt"
 	"sync"
 )
 
@@ -15,17 +14,17 @@ func newMatrixPool() *matrixPool {
 	return &matrixPool{
 		pool2x2: sync.Pool{
 			New: func() any {
-				return NewMatrixRef(2, 2)
+				return AllocateMatrix(2, 2)
 			},
 		},
 		pool3x3: sync.Pool{
 			New: func() any {
-				return NewMatrixRef(3, 3)
+				return AllocateMatrix(3, 3)
 			},
 		},
 		pool4x4: sync.Pool{
 			New: func() any {
-				return NewMatrixRef(4, 4)
+				return AllocateMatrix(4, 4)
 			},
 		},
 	}
@@ -40,9 +39,7 @@ func (p *matrixPool) New(rows, cols int) *Matrix {
 	case rows == cols && rows == 4:
 		return p.pool4x4.Get().(*Matrix)
 	default:
-		fmt.Printf("NewMatrix (%d, %d)\n", rows, cols)
-		m := NewMatrix(rows, cols)
-		return &m
+		return AllocateMatrix(rows, cols)
 	}
 }
 

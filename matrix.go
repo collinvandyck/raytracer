@@ -21,16 +21,16 @@ var MatrixIdentity4x4 = NewMatrixFromValues([][]float{
 })
 
 func NewMatrix(rows, cols int) Matrix {
+	res := mstore.New(rows, cols)
+	return *res
+}
+
+func AllocateMatrix(rows, cols int) *Matrix {
 	m := Matrix{vals: make([][]float, rows)}
 	for i := range m.vals {
 		m.vals[i] = make([]float, cols)
 	}
-	return m
-}
-
-func NewMatrixRef(rows, cols int) *Matrix {
-	res := NewMatrix(rows, cols)
-	return &res
+	return &m
 }
 
 func NewMatrixFromValues(values [][]float) (res Matrix) {
