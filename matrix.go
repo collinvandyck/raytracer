@@ -244,7 +244,11 @@ func (m Matrix) String() string {
 	for ri := 0; ri < m.Rows(); ri++ {
 		row := make([]string, 0)
 		for ci := 0; ci < m.Cols(); ci++ {
-			str := strconv.FormatFloat(m.Get(ri, ci), 'f', -1, 64)
+			val := m.Get(ri, ci)
+			str := "0"
+			if val != 0 {
+				str = strconv.FormatFloat(m.Get(ri, ci), 'f', -1, 64)
+			}
 			row = append(row, str)
 		}
 		rows = append(rows, row)

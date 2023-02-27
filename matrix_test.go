@@ -399,6 +399,10 @@ func TestMatrix(t *testing.T) {
 		c1 := a1.Multiply(b1)
 		equalMatrix(t, a1, c1.Multiply(b1.Inverse()))
 	})
+	t.Run("Inverting the identity matrix", func(t *testing.T) {
+		a1 := MatrixIdentity4x4.Inverse()
+		equalMatrix(t, MatrixIdentity4x4, a1)
+	})
 }
 
 func notEqualMatrix(t *testing.T, m1, m2 Matrix) {
@@ -407,6 +411,6 @@ func notEqualMatrix(t *testing.T, m1, m2 Matrix) {
 }
 
 func equalMatrix(t *testing.T, me, m1 Matrix) {
-	require.True(t, me.Equal(m1), "me:\n%s\nwas not equal to\nm1:\n%s", me, m1)
-	require.True(t, m1.Equal(me), "m1:\n%s\nwas not equal to\nme:\n%s", m1, me)
+	require.True(t, me.Equal(m1), "expected:\n%s\nactual:\n%s", me, m1)
+	require.True(t, m1.Equal(me), "expected:\n%s\nactual:\n%s", m1, me)
 }
