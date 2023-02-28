@@ -39,4 +39,10 @@ func TestScaling(t *testing.T) {
 		equalVector(t, NewVector(-8, 18, 32), t1.MultiplyVector(v1))
 	})
 
+	t.Run("Multiplying by the inverse of a scaling matrix", func(t *testing.T) {
+		t1 := Scaling(2, 3, 4)
+		v1 := NewVector(-4, 6, 8)
+		equalVector(t, NewVector(-8, 18, 32), t1.MultiplyVector(v1))
+	})
+
 }
