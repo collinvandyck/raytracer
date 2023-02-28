@@ -11,6 +11,10 @@ func (t Translator) MultiplyPoint(point Point) Point {
 	return point
 }
 
+func (t Translator) MultiplyVector(vector Vector) Vector {
+	return vector
+}
+
 func (t Translator) Inverse() Translator {
 	return Translator(Matrix(t).Inverse())
 }
