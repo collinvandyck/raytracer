@@ -26,3 +26,12 @@ func (t Translator) MultiplyVector(vector Vector) Vector {
 func (t Translator) Inverse() Translator {
 	return Translator(Matrix(t).Inverse())
 }
+
+func Scaling(x, y, z float) Translator {
+	m := NewMatrix(4, 4)
+	m.Set(0, 0, x)
+	m.Set(1, 1, y)
+	m.Set(2, 2, z)
+	m.Set(3, 3, 1)
+	return Translator(m)
+}

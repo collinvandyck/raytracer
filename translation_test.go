@@ -24,3 +24,13 @@ func TestTranslation(t *testing.T) {
 	})
 
 }
+
+func TestScaling(t *testing.T) {
+
+	t.Run("A scaling matrix applied to a point", func(t *testing.T) {
+		t1 := Scaling(2, 3, 4)
+		p1 := NewPoint(-4, 6, 8)
+		equalPoint(t, NewPoint(-8, 18, 32), t1.MultiplyPoint(p1))
+	})
+
+}
