@@ -297,10 +297,3 @@ func (m Matrix) sameDimensions(o Matrix) bool {
 func (m *Matrix) Release() {
 	mstore.Put(m)
 }
-
-func (m Matrix) reset() {
-	zero := []float{0, 0, 0, 0, 0, 0, 0, 0}
-	for i := 0; i < len(m.vals); i++ {
-		copy(m.vals[i], zero)
-	}
-}

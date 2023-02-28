@@ -54,7 +54,10 @@ func (p *matrixPool) Put(m *Matrix) {
 		pool = p.pool4x4
 	}
 	if pool != nil {
-		m.reset()
+		zero := []float{0, 0, 0, 0, 0, 0, 0, 0}
+		for i := 0; i < len(m.vals); i++ {
+			copy(m.vals[i], zero)
+		}
 		pool.Put(m)
 	}
 }
