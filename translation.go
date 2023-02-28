@@ -18,6 +18,7 @@ func (t Translator) MultiplyPoint(point Point) Point {
 	return Point(Matrix(t).MultiplyTuple4(Tuple4(point)))
 }
 
+// todo: optimize by just returning the vector?
 func (t Translator) MultiplyVector(vector Vector) Vector {
 	return Vector(Matrix(t).MultiplyTuple4(Tuple4(vector)))
 }
