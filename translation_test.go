@@ -33,4 +33,10 @@ func TestScaling(t *testing.T) {
 		equalPoint(t, NewPoint(-8, 18, 32), t1.MultiplyPoint(p1))
 	})
 
+	t.Run("A scaling matrix applied to a vector", func(t *testing.T) {
+		t1 := Scaling(2, 3, 4)
+		v1 := NewVector(-4, 6, 8)
+		equalVector(t, NewVector(-8, 18, 32), t1.MultiplyVector(v1))
+	})
+
 }
