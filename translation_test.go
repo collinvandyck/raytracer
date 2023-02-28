@@ -46,4 +46,10 @@ func TestScaling(t *testing.T) {
 		equalVector(t, NewVector(-2, 2, 2), i1.MultiplyVector(v1))
 	})
 
+	t.Run("Reflection is scaling by a negative value", func(t *testing.T) {
+		t1 := Scaling(1, -1, 1)
+		p1 := NewPoint(2, 3, 4)
+		equalPoint(t, NewPoint(2, -3, 4), t1.MultiplyPoint(p1))
+	})
+
 }
