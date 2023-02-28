@@ -1,6 +1,9 @@
 package rt
 
-import "testing"
+import (
+	"math"
+	"testing"
+)
 
 func TestTranslation(t *testing.T) {
 
@@ -52,4 +55,15 @@ func TestScaling(t *testing.T) {
 		equalPoint(t, NewPoint(2, -3, 4), t1.MultiplyPoint(p1))
 	})
 
+}
+
+func TestRotation(t *testing.T) {
+	t.Run("Rotating a point around the x axis", func(t *testing.T) {
+		p1 := NewPoint(0, 1, 0)
+		halfQuarter := RotationX(Sqrt2 / 4)
+		fullQuarter := RotationX(Sqrt2 / 2)
+
+		equalPoint(t, NewPoint(0, math.Sqrt(2)/2, math.Sqrt(2)/2), halfQuarter.MultiplyPoint(p1))
+		equalPoint(t, NewPoint(0, 0, 1), fullQuarter.MultiplyPoint(p1))
+	})
 }

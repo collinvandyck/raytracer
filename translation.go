@@ -21,6 +21,15 @@ func Scaling(x, y, z float) Translator {
 	return Translator(m)
 }
 
+func RotationX(x float) Translator {
+	m := NewMatrix(4, 4)
+	m.Set(0, 0, 1)
+	m.Set(1, 1, x)
+	m.Set(2, 2, x)
+	m.Set(3, 3, 1)
+	return Translator(m)
+}
+
 type Translator Matrix
 
 func (t Translator) MultiplyPoint(point Point) Point {
