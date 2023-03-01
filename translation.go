@@ -2,6 +2,7 @@ package rt
 
 import "math"
 
+// Translation applies a direction
 func Translation(x, y, z float) Matrix {
 	m := NewMatrix(4, 4)
 	m.Set(0, 0, 1)

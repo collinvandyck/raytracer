@@ -36,6 +36,12 @@ func (c *Canvas) Fill(color Color) {
 	}
 }
 
+func (c *Canvas) WritePoint(point Point, color Color) {
+	x := int(point.x)
+	y := int(point.y)
+	c.WritePixel(x, y, color)
+}
+
 func (c *Canvas) WritePixel(x, y int, color Color) {
 	for xi := x; xi < x+c.pointSize; xi++ {
 		for yi := y; yi < y+c.pointSize; yi++ {
