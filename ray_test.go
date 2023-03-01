@@ -18,6 +18,15 @@ func TestRays(t *testing.T) {
 		r1 := NewRay(o1, d1)
 
 		equalPoint(t, NewPoint(2, 3, 4), r1.Position(0))
+		equalPoint(t, NewPoint(3, 3, 4), r1.Position(1))
+		equalPoint(t, NewPoint(1, 3, 4), r1.Position(-1))
+		equalPoint(t, NewPoint(4.5, 3, 4), r1.Position(2.5))
+	})
+
+	t.Run("A ray intersects a sphere at two points", func(t *testing.T) {
+		r1 := NewRay(NewPoint(0, 0, -5), NewVector(0, 0, 1))
+		_ = r1
+
 	})
 
 }
