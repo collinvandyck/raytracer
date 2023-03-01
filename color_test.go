@@ -33,8 +33,3 @@ func TestColors(t *testing.T) {
 		equalColor(t, NewColor(0.9, 0.2, 0.04), c1.Multiply(c2))
 	})
 }
-
-func equalColor(t *testing.T, c1, c2 Color) {
-	t.Helper()
-	require.True(t, c1.Equal(c2))
-}

@@ -445,13 +445,3 @@ func TestMatrix(t *testing.T) {
 		equalTuple(t, NewTuple(37, 34, 34, 4), i2.MultiplyTuple4(t1))
 	})
 }
-
-func notEqualMatrix(t *testing.T, m1, m2 Matrix) {
-	require.False(t, m1.Equal(m2))
-	require.False(t, m2.Equal(m1))
-}
-
-func equalMatrix(t *testing.T, me, m1 Matrix) {
-	require.True(t, me.Equal(m1), "expected:\n%s\nactual:\n%s", me, m1)
-	require.True(t, m1.Equal(me), "expected:\n%s\nactual:\n%s", m1, me)
-}

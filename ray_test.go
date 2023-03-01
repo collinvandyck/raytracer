@@ -25,7 +25,10 @@ func TestRays(t *testing.T) {
 
 	t.Run("A ray intersects a sphere at two points", func(t *testing.T) {
 		r1 := NewRay(NewPoint(0, 0, -5), NewVector(0, 0, 1))
-		_ = r1
+		s1 := NewSphere()
+
+		i1 := r1.IntersectSphere(s1)
+		equalIntersection(t, NewIntersection(4, 6), i1)
 
 	})
 
