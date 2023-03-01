@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"rt"
 )
@@ -23,7 +22,6 @@ func main() {
 	write := func(point rt.Point) {
 		p1 := t1.MultiplyPoint(point)
 		c.WritePoint(p1, color)
-		fmt.Println("Writing point", p1)
 	}
 
 	origin := rt.NewPoint(0, 0, 0)
