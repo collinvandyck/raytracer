@@ -99,4 +99,34 @@ func TestShearing(t *testing.T) {
 		equalPoint(t, NewPoint(5, 3, 4), t1.MultiplyPoint(p1))
 	})
 
+	t.Run("A shearing transformation moves x in proportion to z", func(t *testing.T) {
+		t1 := Shearing(0, 1, 0, 0, 0, 0)
+		p1 := NewPoint(2, 3, 4)
+		equalPoint(t, NewPoint(6, 3, 4), t1.MultiplyPoint(p1))
+	})
+
+	t.Run("A shearing transformation moves y in proportion to x", func(t *testing.T) {
+		t1 := Shearing(0, 0, 1, 0, 0, 0)
+		p1 := NewPoint(2, 3, 4)
+		equalPoint(t, NewPoint(2, 5, 4), t1.MultiplyPoint(p1))
+	})
+
+	t.Run("A shearing transformation moves y in proportion to z", func(t *testing.T) {
+		t1 := Shearing(0, 0, 0, 1, 0, 0)
+		p1 := NewPoint(2, 3, 4)
+		equalPoint(t, NewPoint(2, 7, 4), t1.MultiplyPoint(p1))
+	})
+
+	t.Run("A shearing transformation moves z in proportion to x", func(t *testing.T) {
+		t1 := Shearing(0, 0, 0, 0, 1, 0)
+		p1 := NewPoint(2, 3, 4)
+		equalPoint(t, NewPoint(2, 3, 6), t1.MultiplyPoint(p1))
+	})
+
+	t.Run("A shearing transformation moves z in proportion to y", func(t *testing.T) {
+		t1 := Shearing(0, 0, 0, 0, 0, 1)
+		p1 := NewPoint(2, 3, 4)
+		equalPoint(t, NewPoint(2, 3, 7), t1.MultiplyPoint(p1))
+	})
+
 }
