@@ -90,3 +90,13 @@ func TestRotation(t *testing.T) {
 	})
 
 }
+
+func TestShearing(t *testing.T) {
+
+	t.Run("A shearing transformation moves x in proportion to y", func(t *testing.T) {
+		t1 := Shearing(1, 0, 0, 0, 0, 0)
+		p1 := NewPoint(2, 3, 4)
+		equalPoint(t, NewPoint(5, 3, 4), t1.MultiplyPoint(p1))
+	})
+
+}

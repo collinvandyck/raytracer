@@ -185,10 +185,10 @@ func equalTuple(t *testing.T, t1, t2 Tuple4) {
 
 func equalVector(t *testing.T, v1, v2 Vector) {
 	t.Helper()
-	require.True(t, v1.Equal(v2), "Expected %s to equal %s", v1, v2)
+	require.True(t, v1.Equal(v2), "Expected %s to equal %s", v2, v1)
 }
 
 func equalPoint(t *testing.T, p1, p2 Point) {
 	t.Helper()
-	require.True(t, p1.Equal(p2), "Expected %s to equal %s", p1, p2)
+	require.True(t, p1.Equal(p2), "Expected %s to equal %s", p2, p1)
 }

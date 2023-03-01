@@ -56,6 +56,11 @@ func RotationZ(rad float) Translator {
 	return Translator(m)
 }
 
+func Shearing(xy, xz, yx, yz, zx, zy float) Translator {
+	m := NewMatrix(4, 4)
+	return Translator(m)
+}
+
 type Translator Matrix
 
 func (t Translator) MultiplyPoint(point Point) Point {
