@@ -151,4 +151,16 @@ func TestChaining(t *testing.T) {
 		p4 := c1.MultiplyPoint(p3)
 		equalPoint(t, NewPoint(15, 0, 7), p4)
 	})
+
+	t.Run("Chained transformations must be applied in reverse order", func(t *testing.T) {
+		p1 := NewPoint(1, 0, 1)
+		a1 := RotationX(Pi / 2)
+		b1 := Scaling(5, 5, 5)
+		c1 := Translation(10, 5, 7)
+
+		t1 := c1.Multiply(b1).Multiply(a1)
+		p2 := t1.MultiplyPoint(p1)
+		equalPoint(t, NewPoint(15, 0, 7), p2)
+	})
+
 }

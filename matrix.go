@@ -142,6 +142,14 @@ func (m Matrix) MultiplyTuple4(t1 Tuple4) (res Tuple4) {
 	return NewTuple(vals[0], vals[1], vals[2], vals[3])
 }
 
+func (m Matrix) MultiplyPoint(v1 Point) Point {
+	return Point(m.MultiplyTuple4(Tuple4(v1)))
+}
+
+func (m Matrix) MultiplyVector(v1 Vector) Vector {
+	return Vector(m.MultiplyTuple4(Tuple4(v1)))
+}
+
 func (m Matrix) Transpose() Matrix {
 	rows, cols := m.Rows(), m.Cols()
 	res := NewMatrix(cols, rows)
