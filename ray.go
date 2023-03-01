@@ -12,6 +12,11 @@ func NewRay(origin Point, direction Vector) Ray {
 	}
 }
 
+func (r Ray) Position(t float) Point {
+	d1 := r.direction.MultiplyBy(t)
+	return d1.AddPoint(r.origin)
+}
+
 func (r Ray) Origin() Point {
 	return r.origin
 }
