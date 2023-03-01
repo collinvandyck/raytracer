@@ -74,4 +74,12 @@ func TestRotation(t *testing.T) {
 		equalPoint(t, NewPoint(0, Sqrt2/2, -Sqrt2/2), inv.MultiplyPoint(p1))
 	})
 
+	t.Run("Rotating a point around the y axis", func(t *testing.T) {
+		p1 := NewPoint(0, 0, 1)
+		halfQuarter := RotationY(Pi / 4)
+		fullQuarter := RotationY(Pi / 2)
+		equalPoint(t, NewPoint(math.Sqrt(2)/2, 0, math.Sqrt(2)/2), halfQuarter.MultiplyPoint(p1))
+		equalPoint(t, NewPoint(1, 0, 0), fullQuarter.MultiplyPoint(p1))
+	})
+
 }

@@ -247,7 +247,7 @@ func (m Matrix) String() string {
 			val := m.Get(ri, ci)
 			str := "0"
 			if val != 0 {
-				str = strconv.FormatFloat(m.Get(ri, ci), 'f', -1, 64)
+				str = formatFloat(m.Get(ri, ci))
 			}
 			row = append(row, str)
 		}

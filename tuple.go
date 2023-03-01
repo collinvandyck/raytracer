@@ -1,12 +1,17 @@
 package rt
 
 import (
+	"fmt"
 	"math"
 )
 
 type (
 	float = float64
 )
+
+func NewTuple(x, y, z, w float) Tuple4 {
+	return Tuple4{x, y, z, w}
+}
 
 type Tuple4 struct {
 	x float
@@ -88,8 +93,9 @@ func (t Tuple4) isPoint() bool {
 func (t Tuple4) isVector() bool {
 	return t.w == 0
 }
-func NewTuple(x, y, z, w float) Tuple4 {
-	return Tuple4{x, y, z, w}
+
+func (t Tuple4) String() string {
+	return fmt.Sprintf("Tuple4(%s %s %s %s)", formatFloat(t.x), formatFloat(t.y), formatFloat(t.z), formatFloat(t.w))
 }
 
 type Point Tuple4
@@ -128,6 +134,10 @@ func (p Point) Y() float {
 
 func (p Point) Z() float {
 	return p.z
+}
+
+func (p Point) String() string {
+	return fmt.Sprintf("Point(%s %s %s)", formatFloat(p.x), formatFloat(p.y), formatFloat(p.z))
 }
 
 type Vector Tuple4
@@ -192,4 +202,8 @@ func (v Vector) Y() float {
 
 func (v Vector) Z() float {
 	return v.z
+}
+
+func (v Vector) String() string {
+	return fmt.Sprintf("Vector(%s %s %s)", formatFloat(v.x), formatFloat(v.y), formatFloat(v.z))
 }

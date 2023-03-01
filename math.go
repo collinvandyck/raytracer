@@ -1,6 +1,9 @@
 package rt
 
-import "math"
+import (
+	"math"
+	"strconv"
+)
 
 const (
 	EPSILON = 0.00001
@@ -10,6 +13,10 @@ const (
 
 func floatsEqual(v1, v2 float) bool {
 	return math.Abs(v1-v2) < EPSILON
+}
+
+func formatFloat(val float) string {
+	return strconv.FormatFloat(val, 'f', -1, 64)
 }
 
 /*
