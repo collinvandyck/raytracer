@@ -79,4 +79,11 @@ func TestRays(t *testing.T) {
 		equalIntersection(t, NewIntersection(-6, -4), i1)
 	})
 
+	t.Run("An intersection encapsulates t and object", func(t *testing.T) {
+		s1 := NewSphere()
+		i1 := s1.Intersection(3.5)
+		require.EqualValues(t, []float{3.5}, i1.Get())
+		intersectionHasSphere(t, s1, i1)
+	})
+
 }

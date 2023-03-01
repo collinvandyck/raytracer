@@ -41,3 +41,10 @@ func equalIntersection(t *testing.T, i1, i2 Intersection) {
 	t.Helper()
 	require.True(t, i1.Equal(i2), "Expected %v to equal %v", i2, i1)
 }
+
+func intersectionHasSphere(t *testing.T, sphere Sphere, i1 Intersection) {
+	t.Helper()
+	res, ok := i1.GetSphere()
+	require.True(t, ok, "intersection did not have sphere")
+	require.True(t, sphere.Equal(res), "Expected %s to equal %s", sphere, res)
+}

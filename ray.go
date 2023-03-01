@@ -8,13 +8,24 @@ type Ray struct {
 }
 
 type Intersection struct {
-	ts []float
+	ts    []float
+	sph   Sphere
+	sphok bool
 }
 
 func NewIntersection(ts ...float) Intersection {
 	return Intersection{
 		ts: ts,
 	}
+}
+
+func (i *Intersection) SetSphere(sphere Sphere) {
+	i.sph = sphere
+	i.sphok = true
+}
+
+func (i Intersection) GetSphere() (Sphere, bool) {
+	return i.sph, i.sphok
 }
 
 func (i Intersection) Get() []float {
@@ -60,7 +71,7 @@ func (r Ray) IntersectSphere(sphere Sphere) (res Intersection) {
 
 	t1 := (-b - math.Sqrt(discriminant)) / (2 * a)
 	t2 := (-b + math.Sqrt(discriminant)) / (2 * a)
-	return NewIntersection(t1, t2)
+	return sphere.Intersection(t1, t2)
 }
 
 func (r Ray) Position(t float) Point {
