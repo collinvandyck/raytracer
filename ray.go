@@ -19,6 +19,10 @@ func (i Intersection) Get() []float {
 	return i.ts
 }
 
+func (i Intersection) Len() int {
+	return len(i.ts)
+}
+
 func (i Intersection) Equal(o Intersection) bool {
 	if len(i.ts) != len(o.ts) {
 		return false

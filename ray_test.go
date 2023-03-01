@@ -29,7 +29,22 @@ func TestRays(t *testing.T) {
 
 		i1 := r1.IntersectSphere(s1)
 		equalIntersection(t, NewIntersection(4, 6), i1)
+	})
 
+	t.Run("A ray intersects a sphere at a tangent", func(t *testing.T) {
+		r1 := NewRay(NewPoint(0, 1, -5), NewVector(0, 0, 1))
+		s1 := NewSphere()
+
+		i1 := r1.IntersectSphere(s1)
+		equalIntersection(t, NewIntersection(5, 5), i1)
+	})
+
+	t.Run("A ray misses a sphere", func(t *testing.T) {
+		r1 := NewRay(NewPoint(0, 2, -5), NewVector(0, 0, 1))
+		s1 := NewSphere()
+
+		i1 := r1.IntersectSphere(s1)
+		equalIntersection(t, NewIntersection(), i1)
 	})
 
 }
