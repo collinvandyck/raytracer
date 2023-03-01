@@ -1,5 +1,7 @@
 package rt
 
+import "math"
+
 func Translation(x, y, z float) Translator {
 	m := NewMatrix(4, 4)
 	m.Set(0, 0, 1)
@@ -21,11 +23,13 @@ func Scaling(x, y, z float) Translator {
 	return Translator(m)
 }
 
-func RotationX(x float) Translator {
+func RotationX(rad float) Translator {
 	m := NewMatrix(4, 4)
 	m.Set(0, 0, 1)
-	m.Set(1, 1, x)
-	m.Set(2, 2, x)
+	m.Set(1, 1, math.Cos(rad))
+	m.Set(1, 2, -math.Sin(rad))
+	m.Set(2, 1, math.Sin(rad))
+	m.Set(2, 2, math.Cos(rad))
 	m.Set(3, 3, 1)
 	return Translator(m)
 }
