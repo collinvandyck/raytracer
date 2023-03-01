@@ -23,6 +23,7 @@ cannon:
 .PHONY: clockface
 clockface:
 	go run ./cmd/clockface
+	open clockface.ppm
 
 .PHONY: table
 table:

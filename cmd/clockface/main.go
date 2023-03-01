@@ -1,7 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"log"
+	"rt"
+)
 
 func main() {
-	fmt.Println("Hello world")
+	c := rt.NewCanvas(500, 500)
+	err := rt.WritePPMTo(c, "clockface.ppm")
+	if err != nil {
+		log.Fatal(err)
+	}
 }
