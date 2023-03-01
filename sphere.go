@@ -7,3 +7,7 @@ type Sphere struct {
 func NewSphere() Sphere {
 	return Sphere{}
 }
+
+func (s Sphere) Point() Point {
+	return NewPoint(0, 0, 0)
+}
