@@ -45,6 +45,12 @@ func (i Intersection) Equal(o Intersection) bool {
 			return false
 		}
 	}
+	if i.sphok != o.sphok {
+		return false
+	}
+	if i.sph != o.sph {
+		return false
+	}
 	return true
 }
 

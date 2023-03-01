@@ -44,7 +44,7 @@ func TestRays(t *testing.T) {
 		s1 := NewSphere()
 
 		i1 := r1.IntersectSphere(s1)
-		equalIntersection(t, NewIntersection(4, 6), i1)
+		equalIntersection(t, s1.Intersection(4, 6), i1)
 	})
 
 	t.Run("A ray intersects a sphere at a tangent", func(t *testing.T) {
@@ -52,7 +52,7 @@ func TestRays(t *testing.T) {
 		s1 := NewSphere()
 
 		i1 := r1.IntersectSphere(s1)
-		equalIntersection(t, NewIntersection(5, 5), i1)
+		equalIntersection(t, s1.Intersection(5, 5), i1)
 	})
 
 	t.Run("A ray misses a sphere", func(t *testing.T) {
@@ -68,7 +68,7 @@ func TestRays(t *testing.T) {
 		s1 := NewSphere()
 
 		i1 := r1.IntersectSphere(s1)
-		equalIntersection(t, NewIntersection(-1, 1), i1)
+		equalIntersection(t, s1.Intersection(-1, 1), i1)
 	})
 
 	t.Run("A sphere is behind a ray", func(t *testing.T) {
@@ -76,7 +76,7 @@ func TestRays(t *testing.T) {
 		s1 := NewSphere()
 
 		i1 := r1.IntersectSphere(s1)
-		equalIntersection(t, NewIntersection(-6, -4), i1)
+		equalIntersection(t, s1.Intersection(-6, -4), i1)
 	})
 
 	t.Run("An intersection encapsulates t and object", func(t *testing.T) {
