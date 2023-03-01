@@ -1,6 +1,10 @@
 package rt
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/require"
+)
 
 func TestRays(t *testing.T) {
 
@@ -21,6 +25,18 @@ func TestRays(t *testing.T) {
 		equalPoint(t, NewPoint(3, 3, 4), r1.Position(1))
 		equalPoint(t, NewPoint(1, 3, 4), r1.Position(-1))
 		equalPoint(t, NewPoint(4.5, 3, 4), r1.Position(2.5))
+	})
+
+	t.Run("An intersection has values", func(t *testing.T) {
+		i1 := NewIntersection()
+		require.Equal(t, 0, i1.Len())
+		require.Len(t, i1.Get(), 0)
+		equalIntersection(t, NewIntersection(), i1)
+
+		i2 := NewIntersection(1, 2)
+		require.Equal(t, 2, i2.Len())
+		require.EqualValues(t, []float{1, 2}, i2.Get())
+		equalIntersection(t, NewIntersection(1, 2), i2)
 	})
 
 	t.Run("A ray intersects a sphere at two points", func(t *testing.T) {

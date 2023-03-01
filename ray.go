@@ -24,10 +24,10 @@ func (i Intersection) Len() int {
 }
 
 func (i Intersection) Equal(o Intersection) bool {
-	if len(i.ts) != len(o.ts) {
+	if i.Len() != o.Len() {
 		return false
 	}
-	for idx := 0; idx < len(i.ts); idx++ {
+	for idx := 0; idx < i.Len(); idx++ {
 		if !floatsEqual(i.ts[idx], o.ts[idx]) {
 			return false
 		}
