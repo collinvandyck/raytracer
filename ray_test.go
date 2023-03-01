@@ -63,4 +63,20 @@ func TestRays(t *testing.T) {
 		equalIntersection(t, NewIntersection(), i1)
 	})
 
+	t.Run("A ray originates inside a sphere", func(t *testing.T) {
+		r1 := NewRay(NewPoint(0, 0, 0), NewVector(0, 0, 1))
+		s1 := NewSphere()
+
+		i1 := r1.IntersectSphere(s1)
+		equalIntersection(t, NewIntersection(-1, 1), i1)
+	})
+
+	t.Run("A sphere is behind a ray", func(t *testing.T) {
+		r1 := NewRay(NewPoint(0, 0, 5), NewVector(0, 0, 1))
+		s1 := NewSphere()
+
+		i1 := r1.IntersectSphere(s1)
+		equalIntersection(t, NewIntersection(-6, -4), i1)
+	})
+
 }
