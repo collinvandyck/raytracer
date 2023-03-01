@@ -130,3 +130,25 @@ func TestShearing(t *testing.T) {
 	})
 
 }
+
+func TestChaining(t *testing.T) {
+
+	t.Run("Individual transformations are applied in sequence", func(t *testing.T) {
+		p1 := NewPoint(1, 0, 1)
+		a1 := RotationX(Pi / 2)
+		b1 := Scaling(5, 5, 5)
+		c1 := Translation(10, 5, 7)
+
+		// apply rotation first
+		p2 := a1.MultiplyPoint(p1)
+		equalPoint(t, NewPoint(1, -1, 0), p2)
+
+		// then apply scaling
+		p3 := b1.MultiplyPoint(p2)
+		equalPoint(t, NewPoint(5, -5, 0), p3)
+
+		// then apply translation
+		p4 := c1.MultiplyPoint(p3)
+		equalPoint(t, NewPoint(15, 0, 7), p4)
+	})
+}
