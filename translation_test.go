@@ -1,7 +1,6 @@
 package rt
 
 import (
-	"math"
 	"testing"
 )
 
@@ -63,7 +62,7 @@ func TestRotation(t *testing.T) {
 		p1 := NewPoint(0, 1, 0)
 		halfQuarter := RotationX(Pi / 4)
 		fullQuarter := RotationX(Pi / 2)
-		equalPoint(t, NewPoint(0, math.Sqrt(2)/2, math.Sqrt(2)/2), halfQuarter.MultiplyPoint(p1))
+		equalPoint(t, NewPoint(0, Sqrt2/2, Sqrt2/2), halfQuarter.MultiplyPoint(p1))
 		equalPoint(t, NewPoint(0, 0, 1), fullQuarter.MultiplyPoint(p1))
 	})
 
@@ -78,8 +77,16 @@ func TestRotation(t *testing.T) {
 		p1 := NewPoint(0, 0, 1)
 		halfQuarter := RotationY(Pi / 4)
 		fullQuarter := RotationY(Pi / 2)
-		equalPoint(t, NewPoint(math.Sqrt(2)/2, 0, math.Sqrt(2)/2), halfQuarter.MultiplyPoint(p1))
+		equalPoint(t, NewPoint(Sqrt2/2, 0, Sqrt2/2), halfQuarter.MultiplyPoint(p1))
 		equalPoint(t, NewPoint(1, 0, 0), fullQuarter.MultiplyPoint(p1))
+	})
+
+	t.Run("Rotating a point around the z axis", func(t *testing.T) {
+		p1 := NewPoint(0, 1, 0)
+		halfQuarter := RotationZ(Pi / 4)
+		fullQuarter := RotationZ(Pi / 2)
+		equalPoint(t, NewPoint(-Sqrt2/2, Sqrt2/2, 0), halfQuarter.MultiplyPoint(p1))
+		equalPoint(t, NewPoint(-1, 0, 0), fullQuarter.MultiplyPoint(p1))
 	})
 
 }
