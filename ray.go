@@ -1,5 +1,7 @@
 package rt
 
+import "math"
+
 type Ray struct {
 	origin    Point
 	direction Vector
@@ -55,7 +57,10 @@ func (r Ray) IntersectSphere(sphere Sphere) (res Intersection) {
 		// there was no intersection
 		return res
 	}
-	return res
+
+	t1 := (-b - math.Sqrt(discriminant)) / (2 * a)
+	t2 := (-b + math.Sqrt(discriminant)) / (2 * a)
+	return NewIntersection(t1, t2)
 }
 
 func (r Ray) Position(t float) Point {
