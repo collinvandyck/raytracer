@@ -66,4 +66,13 @@ func TestRotation(t *testing.T) {
 		equalPoint(t, NewPoint(0, math.Sqrt(2)/2, math.Sqrt(2)/2), halfQuarter.MultiplyPoint(p1))
 		equalPoint(t, NewPoint(0, 0, 1), fullQuarter.MultiplyPoint(p1))
 	})
+
+	t.Run("The inverse of an x-rotation rotates in the opposite direction", func(t *testing.T) {
+		p1 := NewPoint(0, 1, 0)
+		halfQuarter := RotationX(Sqrt2 / 4)
+		inv := halfQuarter.Inverse()
+
+		equalPoint(t, NewPoint(0, Sqrt2/2, -Sqrt2/2), inv.MultiplyPoint(p1))
+	})
+
 }
