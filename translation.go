@@ -36,10 +36,10 @@ func RotationX(rad float) Translator {
 
 func RotationY(rad float) Translator {
 	m := NewMatrix(4, 4)
-	m.Set(0, 0, 1)
-	m.Set(1, 1, math.Cos(rad))
-	m.Set(1, 2, -math.Sin(rad))
-	m.Set(2, 1, math.Sin(rad))
+	m.Set(0, 0, math.Cos(rad))
+	m.Set(0, 2, math.Sin(rad))
+	m.Set(1, 1, 1)
+	m.Set(2, 0, -math.Sin(rad))
 	m.Set(2, 2, math.Cos(rad))
 	m.Set(3, 3, 1)
 	return Translator(m)
