@@ -39,12 +39,12 @@ func equalColor(t *testing.T, c1, c2 Color) {
 	require.True(t, c1.Equal(c2))
 }
 
-func equalValue(t *testing.T, v1, v2 value) {
+func equalValue(t *testing.T, v1, v2 Value) {
 	t.Helper()
 	require.True(t, floatsEqual(v1, v2), "Expected %v to equal %v", v2, v1)
 }
 
-func equalValueSlice(t *testing.T, v1, v2 []value) {
+func equalValueSlice(t *testing.T, v1, v2 []Value) {
 	t.Helper()
 	require.Len(t, v2, len(v1), "Expected %v to equal %v", v2, v1)
 	for i := 0; i < len(v1); i++ {

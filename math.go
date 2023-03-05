@@ -11,11 +11,11 @@ const (
 	Sqrt2   = math.Sqrt2
 )
 
-func floatsEqual(v1, v2 value) bool {
+func floatsEqual(v1, v2 Value) bool {
 	return math.Abs(v1-v2) < EPSILON
 }
 
-func formatFloat(val value) string {
+func formatFloat(val Value) string {
 	return strconv.FormatFloat(val, 'f', -1, 64)
 }
 

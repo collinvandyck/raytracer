@@ -12,7 +12,7 @@ func NewRay(origin Point, direction Vector) Ray {
 	}
 }
 
-func (r Ray) Position(t value) Point {
+func (r Ray) Position(t Value) Point {
 	d1 := r.direction.MultiplyBy(t)
 	return d1.AddPoint(r.origin)
 }

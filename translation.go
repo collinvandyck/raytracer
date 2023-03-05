@@ -3,7 +3,7 @@ package rt
 import "math"
 
 // Translation applies a direction
-func Translation(x, y, z value) Matrix {
+func Translation(x, y, z Value) Matrix {
 	m := NewMatrix(4, 4)
 	m.Set(0, 0, 1)
 	m.Set(1, 1, 1)
@@ -15,7 +15,7 @@ func Translation(x, y, z value) Matrix {
 	return m
 }
 
-func Scaling(x, y, z value) Matrix {
+func Scaling(x, y, z Value) Matrix {
 	m := NewMatrix(4, 4)
 	m.Set(0, 0, x)
 	m.Set(1, 1, y)
@@ -24,7 +24,7 @@ func Scaling(x, y, z value) Matrix {
 	return m
 }
 
-func RotationX(rad value) Matrix {
+func RotationX(rad Value) Matrix {
 	m := NewMatrix(4, 4)
 	m.Set(0, 0, 1)
 	m.Set(1, 1, math.Cos(rad))
@@ -35,7 +35,7 @@ func RotationX(rad value) Matrix {
 	return m
 }
 
-func RotationY(rad value) Matrix {
+func RotationY(rad Value) Matrix {
 	m := NewMatrix(4, 4)
 	m.Set(0, 0, math.Cos(rad))
 	m.Set(0, 2, math.Sin(rad))
@@ -46,7 +46,7 @@ func RotationY(rad value) Matrix {
 	return m
 }
 
-func RotationZ(rad value) Matrix {
+func RotationZ(rad Value) Matrix {
 	m := NewMatrix(4, 4)
 	m.Set(0, 0, math.Cos(rad))
 	m.Set(0, 1, -math.Sin(rad))
@@ -57,7 +57,7 @@ func RotationZ(rad value) Matrix {
 	return m
 }
 
-func Shearing(xy, xz, yx, yz, zx, zy value) Matrix {
+func Shearing(xy, xz, yx, yz, zx, zy Value) Matrix {
 	m := NewMatrix(4, 4)
 	m.Set(0, 0, 1)
 	m.Set(1, 1, 1)

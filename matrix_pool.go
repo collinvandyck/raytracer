@@ -54,7 +54,7 @@ func (p *matrixPool) Put(m *Matrix) {
 		pool = p.pool4x4
 	}
 	if pool != nil {
-		zero := []value{0, 0, 0, 0}
+		zero := []Value{0, 0, 0, 0}
 		for i := 0; i < len(m.vals); i++ {
 			copy(m.vals[i], zero)
 		}

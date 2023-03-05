@@ -89,15 +89,15 @@ func (w *ppmWriter) writeString(v string) {
 	w.err = err
 }
 
-func (w *ppmWriter) scale(val value) int {
+func (w *ppmWriter) scale(val Value) int {
 	if val == 0 {
 		return 0
 	}
-	v := val * value(w.max)
+	v := val * Value(w.max)
 	if v < 0 {
 		return 0
 	}
-	if v > value(w.max) {
+	if v > Value(w.max) {
 		return w.max
 	}
 	return int(math.Round(v))

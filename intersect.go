@@ -2,7 +2,7 @@ package rt
 
 import "math"
 
-func IntersectSphere(sphere Sphere, ray Ray) []value {
+func IntersectSphere(sphere Sphere, ray Ray) []Value {
 	// the vector from the sphere's center to the ray origin
 	sphereToRay := ray.Origin().SubtractPoint(sphere.Point())
 
@@ -18,27 +18,27 @@ func IntersectSphere(sphere Sphere, ray Ray) []value {
 
 	t1 := (-b - math.Sqrt(discriminant)) / (2 * a)
 	t2 := (-b + math.Sqrt(discriminant)) / (2 * a)
-	return []value{t1, t2}
+	return []Value{t1, t2}
 }
 
 type Intersection struct {
-	t     value
+	value Value
 	shape Shape
 }
 
-func NewSphereIntersection(t value, s Sphere) Intersection {
+func NewSphereIntersection(t Value, s Sphere) Intersection {
 	return NewIntersection(t, s)
 }
 
-func NewIntersection(t value, s Shape) Intersection {
+func NewIntersection(t Value, s Shape) Intersection {
 	return Intersection{
 		shape: s,
-		t:     t,
+		value: t,
 	}
 }
 
-func (i Intersection) GetT() value {
-	return i.t
+func (i Intersection) Value() Value {
+	return i.value
 }
 
 func (i Intersection) Shape() Shape {
@@ -46,7 +46,7 @@ func (i Intersection) Shape() Shape {
 }
 
 func (i Intersection) Equal(o Intersection) bool {
-	if !floatsEqual(i.t, o.t) {
+	if !floatsEqual(i.value, o.value) {
 		return false
 	}
 	if i.shape == nil {

@@ -99,13 +99,13 @@ func TestTupleSubtract(t *testing.T) {
 
 func TestTupleMultiply(t *testing.T) {
 	t.Run("Multiplying a tuple by a scalar", func(t *testing.T) {
-		const factor value = 3.5
+		const factor Value = 3.5
 		t1 := NewTuple(1, -2, 3, -4)
 		re := NewTuple(1*factor, -2*factor, 3*factor, -4*factor)
 		equalTuple(t, re, t1.multiplyBy(factor))
 	})
 	t.Run("Multiplying a tuple by a fraction", func(t *testing.T) {
-		const factor value = 0.5
+		const factor Value = 0.5
 		t1 := NewTuple(1, -2, 3, -4)
 		re := NewTuple(1*factor, -2*factor, 3*factor, -4*factor)
 		equalTuple(t, re, t1.multiplyBy(factor))
@@ -114,7 +114,7 @@ func TestTupleMultiply(t *testing.T) {
 
 func TestTupleDivide(t *testing.T) {
 	t.Run("Dividing a tuple by a scalar", func(t *testing.T) {
-		const factor value = 2
+		const factor Value = 2
 		t1 := NewTuple(1, -2, 3, -4)
 		re := NewTuple(1/factor, -2/factor, 3/factor, -4/factor)
 		equalTuple(t, re, t1.divideBy(factor))
