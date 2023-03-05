@@ -1,9 +1,35 @@
 package rt
 
+import "fmt"
+
 type Intersections []Intersection
 
 func NewIntersections(intersections ...Intersection) Intersections {
 	return intersections
+}
+
+func (i Intersections) Values() []Value {
+	res := make([]Value, len(i))
+	for x := range i {
+		res[x] = i[x].Value()
+	}
+	return res
+}
+
+func (i Intersections) Equal(o Intersections) bool {
+	if len(i) != len(o) {
+		return false
+	}
+	for x := range i {
+		if !i[x].Equal(o[x]) {
+			return false
+		}
+	}
+	return true
+}
+
+func (i Intersections) String() string {
+	return fmt.Sprintf("%v", []Intersection(i))
 }
 
 type Intersection struct {
@@ -34,4 +60,8 @@ func (i Intersection) Equal(o Intersection) bool {
 		return o.shape == nil
 	}
 	return i.shape == o.shape
+}
+
+func (i Intersection) String() string {
+	return fmt.Sprintf("x(t:%s, s:%v)", formatFloat(i.value), i.shape)
 }

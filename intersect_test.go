@@ -11,36 +11,41 @@ func TestIntersect(t *testing.T) {
 	t.Run("A ray intersects a sphere at two points", func(t *testing.T) {
 		r1 := NewRay(NewPoint(0, 0, -5), NewVector(0, 0, 1))
 		s1 := NewSphere()
-		vs := IntersectSphere(s1, r1)
-		equalValueSlice(t, []Value{4, 6}, vs)
+		xs := IntersectSphere(s1, r1)
+		xe := NewIntersections(NewIntersection(4, s1), NewIntersection(6, s1))
+		equalIntersections(t, xe, xs)
 	})
 
 	t.Run("A ray intersects a sphere at a tangent", func(t *testing.T) {
 		r1 := NewRay(NewPoint(0, 1, -5), NewVector(0, 0, 1))
 		s1 := NewSphere()
-		vs := IntersectSphere(s1, r1)
-		equalValueSlice(t, []Value{5, 5}, vs)
+		xs := IntersectSphere(s1, r1)
+		xe := NewIntersections(NewIntersection(5, s1), NewIntersection(5, s1))
+		equalIntersections(t, xe, xs)
 	})
 
 	t.Run("A ray misses a sphere", func(t *testing.T) {
 		r1 := NewRay(NewPoint(0, 2, -5), NewVector(0, 0, 1))
 		s1 := NewSphere()
-		vs := IntersectSphere(s1, r1)
-		equalValueSlice(t, nil, vs)
+		xs := IntersectSphere(s1, r1)
+		xe := NewIntersections()
+		equalIntersections(t, xe, xs)
 	})
 
 	t.Run("A ray originates inside a sphere", func(t *testing.T) {
 		r1 := NewRay(NewPoint(0, 0, 0), NewVector(0, 0, 1))
 		s1 := NewSphere()
-		vs := IntersectSphere(s1, r1)
-		equalValueSlice(t, []Value{-1, 1}, vs)
+		xs := IntersectSphere(s1, r1)
+		xe := NewIntersections(NewIntersection(-1, s1), NewIntersection(1, s1))
+		equalIntersections(t, xe, xs)
 	})
 
 	t.Run("A sphere is behind a ray", func(t *testing.T) {
 		r1 := NewRay(NewPoint(0, 0, 5), NewVector(0, 0, 1))
 		s1 := NewSphere()
-		vs := IntersectSphere(s1, r1)
-		equalValueSlice(t, []Value{-6, -4}, vs)
+		xs := IntersectSphere(s1, r1)
+		xe := NewIntersections(NewIntersection(-6, s1), NewIntersection(-4, s1))
+		equalIntersections(t, xe, xs)
 	})
 
 	t.Run("An intersection encapsulates t and object", func(t *testing.T) {
@@ -59,6 +64,9 @@ func TestIntersect(t *testing.T) {
 		require.Len(t, xs, 2)
 		equalValue(t, 1, xs[0].Value())
 		equalValue(t, 2, xs[1].Value())
+	})
+
+	t.Run("Intersect sets the object on the intersection", func(t *testing.T) {
 	})
 
 }

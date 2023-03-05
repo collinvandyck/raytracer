@@ -44,6 +44,8 @@ func equalValue(t *testing.T, v1, v2 Value) {
 	require.True(t, floatsEqual(v1, v2), "Expected %v to equal %v", v2, v1)
 }
 
+var _ = equalValueSlice
+
 func equalValueSlice(t *testing.T, v1, v2 []Value) {
 	t.Helper()
 	require.Len(t, v2, len(v1), "Expected %v to equal %v", v2, v1)
@@ -55,4 +57,16 @@ func equalValueSlice(t *testing.T, v1, v2 []Value) {
 func equalShape(t *testing.T, s1, s2 Shape) {
 	t.Helper()
 	require.EqualValues(t, s2, s1)
+}
+
+var _ = equalIntersection
+
+func equalIntersection(t *testing.T, i1, i2 Intersection) {
+	t.Helper()
+	require.True(t, i1.Equal(i2), "Expected %s to equal %s", i2, i1)
+}
+
+func equalIntersections(t *testing.T, i1, i2 Intersections) {
+	t.Helper()
+	require.True(t, i1.Equal(i2), "Expected %s to equal %s", i2, i1)
 }
