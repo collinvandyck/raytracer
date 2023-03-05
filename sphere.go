@@ -3,6 +3,8 @@ package rt
 import "math"
 
 func IntersectSphere(sphere Sphere, ray Ray) Intersections {
+	inv := sphere.GetTransform().Inverse()
+	ray = ray.Transform(inv)
 	// the vector from the sphere's center to the ray origin
 	sphereToRay := ray.Origin().SubtractPoint(sphere.Point())
 
