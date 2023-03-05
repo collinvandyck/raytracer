@@ -66,7 +66,4 @@ func TestIntersect(t *testing.T) {
 		equalValue(t, 2, xs[1].Value())
 	})
 
-	t.Run("Intersect sets the object on the intersection", func(t *testing.T) {
-	})
-
 }
