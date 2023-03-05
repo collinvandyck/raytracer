@@ -37,10 +37,22 @@ func equalColor(t *testing.T, c1, c2 Color) {
 	require.True(t, c1.Equal(c2))
 }
 
+func equalValueSlice(t *testing.T, v1, v2 []value) {
+	t.Helper()
+	require.Len(t, v2, len(v1), "Expected %v to equal %v", v2, v1)
+	for i := 0; i < len(v1); i++ {
+		require.True(t, floatsEqual(v1[i], v2[i]), "Expected %v to equal %v", v2, v1)
+	}
+}
+
+var _ = equalIntersection
+
 func equalIntersection(t *testing.T, i1, i2 Intersection) {
 	t.Helper()
 	require.True(t, i1.Equal(i2), "Expected %v to equal %v", i2, i1)
 }
+
+var _ = intersectionHasSphere
 
 func intersectionHasSphere(t *testing.T, sphere Sphere, i1 Intersection) {
 	t.Helper()

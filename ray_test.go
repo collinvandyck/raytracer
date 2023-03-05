@@ -2,8 +2,6 @@ package rt
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/require"
 )
 
 func TestRays(t *testing.T) {
@@ -27,63 +25,42 @@ func TestRays(t *testing.T) {
 		equalPoint(t, NewPoint(4.5, 3, 4), r1.Position(2.5))
 	})
 
-	t.Run("An intersection has values", func(t *testing.T) {
-		i1 := NewIntersection()
-		require.Equal(t, 0, i1.Len())
-		require.Len(t, i1.Get(), 0)
-		equalIntersection(t, NewIntersection(), i1)
-
-		i2 := NewIntersection(1, 2)
-		require.Equal(t, 2, i2.Len())
-		require.EqualValues(t, []value{1, 2}, i2.Get())
-		equalIntersection(t, NewIntersection(1, 2), i2)
-	})
-
 	t.Run("A ray intersects a sphere at two points", func(t *testing.T) {
 		r1 := NewRay(NewPoint(0, 0, -5), NewVector(0, 0, 1))
 		s1 := NewSphere()
-
-		i1 := r1.IntersectSphere(s1)
-		equalIntersection(t, s1.Intersection(4, 6), i1)
+		vs := IntersectSphere(s1, r1)
+		equalValueSlice(t, []value{4, 6}, vs)
 	})
 
 	t.Run("A ray intersects a sphere at a tangent", func(t *testing.T) {
 		r1 := NewRay(NewPoint(0, 1, -5), NewVector(0, 0, 1))
 		s1 := NewSphere()
-
-		i1 := r1.IntersectSphere(s1)
-		equalIntersection(t, s1.Intersection(5, 5), i1)
+		vs := IntersectSphere(s1, r1)
+		equalValueSlice(t, []value{5, 5}, vs)
 	})
 
 	t.Run("A ray misses a sphere", func(t *testing.T) {
 		r1 := NewRay(NewPoint(0, 2, -5), NewVector(0, 0, 1))
 		s1 := NewSphere()
-
-		i1 := r1.IntersectSphere(s1)
-		equalIntersection(t, NewIntersection(), i1)
+		vs := IntersectSphere(s1, r1)
+		equalValueSlice(t, nil, vs)
 	})
 
 	t.Run("A ray originates inside a sphere", func(t *testing.T) {
 		r1 := NewRay(NewPoint(0, 0, 0), NewVector(0, 0, 1))
 		s1 := NewSphere()
-
-		i1 := r1.IntersectSphere(s1)
-		equalIntersection(t, s1.Intersection(-1, 1), i1)
+		vs := IntersectSphere(s1, r1)
+		equalValueSlice(t, []value{-1, 1}, vs)
 	})
 
 	t.Run("A sphere is behind a ray", func(t *testing.T) {
 		r1 := NewRay(NewPoint(0, 0, 5), NewVector(0, 0, 1))
 		s1 := NewSphere()
-
-		i1 := r1.IntersectSphere(s1)
-		equalIntersection(t, s1.Intersection(-6, -4), i1)
+		vs := IntersectSphere(s1, r1)
+		equalValueSlice(t, []value{-6, -4}, vs)
 	})
 
 	t.Run("An intersection encapsulates t and object", func(t *testing.T) {
-		s1 := NewSphere()
-		i1 := s1.Intersection(3.5)
-		require.EqualValues(t, []value{3.5}, i1.Get())
-		intersectionHasSphere(t, s1, i1)
 	})
 
 }
