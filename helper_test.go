@@ -44,7 +44,7 @@ func equalIntersection(t *testing.T, i1, i2 Intersection) {
 
 func intersectionHasSphere(t *testing.T, sphere Sphere, i1 Intersection) {
 	t.Helper()
-	res, ok := i1.GetSphere()
-	require.True(t, ok, "intersection did not have sphere")
-	require.True(t, sphere.Equal(res), "Expected %s to equal %s", sphere, res)
+	shape := i1.Shape()
+	require.NotNil(t, shape)
+	require.True(t, sphere.Equal(shape), "Expected %s to equal %s", sphere, shape)
 }

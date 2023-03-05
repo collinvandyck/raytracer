@@ -11,6 +11,10 @@ func NewIntersection(ts ...float) Intersection {
 	}
 }
 
+func (i Intersection) Shape() Shape {
+	return i.shape
+}
+
 func (i *Intersection) SetShape(shape Shape) {
 	i.shape = shape
 }
@@ -32,11 +36,8 @@ func (i Intersection) Equal(o Intersection) bool {
 			return false
 		}
 	}
-	if i.sphok != o.sphok {
-		return false
+	if i.shape == nil {
+		return o.shape == nil
 	}
-	if i.sph != o.sph {
-		return false
-	}
-	return true
+	return i.shape.Equal(o.shape)
 }
