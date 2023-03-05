@@ -1,33 +1,14 @@
 package rt
 
-import "math"
+type Intersections []Intersection
 
-func IntersectSphere(sphere Sphere, ray Ray) []Value {
-	// the vector from the sphere's center to the ray origin
-	sphereToRay := ray.Origin().SubtractPoint(sphere.Point())
-
-	a := ray.Direction().Dot(ray.Direction())
-	b := 2 * ray.Direction().Dot(sphereToRay)
-	c := sphereToRay.Dot(sphereToRay) - 1
-
-	discriminant := b*b - 4*a*c
-	if discriminant < 0 {
-		// there was no intersection
-		return nil
-	}
-
-	t1 := (-b - math.Sqrt(discriminant)) / (2 * a)
-	t2 := (-b + math.Sqrt(discriminant)) / (2 * a)
-	return []Value{t1, t2}
+func NewIntersections(intersections ...Intersection) Intersections {
+	return intersections
 }
 
 type Intersection struct {
 	value Value
 	shape Shape
-}
-
-func NewSphereIntersection(t Value, s Sphere) Intersection {
-	return NewIntersection(t, s)
 }
 
 func NewIntersection(t Value, s Shape) Intersection {

@@ -41,7 +41,7 @@ func TestIntersect(t *testing.T) {
 
 	t.Run("An intersection encapsulates t and object", func(t *testing.T) {
 		s1 := NewSphere()
-		i1 := NewSphereIntersection(3.5, s1)
+		i1 := NewIntersection(3.5, s1)
 		equalValue(t, 3.5, i1.Value())
 		equalShape(t, s1, i1.Shape())
 	})
