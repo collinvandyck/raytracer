@@ -66,4 +66,24 @@ func TestIntersect(t *testing.T) {
 		equalValue(t, 2, xs[1].Value())
 	})
 
+	t.Run("The hit, when all intersections have positive t", func(t *testing.T) {
+		s1 := NewSphere()
+		i1 := NewIntersection(1, s1)
+		i2 := NewIntersection(2, s1)
+		xs := NewIntersections(i2, i1)
+		h1, ok := Hit(xs)
+		require.True(t, ok)
+		equalIntersection(t, i1, h1)
+	})
+
+	t.Run("The hit, when some intersections have negative t", func(t *testing.T) {
+		s1 := NewSphere()
+		i1 := NewIntersection(-1, s1)
+		i2 := NewIntersection(+1, s1)
+		xs := NewIntersections(i2, i1)
+		h1, ok := Hit(xs)
+		require.True(t, ok)
+		equalIntersection(t, i2, h1)
+	})
+
 }
