@@ -7,53 +7,6 @@ type Ray struct {
 	direction Vector
 }
 
-type Intersection struct {
-	ts    []float
-	sph   Sphere
-	sphok bool
-}
-
-func NewIntersection(ts ...float) Intersection {
-	return Intersection{
-		ts: ts,
-	}
-}
-
-func (i *Intersection) SetSphere(sphere Sphere) {
-	i.sph = sphere
-	i.sphok = true
-}
-
-func (i Intersection) GetSphere() (Sphere, bool) {
-	return i.sph, i.sphok
-}
-
-func (i Intersection) Get() []float {
-	return i.ts
-}
-
-func (i Intersection) Len() int {
-	return len(i.ts)
-}
-
-func (i Intersection) Equal(o Intersection) bool {
-	if i.Len() != o.Len() {
-		return false
-	}
-	for idx := 0; idx < i.Len(); idx++ {
-		if !floatsEqual(i.ts[idx], o.ts[idx]) {
-			return false
-		}
-	}
-	if i.sphok != o.sphok {
-		return false
-	}
-	if i.sph != o.sph {
-		return false
-	}
-	return true
-}
-
 func NewRay(origin Point, direction Vector) Ray {
 	return Ray{
 		origin:    origin,

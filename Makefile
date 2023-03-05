@@ -1,5 +1,8 @@
+.PHONY: default
+default: test lint
+
 .PHONY: test
-test: lint
+test: 
 	go test .
 
 .PHONY: lint

@@ -1,5 +1,9 @@
 package rt
 
+type Shape interface {
+	Equal(o Shape) bool
+}
+
 type Sphere struct {
 }
 
@@ -8,7 +12,10 @@ func NewSphere() Sphere {
 	return Sphere{}
 }
 
-func (s Sphere) Equal(o Sphere) bool {
+func (s Sphere) Equal(o Shape) bool {
+	if _, ok := o.(Sphere); !ok {
+		return false
+	}
 	return true
 }
 
@@ -18,7 +25,7 @@ func (s Sphere) Point() Point {
 
 func (s Sphere) Intersection(ts ...float) Intersection {
 	res := NewIntersection(ts...)
-	res.SetSphere(s)
+	res.SetShape(s)
 	return res
 }
 
