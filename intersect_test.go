@@ -1,6 +1,10 @@
 package rt
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/require"
+)
 
 func TestIntersect(t *testing.T) {
 
@@ -44,6 +48,17 @@ func TestIntersect(t *testing.T) {
 		i1 := NewIntersection(3.5, s1)
 		equalValue(t, 3.5, i1.Value())
 		equalShape(t, s1, i1.Shape())
+	})
+
+	t.Run("Aggregating intersections", func(t *testing.T) {
+		s1 := NewSphere()
+		i1 := NewIntersection(1, s1)
+		i2 := NewIntersection(2, s1)
+		xs := NewIntersections(i1, i2)
+
+		require.Len(t, xs, 2)
+		equalValue(t, 1, xs[0].Value())
+		equalValue(t, 2, xs[1].Value())
 	})
 
 }
