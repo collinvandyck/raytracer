@@ -44,6 +44,14 @@ func (s *Sphere) SetTransform(m Matrix) {
 	s.matrix = m
 }
 
+func (s Sphere) EqualShape(o Shape) bool {
+	os, ok := o.(Sphere)
+	if !ok {
+		return false
+	}
+	return s.Equal(os)
+}
+
 func (s Sphere) Equal(o Sphere) bool {
 	return true
 }

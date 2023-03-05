@@ -76,7 +76,7 @@ func (i Intersection) Equal(o Intersection) bool {
 	if i.shape == nil {
 		return o.shape == nil
 	}
-	return i.shape == o.shape
+	return i.shape.EqualShape(o.Shape())
 }
 
 func (i Intersection) String() string {
