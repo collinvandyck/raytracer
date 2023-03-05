@@ -2,13 +2,6 @@ package rt
 
 import "math"
 
-var noIntersection Intersection
-
-type Intersection struct {
-	ts    []value
-	shape Shape
-}
-
 func IntersectSphere(sphere Sphere, ray Ray) []value {
 	// the vector from the sphere's center to the ray origin
 	sphereToRay := ray.Origin().SubtractPoint(sphere.Point())
@@ -28,9 +21,15 @@ func IntersectSphere(sphere Sphere, ray Ray) []value {
 	return []value{t1, t2}
 }
 
-func NewIntersection(ts ...value) Intersection {
+type Intersection struct {
+	t     value
+	shape Shape
+}
+
+func NewIntersection(shape Shape, t value) Intersection {
 	return Intersection{
-		ts: ts,
+		shape: shape,
+		t:     t,
 	}
 }
 
@@ -42,22 +41,9 @@ func (i *Intersection) SetShape(shape Shape) {
 	i.shape = shape
 }
 
-func (i Intersection) Get() []value {
-	return i.ts
-}
-
-func (i Intersection) Len() int {
-	return len(i.ts)
-}
-
 func (i Intersection) Equal(o Intersection) bool {
-	if i.Len() != o.Len() {
+	if !floatsEqual(i.t, o.t) {
 		return false
-	}
-	for idx := 0; idx < i.Len(); idx++ {
-		if !floatsEqual(i.ts[idx], o.ts[idx]) {
-			return false
-		}
 	}
 	if i.shape == nil {
 		return o.shape == nil
