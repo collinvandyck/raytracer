@@ -19,7 +19,7 @@ func TestSphere(t *testing.T) {
 	t.Run("Intersecting a scaled sphere with a ray", func(t *testing.T) {
 		r1 := NewRay(NewPoint(0, 0, -5), NewVector(0, 0, 1))
 		s1 := NewSphere()
-		s1.SetTransform(Scaling(2, 2, 3))
+		s1.SetTransform(Scaling(2, 2, 2))
 		xs := IntersectSphere(s1, r1)
 		xe := NewIntersections(NewIntersection(3, s1), NewIntersection(7, s1))
 		equalIntersections(t, xe, xs)
