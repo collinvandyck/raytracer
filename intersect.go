@@ -26,11 +26,23 @@ type Intersection struct {
 	shape Shape
 }
 
-func NewIntersection(shape Shape, t value) Intersection {
+func NewSphereIntersection(t value, s Sphere) Intersection {
+	return NewIntersection(t, s)
+}
+
+func NewIntersection(t value, s Shape) Intersection {
 	return Intersection{
-		shape: shape,
+		shape: s,
 		t:     t,
 	}
+}
+
+func (i Intersection) GetT() value {
+	return i.t
+}
+
+func (i Intersection) Shape() Shape {
+	return i.shape
 }
 
 func (i Intersection) Equal(o Intersection) bool {
@@ -40,5 +52,5 @@ func (i Intersection) Equal(o Intersection) bool {
 	if i.shape == nil {
 		return o.shape == nil
 	}
-	return i.shape.Equal(o.shape)
+	return i.shape == o.shape
 }
