@@ -25,11 +25,23 @@ func IntersectSphere(sphere Sphere, ray Ray) Intersections {
 }
 
 type Sphere struct {
+	matrix Matrix
 }
 
 // todo: do i need to force an allocation here?
 func NewSphere() Sphere {
 	return Sphere{}
+}
+
+func (s Sphere) GetTransform() Matrix {
+	if s.matrix.Empty() {
+		return MatrixIdentity4x4
+	}
+	return s.matrix
+}
+
+func (s *Sphere) SetTransform(m Matrix) {
+	s.matrix = m
 }
 
 func (s Sphere) Equal(o Sphere) bool {
