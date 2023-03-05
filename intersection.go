@@ -1,5 +1,7 @@
 package rt
 
+var noIntersection Intersection
+
 type Intersection struct {
 	ts    []value
 	shape Shape

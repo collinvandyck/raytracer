@@ -14,7 +14,7 @@ func NewRay(origin Point, direction Vector) Ray {
 	}
 }
 
-func (r Ray) IntersectSphere(sphere Sphere) (res Intersection) {
+func (r Ray) IntersectSphere(sphere Sphere) Intersection {
 	// the vector from the sphere's center to the ray origin
 	sphereToRay := r.Origin().SubtractPoint(sphere.Point())
 
@@ -25,7 +25,7 @@ func (r Ray) IntersectSphere(sphere Sphere) (res Intersection) {
 	discriminant := b*b - 4*a*c
 	if discriminant < 0 {
 		// there was no intersection
-		return res
+		return noIntersection
 	}
 
 	t1 := (-b - math.Sqrt(discriminant)) / (2 * a)
