@@ -23,7 +23,7 @@ func (s Sphere) Point() Point {
 	return NewPoint(0, 0, 0)
 }
 
-func (s Sphere) Intersection(ts ...float) Intersection {
+func (s Sphere) Intersection(ts ...value) Intersection {
 	res := NewIntersection(ts...)
 	res.SetShape(s)
 	return res

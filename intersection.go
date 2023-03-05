@@ -1,11 +1,11 @@
 package rt
 
 type Intersection struct {
-	ts    []float
+	ts    []value
 	shape Shape
 }
 
-func NewIntersection(ts ...float) Intersection {
+func NewIntersection(ts ...value) Intersection {
 	return Intersection{
 		ts: ts,
 	}
@@ -19,7 +19,7 @@ func (i *Intersection) SetShape(shape Shape) {
 	i.shape = shape
 }
 
-func (i Intersection) Get() []float {
+func (i Intersection) Get() []value {
 	return i.ts
 }
 

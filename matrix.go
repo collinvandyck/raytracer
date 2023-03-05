@@ -8,12 +8,12 @@ import (
 )
 
 type Matrix struct {
-	vals [][]float
+	vals [][]value
 }
 
 var mstore = newMatrixPool()
 
-var MatrixIdentity4x4 = NewMatrixFromValues([][]float{
+var MatrixIdentity4x4 = NewMatrixFromValues([][]value{
 	{1, 0, 0, 0},
 	{0, 1, 0, 0},
 	{0, 0, 1, 0},
@@ -26,14 +26,14 @@ func NewMatrix(rows, cols int) Matrix {
 }
 
 func AllocateMatrix(rows, cols int) *Matrix {
-	m := Matrix{vals: make([][]float, rows)}
+	m := Matrix{vals: make([][]value, rows)}
 	for i := range m.vals {
-		m.vals[i] = make([]float, cols)
+		m.vals[i] = make([]value, cols)
 	}
 	return &m
 }
 
-func NewMatrixFromValues(values [][]float) (res Matrix) {
+func NewMatrixFromValues(values [][]value) (res Matrix) {
 	if len(values) == 0 {
 		return res
 	}
@@ -44,14 +44,14 @@ func NewMatrixFromValues(values [][]float) (res Matrix) {
 func NewMatrixFromTable(table string) (res Matrix) {
 	table = strings.TrimSpace(table)
 	s := bufio.NewScanner(strings.NewReader(table))
-	rows := make([][]float, 0)
+	rows := make([][]value, 0)
 	for s.Scan() {
 		line := strings.TrimSpace(s.Text())
 		if !strings.HasPrefix(line, "|") {
 			continue
 		}
 		parts := strings.Split(line, "|")
-		row := make([]float, 0, 4)
+		row := make([]value, 0, 4)
 		for _, part := range parts {
 			part = strings.TrimSpace(part)
 			if len(part) == 0 {
@@ -85,11 +85,11 @@ func (m Matrix) Cols() int {
 	return len(m.vals[0])
 }
 
-func (m Matrix) Get(row int, column int) float {
+func (m Matrix) Get(row int, column int) value {
 	return m.vals[row][column]
 }
 
-func (m Matrix) Set(row int, column int, val float) {
+func (m Matrix) Set(row int, column int, val value) {
 	m.vals[row][column] = val
 }
 
@@ -116,7 +116,7 @@ func (m Matrix) Multiply(o Matrix) (res Matrix) {
 	res = NewMatrix(m.Rows(), m.Cols())
 	for ri := 0; ri < m.Rows(); ri++ {
 		for ci := 0; ci < m.Cols(); ci++ {
-			var val float
+			var val value
 			for lhsi := 0; lhsi < m.Cols(); lhsi++ {
 				lhs := m.Get(ri, lhsi)
 				rhs := o.Get(lhsi, ci)
@@ -132,7 +132,7 @@ func (m Matrix) MultiplyTuple4(t1 Tuple4) (res Tuple4) {
 	if m.Rows() != 4 || m.Cols() != 4 {
 		panic("must be a 4x4")
 	}
-	vals := [4]float{}
+	vals := [4]value{}
 	for ri := 0; ri < m.Rows(); ri++ {
 		vals[ri] += m.Get(ri, 0) * t1.x
 		vals[ri] += m.Get(ri, 1) * t1.y
@@ -188,7 +188,7 @@ func (m Matrix) Submatrix(row, col int) Matrix {
 	return res
 }
 
-func (m Matrix) Determinant() float {
+func (m Matrix) Determinant() value {
 	if m.Empty() {
 		panic("determinant on empty matrix")
 	}
@@ -199,7 +199,7 @@ func (m Matrix) Determinant() float {
 	case rows == 2 && cols == 2:
 		return m.Get(0, 0)*m.Get(1, 1) - m.Get(0, 1)*m.Get(1, 0)
 	}
-	var res float
+	var res value
 	for i := 0; i < m.Cols(); i++ {
 		cf := m.Cofactor(0, i)
 		res += cf * m.Get(0, i)
@@ -207,13 +207,13 @@ func (m Matrix) Determinant() float {
 	return res
 }
 
-func (m Matrix) Minor(row, col int) float {
+func (m Matrix) Minor(row, col int) value {
 	sm := m.Submatrix(row, col)
 	defer sm.Release()
 	return sm.Determinant()
 }
 
-func (m Matrix) Cofactor(row, col int) float {
+func (m Matrix) Cofactor(row, col int) value {
 	sm := m.Minor(row, col)
 	if (row+col)%2 == 1 {
 		sm *= -1

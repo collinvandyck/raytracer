@@ -6,18 +6,18 @@ import (
 )
 
 type (
-	float = float64
+	value = float64
 )
 
-func NewTuple(x, y, z, w float) Tuple4 {
+func NewTuple(x, y, z, w value) Tuple4 {
 	return Tuple4{x, y, z, w}
 }
 
 type Tuple4 struct {
-	x float
-	y float
-	z float
-	w float
+	x value
+	y value
+	z value
+	w value
 }
 
 func (t Tuple4) add(o Tuple4) Tuple4 {
@@ -38,7 +38,7 @@ func (t Tuple4) subtract(o Tuple4) Tuple4 {
 	}
 }
 
-func (t Tuple4) multiplyBy(val float) Tuple4 {
+func (t Tuple4) multiplyBy(val value) Tuple4 {
 	return Tuple4{
 		t.x * val,
 		t.y * val,
@@ -56,7 +56,7 @@ func (t Tuple4) multiply(o Tuple4) Tuple4 {
 	}
 }
 
-func (t Tuple4) divideBy(val float) Tuple4 {
+func (t Tuple4) divideBy(val value) Tuple4 {
 	return Tuple4{
 		t.x / val,
 		t.y / val,
@@ -65,7 +65,7 @@ func (t Tuple4) divideBy(val float) Tuple4 {
 	}
 }
 
-func (t Tuple4) dot(o Tuple4) float {
+func (t Tuple4) dot(o Tuple4) value {
 	x2 := t.x * o.x
 	y2 := t.y * o.y
 	z2 := t.z * o.z
@@ -100,7 +100,7 @@ func (t Tuple4) String() string {
 
 type Point Tuple4
 
-func NewPoint(x, y, z float) Point {
+func NewPoint(x, y, z value) Point {
 	return Point(NewTuple(x, y, z, 1))
 }
 
@@ -124,15 +124,15 @@ func (p Point) Equal(o Point) bool {
 	return Tuple4(p).equal(Tuple4(o))
 }
 
-func (p Point) X() float {
+func (p Point) X() value {
 	return p.x
 }
 
-func (p Point) Y() float {
+func (p Point) Y() value {
 	return p.y
 }
 
-func (p Point) Z() float {
+func (p Point) Z() value {
 	return p.z
 }
 
@@ -142,7 +142,7 @@ func (p Point) String() string {
 
 type Vector Tuple4
 
-func NewVector(x, y, z float) Vector {
+func NewVector(x, y, z value) Vector {
 	return Vector(NewTuple(x, y, z, 0))
 }
 
@@ -162,11 +162,11 @@ func (v Vector) Negate() Vector {
 	return Vector(Tuple4(v).negate())
 }
 
-func (v Vector) MultiplyBy(o float) Vector {
+func (v Vector) MultiplyBy(o value) Vector {
 	return Vector(Tuple4(v).multiplyBy(o))
 }
 
-func (v Vector) Magnitude() float {
+func (v Vector) Magnitude() value {
 	m1 := Tuple4(v).multiply(Tuple4(v))
 	return math.Sqrt(m1.x + m1.y + m1.z)
 }
@@ -177,7 +177,7 @@ func (v Vector) Normalize() Vector {
 	return NewVector(d1.x, d1.y, d1.z)
 }
 
-func (v Vector) Dot(o Vector) float {
+func (v Vector) Dot(o Vector) value {
 	return Tuple4(v).dot(Tuple4(o))
 }
 
@@ -192,15 +192,15 @@ func (v Vector) Equal(o Vector) bool {
 	return Tuple4(v).equal(Tuple4(o))
 }
 
-func (v Vector) X() float {
+func (v Vector) X() value {
 	return v.x
 }
 
-func (v Vector) Y() float {
+func (v Vector) Y() value {
 	return v.y
 }
 
-func (v Vector) Z() float {
+func (v Vector) Z() value {
 	return v.z
 }
 

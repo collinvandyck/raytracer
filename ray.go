@@ -33,7 +33,7 @@ func (r Ray) IntersectSphere(sphere Sphere) (res Intersection) {
 	return sphere.Intersection(t1, t2)
 }
 
-func (r Ray) Position(t float) Point {
+func (r Ray) Position(t value) Point {
 	d1 := r.direction.MultiplyBy(t)
 	return d1.AddPoint(r.origin)
 }
