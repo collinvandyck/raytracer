@@ -13,7 +13,9 @@ func NewRay(origin Point, direction Vector) Ray {
 }
 
 func (r Ray) Transform(m Matrix) Ray {
-	return r
+	ro := m.MultiplyPoint(r.origin)
+	rd := m.MultiplyVector(r.direction)
+	return NewRay(ro, rd)
 }
 
 func (r Ray) Position(t Value) Point {
