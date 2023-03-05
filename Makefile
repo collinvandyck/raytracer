@@ -28,6 +28,11 @@ clockface:
 	go run ./cmd/clockface
 	open clockface.ppm
 
+.PHONY: sphere
+sphere:
+	go run ./cmd/sphere
+	open sphere.ppm
+
 .PHONY: table
 table:
 	go run ./cmd/table
