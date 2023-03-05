@@ -2,6 +2,12 @@ package rt
 
 import "fmt"
 
+var noIntersection Intersection
+
+func Hit(xs Intersections) (Intersection, bool) {
+	return noIntersection, false
+}
+
 type Intersections []Intersection
 
 func NewIntersections(intersections ...Intersection) Intersections {
