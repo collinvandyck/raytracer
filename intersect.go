@@ -1,17 +1,28 @@
 package rt
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 var noIntersection Intersection
 
 func Hit(xs Intersections) (Intersection, bool) {
+	for _, x := range xs {
+		if x.Value() >= 0 {
+			return x, true
+		}
+	}
 	return noIntersection, false
 }
 
 type Intersections []Intersection
 
-func NewIntersections(intersections ...Intersection) Intersections {
-	return intersections
+func NewIntersections(xs ...Intersection) Intersections {
+	sort.Slice(xs, func(i, j int) bool {
+		return xs[i].Value() < xs[j].Value()
+	})
+	return xs
 }
 
 func (i Intersections) Values() []Value {

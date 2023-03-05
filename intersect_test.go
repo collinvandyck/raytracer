@@ -86,4 +86,25 @@ func TestIntersect(t *testing.T) {
 		equalIntersection(t, i2, h1)
 	})
 
+	t.Run("The hit, when all intersections have negative t", func(t *testing.T) {
+		s1 := NewSphere()
+		i1 := NewIntersection(-1, s1)
+		i2 := NewIntersection(-1, s1)
+		xs := NewIntersections(i2, i1)
+		_, ok := Hit(xs)
+		require.False(t, ok)
+	})
+
+	t.Run("The hit is always the lowest nonnegative intersection", func(t *testing.T) {
+		s1 := NewSphere()
+		i1 := NewIntersection(+5, s1)
+		i2 := NewIntersection(+7, s1)
+		i3 := NewIntersection(-3, s1)
+		i4 := NewIntersection(+2, s1)
+		xs := NewIntersections(i1, i2, i3, i4)
+		h1, ok := Hit(xs)
+		require.True(t, ok)
+		equalIntersection(t, i4, h1)
+	})
+
 }
