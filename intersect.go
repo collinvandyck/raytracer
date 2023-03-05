@@ -33,14 +33,6 @@ func NewIntersection(shape Shape, t value) Intersection {
 	}
 }
 
-func (i Intersection) Shape() Shape {
-	return i.shape
-}
-
-func (i *Intersection) SetShape(shape Shape) {
-	i.shape = shape
-}
-
 func (i Intersection) Equal(o Intersection) bool {
 	if !floatsEqual(i.t, o.t) {
 		return false

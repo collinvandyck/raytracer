@@ -8,10 +8,7 @@ func NewSphere() Sphere {
 	return Sphere{}
 }
 
-func (s Sphere) Equal(o Shape) bool {
-	if _, ok := o.(Sphere); !ok {
-		return false
-	}
+func (s Sphere) Equal(o Sphere) bool {
 	return true
 }
 

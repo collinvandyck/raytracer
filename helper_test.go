@@ -44,19 +44,3 @@ func equalValueSlice(t *testing.T, v1, v2 []value) {
 		require.True(t, floatsEqual(v1[i], v2[i]), "Expected %v to equal %v", v2, v1)
 	}
 }
-
-var _ = equalIntersection
-
-func equalIntersection(t *testing.T, i1, i2 Intersection) {
-	t.Helper()
-	require.True(t, i1.Equal(i2), "Expected %v to equal %v", i2, i1)
-}
-
-var _ = intersectionHasSphere
-
-func intersectionHasSphere(t *testing.T, sphere Sphere, i1 Intersection) {
-	t.Helper()
-	shape := i1.Shape()
-	require.NotNil(t, shape)
-	require.True(t, sphere.Equal(shape), "Expected %s to equal %s", sphere, shape)
-}
