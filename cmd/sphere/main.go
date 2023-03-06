@@ -1,11 +1,33 @@
 package main
 
 import (
+	"flag"
 	"log"
+	"os"
 	"rt"
+	"runtime/pprof"
+)
+
+var (
+	cpuprofile = flag.String("cpuprofile", "", "write cpu profile to file")
+	memprofile = flag.String("memprofile", "", "write memory profile to this file")
 )
 
 func main() {
+	flag.Parse()
+	if *cpuprofile != "" {
+		f, err := os.Create(*cpuprofile)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer f.Close()
+		err = pprof.StartCPUProfile(f)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer pprof.StopCPUProfile()
+	}
+
 	canvas := render(100)
 	err := rt.WritePPMTo(canvas, "sphere.ppm")
 	if err != nil {
@@ -40,6 +62,14 @@ func render(canvasPixels int) *rt.Canvas {
 			}
 
 		}
+	}
+	if *memprofile != "" {
+		f, err := os.Create(*memprofile)
+		if err != nil {
+			log.Fatal(err)
+		}
+		pprof.WriteHeapProfile(f)
+		f.Close()
 	}
 	return canvas
 }
