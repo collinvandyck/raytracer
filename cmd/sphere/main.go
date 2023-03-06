@@ -1,12 +1,20 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"rt"
+	"time"
 )
 
 func main() {
-	canvas := render(1024)
+	const canvasPixels = 1024
+	start := time.Now()
+	canvas := render(canvasPixels)
+	dur := time.Since(start)
+	durPixel := dur / time.Duration(canvasPixels*canvasPixels)
+	fmt.Printf("Total time: %s\n", dur.Truncate(time.Millisecond))
+	fmt.Printf("Per pixel : %s\n", durPixel)
 	err := rt.WritePPMTo(canvas, "sphere.ppm")
 	if err != nil {
 		log.Fatal(err)

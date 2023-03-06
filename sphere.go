@@ -28,8 +28,8 @@ func IntersectSphere(sphere *Sphere, ray Ray) Intersections {
 }
 
 type Sphere struct {
-	matrix  Matrix
-	inverse Matrix
+	transform Matrix
+	inverse   Matrix
 }
 
 // todo: do i need to force an allocation here?
@@ -46,14 +46,14 @@ func (s *Sphere) GetInverseTransform() Matrix {
 }
 
 func (s Sphere) GetTransform() Matrix {
-	if s.matrix.Empty() {
+	if s.transform.Empty() {
 		return MatrixIdentity4x4
 	}
-	return s.matrix
+	return s.transform
 }
 
 func (s *Sphere) SetTransform(m Matrix) {
-	s.matrix = m
+	s.transform = m
 	s.inverse = emptyMatrix
 }
 
