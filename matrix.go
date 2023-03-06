@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+var emptyMatrix Matrix
+
 type Matrix struct {
 	vals [][]Value
 }

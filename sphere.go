@@ -2,7 +2,7 @@ package rt
 
 import "math"
 
-func IntersectSphere(sphere Sphere, ray Ray) Intersections {
+func IntersectSphere(sphere *Sphere, ray Ray) Intersections {
 	// transform the ray into object coordinates
 	ray = ray.Transform(sphere.GetInverseTransform())
 
@@ -33,8 +33,8 @@ type Sphere struct {
 }
 
 // todo: do i need to force an allocation here?
-func NewSphere() Sphere {
-	return Sphere{}
+func NewSphere() *Sphere {
+	return &Sphere{}
 }
 
 func (s *Sphere) GetInverseTransform() Matrix {
@@ -54,17 +54,18 @@ func (s Sphere) GetTransform() Matrix {
 
 func (s *Sphere) SetTransform(m Matrix) {
 	s.matrix = m
+	s.inverse = emptyMatrix
 }
 
 func (s Sphere) EqualShape(o Shape) bool {
-	os, ok := o.(Sphere)
+	os, ok := o.(*Sphere)
 	if !ok {
 		return false
 	}
 	return s.Equal(os)
 }
 
-func (s Sphere) Equal(o Sphere) bool {
+func (s *Sphere) Equal(o *Sphere) bool {
 	return true
 }
 
