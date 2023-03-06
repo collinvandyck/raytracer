@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	canvas := render(500)
+	canvas := render(1024)
 	err := rt.WritePPMTo(canvas, "sphere.ppm")
 	if err != nil {
 		log.Fatal(err)
