@@ -30,7 +30,7 @@ clockface:
 
 .PHONY: sphere
 sphere:
-	go run ./cmd/sphere
+	time go run ./cmd/sphere
 	open sphere.ppm
 
 .PHONY: table

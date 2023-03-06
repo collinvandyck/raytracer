@@ -6,16 +6,22 @@ import (
 )
 
 func main() {
+	canvas := render(100)
+	err := rt.WritePPMTo(canvas, "sphere.ppm")
+	if err != nil {
+		log.Fatal(err)
+	}
+}
 
+func render(canvasPixels int) *rt.Canvas {
 	var (
-		canvasPixels = 500                                      // the dimensions of the canvas
-		wallSize     = rt.Value(7)                              // how big the wall is
-		pixelSize    = wallSize / rt.Value(canvasPixels)        // pixel size in world coordinates
-		half         = wallSize / 2                             // half the wall size
-		color        = rt.NewColor(1, 0, 0)                     // color of the sphere
-		canvas       = rt.NewCanvas(canvasPixels, canvasPixels) // size of the canvas
-		rayOrigin    = rt.NewPoint(0, 0, -5)                    // ray origin
-		sphere       = rt.NewSphere()                           // unit sphere
+		wallSize  = rt.Value(7)                              // how big the wall is
+		pixelSize = wallSize / rt.Value(canvasPixels)        // pixel size in world coordinates
+		half      = wallSize / 2                             // half the wall size
+		color     = rt.NewColor(1, 0, 0)                     // color of the sphere
+		canvas    = rt.NewCanvas(canvasPixels, canvasPixels) // size of the canvas
+		rayOrigin = rt.NewPoint(0, 0, -5)                    // ray origin
+		sphere    = rt.NewSphere()                           // unit sphere
 	)
 
 	for y := 0; y < canvasPixels; y++ {
@@ -35,9 +41,5 @@ func main() {
 
 		}
 	}
-
-	err := rt.WritePPMTo(canvas, "sphere.ppm")
-	if err != nil {
-		log.Fatal(err)
-	}
+	return canvas
 }
