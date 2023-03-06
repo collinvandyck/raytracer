@@ -4,7 +4,7 @@ import "math"
 
 func IntersectSphere(sphere Sphere, ray Ray) Intersections {
 	// transform the ray into object coordinates
-	ray = ray.Transform(sphere.GetTransform().Inverse())
+	ray = ray.Transform(sphere.GetInverseTransform())
 
 	// the vector from the sphere's center to the ray origin
 	sphereToRay := ray.Origin().SubtractPoint(sphere.Point())
@@ -28,12 +28,21 @@ func IntersectSphere(sphere Sphere, ray Ray) Intersections {
 }
 
 type Sphere struct {
-	matrix Matrix
+	matrix  Matrix
+	inverse Matrix
 }
 
 // todo: do i need to force an allocation here?
 func NewSphere() Sphere {
 	return Sphere{}
+}
+
+func (s *Sphere) GetInverseTransform() Matrix {
+	if s.inverse.Empty() {
+		m := s.GetTransform()
+		s.inverse = m.Inverse()
+	}
+	return s.inverse
 }
 
 func (s Sphere) GetTransform() Matrix {
