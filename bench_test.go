@@ -121,3 +121,37 @@ func BenchmarkMatrixMultiply(b *testing.B) {
 		m1.Multiply(m2)
 	}
 }
+
+func BenchmarkSphere(b *testing.B) {
+	const canvasPixels = 100
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		var (
+			wallSize  = Value(7)                              // how big the wall is
+			pixelSize = wallSize / Value(canvasPixels)        // pixel size in world coordinates
+			half      = wallSize / 2                          // half the wall size
+			color     = NewColor(1, 0, 0)                     // color of the sphere
+			canvas    = NewCanvas(canvasPixels, canvasPixels) // size of the canvas
+			rayOrigin = NewPoint(0, 0, -5)                    // ray origin
+			sphere    = NewSphere()                           // unit sphere
+		)
+
+		for y := 0; y < canvasPixels; y++ {
+			// compute worldY (top = +half, bottom = -half)
+			worldY := half - (float64(y) * pixelSize)
+
+			for x := 0; x < canvasPixels; x++ {
+				worldX := half - (float64(x) * pixelSize)
+				point := NewPoint(worldX, worldY, 10) // the wall lives at z=10
+				vector := point.SubtractPoint(rayOrigin).Normalize()
+				ray := NewRay(rayOrigin, vector)
+				xs := IntersectSphere(sphere, ray)
+				_, hit := Hit(xs)
+				if hit {
+					canvas.WritePixel(x, y, color)
+				}
+
+			}
+		}
+	}
+}
