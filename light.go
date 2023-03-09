@@ -12,10 +12,10 @@ func NewPointLight(position Point, intensity Color) PointLight {
 	}
 }
 
-func (p PointLight) GetPosition() Point {
+func (p PointLight) Position() Point {
 	return p.position
 }
 
-func (p PointLight) GetIntensity() Color {
+func (p PointLight) Intensity() Color {
 	return p.intensity
 }

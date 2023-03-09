@@ -8,7 +8,7 @@ func TestLights(t *testing.T) {
 		p1 := NewPoint(0, 0, 0)
 		l1 := NewPointLight(p1, i1)
 
-		equalPoint(t, p1, l1.GetPosition())
-		equalColor(t, i1, l1.GetIntensity())
+		equalPoint(t, p1, l1.Position())
+		equalColor(t, i1, l1.Intensity())
 	})
 }

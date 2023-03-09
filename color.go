@@ -2,6 +2,8 @@ package rt
 
 import "fmt"
 
+var black = NewColor(0, 0, 0)
+
 type Color Tuple4
 
 func NewColor(r, g, b Value) Color {
