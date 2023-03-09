@@ -146,6 +146,10 @@ func NewVector(x, y, z Value) Vector {
 	return Vector(NewTuple(x, y, z, 0))
 }
 
+func (v Vector) Reflect(o Vector) Vector {
+	return v
+}
+
 func (v Vector) AddVector(o Vector) Vector {
 	return Vector(Tuple4(v).add(Tuple4(o)))
 }

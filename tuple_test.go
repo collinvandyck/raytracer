@@ -176,3 +176,20 @@ func TestVectorCrossProduct(t *testing.T) {
 		equalVector(t, NewVector(1, -2, 1), v2.Cross(v1))
 	})
 }
+
+func TestVectorReflection(t *testing.T) {
+	t.Run("Reflecting a vector approaching at 45°", func(t *testing.T) {
+		v1 := NewVector(1, -1, 0)
+		n1 := NewVector(0, 1, 0)
+		r1 := v1.Reflect(n1)
+		equalVector(t, NewVector(1, 1, 0), r1)
+	})
+
+	t.Run("Reflecting a vector off a slanted surface", func(t *testing.T) {
+		v1 := NewVector(0, -1, 0)
+		n1 := NewVector(Sqrt2/2, Sqrt2/2, 0)
+		r1 := v1.Reflect(n1)
+		equalVector(t, NewVector(1, 0, 0), r1)
+	})
+
+}
