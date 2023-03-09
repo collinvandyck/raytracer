@@ -1,5 +1,7 @@
 package rt
 
+import "fmt"
+
 type Color Tuple4
 
 func NewColor(r, g, b Value) Color {
@@ -36,4 +38,9 @@ func (c Color) Blue() Value {
 
 func (c Color) Equal(o Color) bool {
 	return Tuple4(c).equal(Tuple4(o))
+}
+
+func (c Color) String() string {
+	return fmt.Sprintf("Color(%s,%s,%s)",
+		formatFloat(c.x), formatFloat(c.y), formatFloat(c.z))
 }

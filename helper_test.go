@@ -36,7 +36,7 @@ func equalMatrix(t *testing.T, me, m1 Matrix) {
 
 func equalColor(t *testing.T, c1, c2 Color) {
 	t.Helper()
-	require.True(t, c1.Equal(c2))
+	require.True(t, c1.Equal(c2), "Expected %s to equal %s", c2, c1)
 }
 
 func equalValue(t *testing.T, v1, v2 Value) {

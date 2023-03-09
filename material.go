@@ -8,6 +8,10 @@ type Material struct {
 	shininess Value
 }
 
+func Lighting(m Material, light PointLight, position Point, eye Vector, normal Vector) Color {
+	return NewColor(1, 1, 1)
+}
+
 func NewMaterial(color Color, ambient, diffuse, specular, shininess Value) Material {
 	return Material{
 		color:     color,
