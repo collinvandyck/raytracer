@@ -61,4 +61,10 @@ func TestSphere(t *testing.T) {
 		equalVector(t, NewVector(math.Sqrt(3)/3, math.Sqrt(3)/3, math.Sqrt(3)/3), n1)
 	})
 
+	t.Run("The normal is a normalized vector", func(t *testing.T) {
+		s1 := NewSphere()
+		n1 := s1.NormalAt(NewPoint(math.Sqrt(3)/3, math.Sqrt(3)/3, math.Sqrt(3)/3))
+		equalVector(t, n1.Normalize(), n1)
+	})
+
 }
