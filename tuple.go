@@ -205,7 +205,7 @@ func (v Vector) Z() Value {
 }
 
 func (v *Vector) SetW(w Value) {
-	v.x = w
+	v.w = w
 }
 
 func (v Vector) String() string {

@@ -30,12 +30,15 @@ func IntersectSphere(sphere *Sphere, ray Ray) Intersections {
 	return NewIntersections(i1, i2)
 }
 
-func NormalAtSphere(sphere *Sphere, worldPoint Point) Vector {
-	objectPoint := sphere.GetInverseTransform().MultiplyPoint(worldPoint)
-	objectNormal := objectPoint.SubtractPoint(NewPoint(0, 0, 0))
-	worldNormal := sphere.GetInverseTransform().Transpose().MultiplyVector(objectNormal)
-	worldNormal.SetW(0)
-	return worldNormal.Normalize()
+func NormalAtSphere(s1 *Sphere, p1 Point) Vector {
+	mi := s1.GetInverseTransform()                   // inverse transform
+	mt := mi.Transpose()                             // transposed inverse transform
+	op := s1.GetInverseTransform().MultiplyPoint(p1) // object space
+	on := op.SubtractPoint(Origin)                   // object normal
+	wn := mt.MultiplyVector(on)                      // world normal
+	wn.SetW(0)
+	normalized := wn.Normalize()
+	return normalized
 }
 
 type Sphere struct {
