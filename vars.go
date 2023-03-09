@@ -10,5 +10,3 @@ var MatrixIdentity4x4 = NewMatrixFromValues([][]Value{
 })
 
 var Origin = NewPoint(0, 0, 0)
-
-var defaultMaterial = DefaultMaterial()
