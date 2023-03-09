@@ -28,7 +28,8 @@ func IntersectSphere(sphere *Sphere, ray Ray) Intersections {
 }
 
 func NormalAtSphere(sphere *Sphere, point Point) Vector {
-	return Vector{}
+	p := point.SubtractPoint(Origin)
+	return p.Normalize()
 }
 
 type Sphere struct {

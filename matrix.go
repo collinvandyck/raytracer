@@ -7,20 +7,11 @@ import (
 	"strings"
 )
 
-var emptyMatrix Matrix
-
 type Matrix struct {
 	vals [][]Value
 }
 
 var mstore = newMatrixPool()
-
-var MatrixIdentity4x4 = NewMatrixFromValues([][]Value{
-	{1, 0, 0, 0},
-	{0, 1, 0, 0},
-	{0, 0, 1, 0},
-	{0, 0, 0, 1},
-})
 
 func NewMatrix(rows, cols int) Matrix {
 	res := mstore.New(rows, cols)
