@@ -48,7 +48,7 @@ type Sphere struct {
 
 func NewSphere() *Sphere {
 	return &Sphere{
-		material: defaultMaterial,
+		material: DefaultMaterial(),
 	}
 }
 

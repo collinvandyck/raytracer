@@ -23,16 +23,21 @@ func main() {
 
 func render(canvasPixels int) *rt.Canvas {
 	var (
-		wallSize  = rt.Value(7)                              // how big the wall is
-		pixelSize = wallSize / rt.Value(canvasPixels)        // pixel size in world coordinates
-		half      = wallSize / 2                             // half the wall size
-		color     = rt.NewColor(1, 0, 0)                     // color of the sphere
-		canvas    = rt.NewCanvas(canvasPixels, canvasPixels) // size of the canvas
-		rayOrigin = rt.NewPoint(0, 0, -5)                    // ray origin
-		sphere    = rt.NewSphere()                           // unit sphere
+		wallSize   = rt.Value(7)                              // how big the wall is
+		pixelSize  = wallSize / rt.Value(canvasPixels)        // pixel size in world coordinates
+		half       = wallSize / 2                             // half the wall size
+		color      = rt.NewColor(1, 0, 0)                     // color of the sphere
+		canvas     = rt.NewCanvas(canvasPixels, canvasPixels) // size of the canvas
+		rayOrigin  = rt.NewPoint(0, 0, -5)                    // ray origin
+		sphere     = rt.NewSphere()                           // unit sphere
+		material   = rt.DefaultMaterial()                     // the material of the sphere
+		lightPos   = rt.NewPoint(-10, 10, -10)                // light position above and to the left of the eys
+		lightColor = rt.NewColor(1, 1, 1)                     // the light will be a white light
+		light      = rt.NewPointLight(lightPos, lightColor)   // the singular light source
 	)
 
-	//sphere.SetTransform(rt.Shearing(1, 0, 0, 0, 0, 0).Multiply(rt.Scaling(0.5, 1, 1)))
+	material.SetColor(rt.NewColor(1, 0.2, 1))
+	sphere.SetMaterial(material)
 
 	for y := 0; y < canvasPixels; y++ {
 		// compute worldY (top = +half, bottom = -half)
