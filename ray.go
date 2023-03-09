@@ -30,3 +30,7 @@ func (r Ray) Origin() Point {
 func (r Ray) Direction() Vector {
 	return r.direction
 }
+
+func (r *Ray) NormalizeDirection() {
+	r.direction = r.direction.Normalize()
+}

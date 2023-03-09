@@ -47,12 +47,18 @@ func render(canvasPixels int) *rt.Canvas {
 			worldX := half - (float64(x) * pixelSize)
 			point := rt.NewPoint(worldX, worldY, 10) // the wall lives at z=10
 			vector := point.SubtractPoint(rayOrigin).Normalize()
+
 			ray := rt.NewRay(rayOrigin, vector)
+			// TODO: we are already normalizing our vector, so we don't need to do this, possibly
+			ray.NormalizeDirection()
+
 			xs := rt.IntersectSphere(sphere, ray)
-			_, hit := rt.Hit(xs)
-			if hit {
-				canvas.WritePixel(x, y, color)
+			hit, ok := rt.Hit(xs)
+			if !ok {
+				// we missed the sphere. no need to continue
+				continue
 			}
+			canvas.WritePixel(x, y, color)
 
 		}
 	}
