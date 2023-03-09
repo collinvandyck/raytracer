@@ -88,4 +88,10 @@ func TestSphere(t *testing.T) {
 		equalMaterial(t, DefaultMaterial(), m1)
 	})
 
+	t.Run("A sphere may be assigned a material", func(t *testing.T) {
+		s1 := NewSphere()
+		m1 := DefaultMaterial()
+		equalMaterial(t, DefaultMaterial(), m1)
+	})
+
 }

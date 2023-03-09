@@ -31,20 +31,40 @@ func (m Material) GetColor() Color {
 	return m.color
 }
 
+func (m *Material) SetColor(c Color) {
+	m.color = c
+}
+
 func (m Material) GetAmbient() Value {
 	return m.ambient
+}
+
+func (m *Material) SetAmbient(v Value) {
+	m.ambient = v
 }
 
 func (m Material) GetDiffuse() Value {
 	return m.diffuse
 }
 
+func (m *Material) SetDiffuse(v Value) {
+	m.diffuse = v
+}
+
 func (m Material) GetSpecular() Value {
 	return m.specular
 }
 
+func (m *Material) SetSpecular(v Value) {
+	m.specular = v
+}
+
 func (m Material) GetShininess() Value {
 	return m.shininess
+}
+
+func (m *Material) SetShininess(v Value) {
+	m.shininess = v
 }
 
 func (m Material) Equal(o Material) bool {

@@ -105,6 +105,10 @@ func (s *Sphere) Material() Material {
 	return s.material
 }
 
+func (s *Sphere) SetMaterial(m Material) {
+	s.material = m
+}
+
 func (s *Sphere) String() string {
 	return "Sphere()"
 }
