@@ -1,6 +1,9 @@
 package rt
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 func IntersectSphere(sphere *Sphere, ray Ray) Intersections {
 	// transform the ray into object coordinates
@@ -27,14 +30,12 @@ func IntersectSphere(sphere *Sphere, ray Ray) Intersections {
 	return NewIntersections(i1, i2)
 }
 
-func NormalAtSphere(s1 *Sphere, p1 Point) Vector {
-	t1 := s1.GetInverseTransform()          // get the inverse transform
-	p1 = t1.MultiplyPoint(p1)               // multiply by the inverse to make p1 be in object coords
-	n1 := p1.SubtractPoint(Origin)          // subtract the point from the origin to get the normal
-	w1 := t1.Transpose().MultiplyVector(n1) // transpose the normal
-	w1.SetW(0)                              // correct the transposition
-	w1 = w1.Normalize()                     // finally normalize it
-	return n1
+func NormalAtSphere(sphere *Sphere, worldPoint Point) Vector {
+	objectPoint := sphere.GetInverseTransform().MultiplyPoint(worldPoint)
+	objectNormal := objectPoint.SubtractPoint(NewPoint(0, 0, 0))
+	worldNormal := sphere.GetInverseTransform().Transpose().MultiplyVector(objectNormal)
+	worldNormal.SetW(0)
+	return worldNormal.Normalize()
 }
 
 type Sphere struct {
@@ -54,7 +55,9 @@ func (s *Sphere) NormalAt(point Point) Vector {
 func (s *Sphere) GetInverseTransform() Matrix {
 	if s.inverse.Empty() {
 		m := s.GetTransform()
+		fmt.Printf("Transform\n%s\n", m)
 		s.inverse = m.Inverse()
+		fmt.Printf("Inverse\n%s\n", s.inverse)
 	}
 	return s.inverse
 }

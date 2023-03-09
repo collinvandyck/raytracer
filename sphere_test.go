@@ -78,7 +78,7 @@ func TestSphere(t *testing.T) {
 		s1 := NewSphere()
 		m1 := Scaling(1, 0.5, 1).Multiply(RotationZ(Pi / 5))
 		s1.SetTransform(m1)
-		n1 := s1.NormalAt(NewPoint(0, Sqrt2/2, -Sqrt2/2))
+		n1 := s1.NormalAt(NewPoint(0, math.Sqrt2/Value(2), -(math.Sqrt2 / Value(2))))
 		equalVector(t, NewVector(0, 0.97014, -0.24254), n1)
 	})
 
