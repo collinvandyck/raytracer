@@ -48,8 +48,6 @@ func render(canvasPixels int) *rt.Canvas {
 			rayDirection := point.SubtractPoint(rayOrigin).Normalize()
 
 			ray := rt.NewRay(rayOrigin, rayDirection)
-			// TODO: we are already normalizing our vector, so we don't need to do this, possibly
-			ray.NormalizeDirection()
 
 			xs := rt.IntersectSphere(sphere, ray)
 			hit, ok := rt.Hit(xs)
