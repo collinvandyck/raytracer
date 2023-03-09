@@ -155,3 +155,12 @@ func BenchmarkSphere(b *testing.B) {
 		}
 	}
 }
+
+func BenchmarkNormalAtSphere(b *testing.B) {
+	s1 := NewSphere()
+	p1 := NewPoint(1, 1, 1)
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		_ = s1.NormalAt(p1)
+	}
+}
