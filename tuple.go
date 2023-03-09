@@ -204,6 +204,10 @@ func (v Vector) Z() Value {
 	return v.z
 }
 
+func (v *Vector) SetW(w Value) {
+	v.x = w
+}
+
 func (v Vector) String() string {
 	return fmt.Sprintf("Vector(%s %s %s)", formatFloat(v.x), formatFloat(v.y), formatFloat(v.z))
 }

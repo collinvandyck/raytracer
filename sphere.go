@@ -27,9 +27,14 @@ func IntersectSphere(sphere *Sphere, ray Ray) Intersections {
 	return NewIntersections(i1, i2)
 }
 
-func NormalAtSphere(sphere *Sphere, point Point) Vector {
-	p := point.SubtractPoint(Origin)
-	return p.Normalize()
+func NormalAtSphere(s1 *Sphere, p1 Point) Vector {
+	t1 := s1.GetInverseTransform()          // get the inverse transform
+	p1 = t1.MultiplyPoint(p1)               // multiply by the inverse to make p1 be in object coords
+	n1 := p1.SubtractPoint(Origin)          // subtract the point from the origin to get the normal
+	w1 := t1.Transpose().MultiplyVector(n1) // transpose the normal
+	w1.SetW(0)                              // correct the transposition
+	w1 = w1.Normalize()                     // finally normalize it
+	return n1
 }
 
 type Sphere struct {
