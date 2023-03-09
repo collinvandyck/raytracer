@@ -23,15 +23,15 @@ func main() {
 
 func render(canvasPixels int) *rt.Canvas {
 	var (
-		wallSize   = rt.Value(7)                              // how big the wall is
-		pixelSize  = wallSize / rt.Value(canvasPixels)        // pixel size in world coordinates
-		canvas     = rt.NewCanvas(canvasPixels, canvasPixels) // size of the canvas
-		rayOrigin  = rt.NewPoint(0, 0, -5)                    // ray origin
-		sphere     = rt.NewSphere()                           // unit sphere
-		material   = rt.DefaultMaterial()                     // the material of the sphere
-		lightPos   = rt.NewPoint(-10, 10, -10)                // light position above and to the left of the eye
-		lightColor = rt.NewColor(1, 1, 1)                     // the light will be a white light
-		light      = rt.NewPointLight(lightPos, lightColor)   // the singular light source
+		worldWallSize = rt.Value(7)                              // how big the wall is
+		pixelSize     = worldWallSize / rt.Value(canvasPixels)   // pixel size in world coordinates
+		canvas        = rt.NewCanvas(canvasPixels, canvasPixels) // size of the canvas
+		rayOrigin     = rt.NewPoint(0, 0, -5)                    // ray origin
+		sphere        = rt.NewSphere()                           // unit sphere
+		material      = rt.DefaultMaterial()                     // the material of the sphere
+		lightPos      = rt.NewPoint(-10, 10, -10)                // light position above and to the left of the eye
+		lightColor    = rt.NewColor(1, 1, 1)                     // the light will be a white light
+		light         = rt.NewPointLight(lightPos, lightColor)   // the singular light source
 	)
 
 	material.SetColor(rt.NewColor(1, 0.2, 1))
@@ -39,10 +39,10 @@ func render(canvasPixels int) *rt.Canvas {
 
 	for y := 0; y < canvasPixels; y++ {
 		// compute worldY (top = +half, bottom = -half)
-		worldY := (wallSize / 2) - (float64(y) * pixelSize)
+		worldY := (worldWallSize / 2) - (float64(y) * pixelSize)
 
 		for x := 0; x < canvasPixels; x++ {
-			worldX := (wallSize / 2) - (float64(x) * pixelSize)
+			worldX := (-worldWallSize / 2) + (float64(x) * pixelSize)
 
 			point := rt.NewPoint(worldX, worldY, 10) // the wall lives at z=10
 			rayDirection := point.SubtractPoint(rayOrigin).Normalize()
@@ -67,6 +67,5 @@ func render(canvasPixels int) *rt.Canvas {
 
 		}
 	}
-	canvas.WritePixel(0, 0, rt.NewColor(1, 0, 0))
 	return canvas
 }
