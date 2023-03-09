@@ -34,9 +34,9 @@ func NormalAtSphere(s1 *Sphere, p1 Point) Vector {
 	op := s1.GetInverseTransform().MultiplyPoint(p1) // object space
 	on := op.SubtractPoint(Origin)                   // object normal
 	wn := mt.MultiplyVector(on)                      // world normal
-	wn.SetW(0)
-	normalized := wn.Normalize()
-	return normalized
+	wn.SetW(0)                                       // correct transposition side effect
+	nv := wn.Normalize()                             // normalize
+	return nv
 }
 
 type Sphere struct {
