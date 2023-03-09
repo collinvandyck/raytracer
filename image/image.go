@@ -5,6 +5,7 @@ import (
 	"image/color"
 	"image/png"
 	"io"
+	"os"
 	"rt"
 )
 
@@ -17,12 +18,21 @@ func scaleRGB(val rt.Value) uint8 {
 	return uint8(val)
 }
 
-func WritePNG(c rt.Canvas, w io.Writer) error {
+func WritePNGTo(c *rt.Canvas, file string) error {
+	f, err := os.Create(file)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	return WritePNG(c, f)
+}
+
+func WritePNG(c *rt.Canvas, w io.Writer) error {
 	rgb := CanvasToRGBA(c)
 	return png.Encode(w, rgb)
 }
 
-func CanvasToRGBA(c rt.Canvas) *image.RGBA {
+func CanvasToRGBA(c *rt.Canvas) *image.RGBA {
 	rect := image.Rect(0, 0, c.Width(), c.Height())
 	res := image.NewRGBA(rect)
 	for x := 0; x < c.Width(); x++ {

@@ -41,7 +41,7 @@ sphere:
 .PHONY: shade
 shade:
 	go run ./cmd/shade
-	open shade.ppm
+	open shade.png
 
 .PHONY: table
 table:
