@@ -1,6 +1,9 @@
 package rt
 
-import "testing"
+import (
+	"math"
+	"testing"
+)
 
 func BenchmarkMatrix4x4Get(b *testing.B) {
 	m1 := NewMatrixFromTable(`
@@ -159,6 +162,17 @@ func BenchmarkSphere(b *testing.B) {
 func BenchmarkNormalAtSphere(b *testing.B) {
 	s1 := NewSphere()
 	p1 := NewPoint(1, 1, 1)
+	b.ReportAllocs()
+	for i := 0; i < b.N; i++ {
+		_ = s1.NormalAt(p1)
+	}
+}
+
+func BenchmarkNormalAtSphereTransforme(b *testing.B) {
+	s1 := NewSphere()
+	m1 := Scaling(1, 0.5, 1).Multiply(RotationZ(Pi / 5))
+	s1.SetTransform(m1)
+	p1 := NewPoint(0, math.Sqrt2/Value(2), -(math.Sqrt2 / Value(2)))
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
 		_ = s1.NormalAt(p1)
