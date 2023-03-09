@@ -34,4 +34,22 @@ func TestSphere(t *testing.T) {
 		equalIntersections(t, xe, xs)
 	})
 
+	t.Run("The normal on a sphere at a point on the x axis", func(t *testing.T) {
+		s1 := NewSphere()
+		n1 := s1.NormalAt(NewPoint(1, 0, 0))
+		equalVector(t, NewVector(1, 0, 0), n1)
+	})
+
+	t.Run("The normal on a sphere at a point on the y axis", func(t *testing.T) {
+		s1 := NewSphere()
+		n1 := s1.NormalAt(NewPoint(0, 1, 0))
+		equalVector(t, NewVector(0, 1, 0), n1)
+	})
+
+	t.Run("The normal on a sphere at a point on the z axis", func(t *testing.T) {
+		s1 := NewSphere()
+		n1 := s1.NormalAt(NewPoint(0, 0, 1))
+		equalVector(t, NewVector(0, 0, 1), n1)
+	})
+
 }
