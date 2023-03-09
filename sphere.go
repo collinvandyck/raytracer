@@ -27,6 +27,10 @@ func IntersectSphere(sphere *Sphere, ray Ray) Intersections {
 	return NewIntersections(i1, i2)
 }
 
+func NormalAtSphere(sphere *Sphere, point Point) Vector {
+	return Vector{}
+}
+
 type Sphere struct {
 	transform Matrix
 	inverse   Matrix
@@ -35,6 +39,10 @@ type Sphere struct {
 // todo: do i need to force an allocation here?
 func NewSphere() *Sphere {
 	return &Sphere{}
+}
+
+func (s *Sphere) NormalAt(point Point) Vector {
+	return NormalAtSphere(s, point)
 }
 
 func (s *Sphere) GetInverseTransform() Matrix {
