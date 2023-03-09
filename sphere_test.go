@@ -67,4 +67,19 @@ func TestSphere(t *testing.T) {
 		equalVector(t, n1.Normalize(), n1)
 	})
 
+	t.Run("Computing the normal on a translated sphere", func(t *testing.T) {
+		s1 := NewSphere()
+		s1.SetTransform(Translation(0, 1, 0))
+		n1 := s1.NormalAt(NewPoint(0, 1.70711, -0.70711))
+		equalVector(t, NewVector(0, 0.70711, -0.70711), n1)
+	})
+
+	t.Run("Computing the normal on a transformed sphere", func(t *testing.T) {
+		s1 := NewSphere()
+		m1 := Scaling(1, 0.5, 1).Multiply(RotationZ(Pi / 5))
+		s1.SetTransform(m1)
+		n1 := s1.NormalAt(NewPoint(0, Sqrt2/2, -Sqrt2/2))
+		equalVector(t, NewVector(0, 0.97014, -0.24254), n1)
+	})
+
 }
