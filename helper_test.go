@@ -70,3 +70,8 @@ func equalIntersections(t *testing.T, i1, i2 Intersections) {
 	t.Helper()
 	require.True(t, i1.Equal(i2), "Expected %s to equal %s", i2, i1)
 }
+
+func equalMaterial(t *testing.T, m1, m2 Material) {
+	t.Helper()
+	require.True(t, m1.Equal(m2), "Expected %s to equal %s", m2, m1)
+}

@@ -43,10 +43,13 @@ type Sphere struct {
 	transform         Matrix
 	inverse           Matrix
 	transposedInverse Matrix
+	material          Material
 }
 
 func NewSphere() *Sphere {
-	return &Sphere{}
+	return &Sphere{
+		material: defaultMaterial,
+	}
 }
 
 func (s *Sphere) NormalAt(point Point) Vector {
@@ -96,6 +99,10 @@ func (s *Sphere) Equal(o *Sphere) bool {
 
 func (s *Sphere) Point() Point {
 	return NewPoint(0, 0, 0)
+}
+
+func (s *Sphere) Material() Material {
+	return s.material
 }
 
 func (s *Sphere) String() string {

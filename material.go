@@ -46,3 +46,22 @@ func (m Material) GetSpecular() Value {
 func (m Material) GetShininess() Value {
 	return m.shininess
 }
+
+func (m Material) Equal(o Material) bool {
+	if !m.GetColor().Equal(o.GetColor()) {
+		return false
+	}
+	if !floatsEqual(m.GetAmbient(), o.GetAmbient()) {
+		return false
+	}
+	if !floatsEqual(m.GetDiffuse(), o.GetDiffuse()) {
+		return false
+	}
+	if !floatsEqual(m.GetSpecular(), o.GetSpecular()) {
+		return false
+	}
+	if !floatsEqual(m.GetShininess(), o.GetShininess()) {
+		return false
+	}
+	return true
+}

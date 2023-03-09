@@ -82,4 +82,10 @@ func TestSphere(t *testing.T) {
 		equalVector(t, NewVector(0, 0.97014, -0.24254), n1)
 	})
 
+	t.Run("A sphere has a default material", func(t *testing.T) {
+		s1 := NewSphere()
+		m1 := s1.Material()
+		equalMaterial(t, DefaultMaterial(), m1)
+	})
+
 }
