@@ -38,6 +38,11 @@ sphere:
 	go run ./cmd/sphere
 	open sphere.ppm
 
+.PHONY: shade
+shade:
+	go run ./cmd/shade
+	open shade.ppm
+
 .PHONY: table
 table:
 	go run ./cmd/table
