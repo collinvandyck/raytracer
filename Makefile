@@ -9,6 +9,11 @@ test:
 lint:
 	golangci-lint run
 
+build:
+	mkdir -p bin
+	go build -o bin/cannon ./cmd/cannon
+	go build -o bin/sphere ./cmd/sphere
+
 .PHONY: bench
 bench:
 	go test -run donotrun -bench . -memprofile mem.out -cpuprofile cpu.out

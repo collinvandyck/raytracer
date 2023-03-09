@@ -32,6 +32,8 @@ func render(canvasPixels int) *rt.Canvas {
 		sphere    = rt.NewSphere()                           // unit sphere
 	)
 
+	//sphere.SetTransform(rt.Shearing(1, 0, 0, 0, 0, 0).Multiply(rt.Scaling(0.5, 1, 1)))
+
 	for y := 0; y < canvasPixels; y++ {
 		// compute worldY (top = +half, bottom = -half)
 		worldY := half - (float64(y) * pixelSize)
