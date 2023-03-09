@@ -26,7 +26,6 @@ func render(canvasPixels int) *rt.Canvas {
 		wallSize   = rt.Value(7)                              // how big the wall is
 		pixelSize  = wallSize / rt.Value(canvasPixels)        // pixel size in world coordinates
 		half       = wallSize / 2                             // half the wall size
-		color      = rt.NewColor(1, 0, 0)                     // color of the sphere
 		canvas     = rt.NewCanvas(canvasPixels, canvasPixels) // size of the canvas
 		rayOrigin  = rt.NewPoint(0, 0, -5)                    // ray origin
 		sphere     = rt.NewSphere()                           // unit sphere
@@ -46,9 +45,9 @@ func render(canvasPixels int) *rt.Canvas {
 		for x := 0; x < canvasPixels; x++ {
 			worldX := half - (float64(x) * pixelSize)
 			point := rt.NewPoint(worldX, worldY, 10) // the wall lives at z=10
-			vector := point.SubtractPoint(rayOrigin).Normalize()
+			rayDirection := point.SubtractPoint(rayOrigin).Normalize()
 
-			ray := rt.NewRay(rayOrigin, vector)
+			ray := rt.NewRay(rayOrigin, rayDirection)
 			// TODO: we are already normalizing our vector, so we don't need to do this, possibly
 			ray.NormalizeDirection()
 
@@ -58,7 +57,15 @@ func render(canvasPixels int) *rt.Canvas {
 				// we missed the sphere. no need to continue
 				continue
 			}
-			canvas.WritePixel(x, y, color)
+
+			// here we have a hit.
+			hitPoint := ray.Position(hit.Value())
+			hitNormal := hit.Shape().NormalAt(hitPoint)
+			hitEye := ray.Direction().Negate()
+
+			// calculate the color.
+			hitColor := rt.Lighting(hit.Shape().Material(), light, hitPoint, hitEye, hitNormal)
+			canvas.WritePixel(x, y, hitColor)
 
 		}
 	}
