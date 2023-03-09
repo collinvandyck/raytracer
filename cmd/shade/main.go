@@ -42,6 +42,7 @@ func render(canvasPixels int) *rt.Canvas {
 		worldY := (worldWallSize / 2) - (float64(y) * pixelSize)
 
 		for x := 0; x < canvasPixels; x++ {
+			// compute worldX (left = -half, right = +half)
 			worldX := (-worldWallSize / 2) + (float64(x) * pixelSize)
 
 			point := rt.NewPoint(worldX, worldY, 10) // the wall lives at z=10
