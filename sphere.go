@@ -1,7 +1,6 @@
 package rt
 
 import (
-	"fmt"
 	"math"
 )
 
@@ -42,11 +41,11 @@ func NormalAtSphere(s1 *Sphere, p1 Point) Vector {
 }
 
 type Sphere struct {
-	transform Matrix
-	inverse   Matrix
+	transform         Matrix
+	inverse           Matrix
+	transposedInverse Matrix
 }
 
-// todo: do i need to force an allocation here?
 func NewSphere() *Sphere {
 	return &Sphere{}
 }
@@ -55,12 +54,18 @@ func (s *Sphere) NormalAt(point Point) Vector {
 	return NormalAtSphere(s, point)
 }
 
+func (s *Sphere) GetTransposedInverseTransform() Matrix {
+	if s.transposedInverse.Empty() {
+		m := s.GetInverseTransform()
+		s.transposedInverse = m.Transpose()
+	}
+	return s.transposedInverse
+}
+
 func (s *Sphere) GetInverseTransform() Matrix {
 	if s.inverse.Empty() {
 		m := s.GetTransform()
-		fmt.Printf("Transform\n%s\n", m)
 		s.inverse = m.Inverse()
-		fmt.Printf("Inverse\n%s\n", s.inverse)
 	}
 	return s.inverse
 }
@@ -75,6 +80,7 @@ func (s *Sphere) GetTransform() Matrix {
 func (s *Sphere) SetTransform(m Matrix) {
 	s.transform = m
 	s.inverse = emptyMatrix
+	s.transposedInverse = emptyMatrix
 }
 
 func (s *Sphere) EqualShape(o Shape) bool {
