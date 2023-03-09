@@ -30,8 +30,7 @@ func IntersectSphere(sphere *Sphere, ray Ray) Intersections {
 }
 
 func NormalAtSphere(s1 *Sphere, p1 Point) Vector {
-	mi := s1.GetInverseTransform()                   // inverse transform
-	mt := mi.Transpose()                             // transposed inverse transform
+	mt := s1.GetTransposedInverseTransform()         // transposed inverse transform
 	op := s1.GetInverseTransform().MultiplyPoint(p1) // object space
 	on := op.SubtractPoint(Origin)                   // object normal
 	wn := mt.MultiplyVector(on)                      // world normal
