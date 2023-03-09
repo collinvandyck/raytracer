@@ -146,8 +146,8 @@ func NewVector(x, y, z Value) Vector {
 	return Vector(NewTuple(x, y, z, 0))
 }
 
-func (v Vector) Reflect(o Vector) Vector {
-	return v
+func (v Vector) Reflect(normal Vector) Vector {
+	return v.SubtractVector(normal.MultiplyBy(2 * v.Dot(normal)))
 }
 
 func (v Vector) AddVector(o Vector) Vector {
