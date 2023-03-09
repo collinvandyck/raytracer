@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"rt"
+	"rt/image"
 	"time"
 )
 
@@ -15,7 +16,7 @@ func main() {
 	durPixel := dur / time.Duration(canvasPixels*canvasPixels)
 	fmt.Printf("Total time: %s\n", dur.Truncate(time.Millisecond))
 	fmt.Printf("Per pixel : %s\n", durPixel)
-	err := rt.WritePPMTo(canvas, "sphere.ppm")
+	err := image.WritePNGTo(canvas, "sphere.png")
 	if err != nil {
 		log.Fatal(err)
 	}

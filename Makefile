@@ -36,7 +36,7 @@ clockface:
 .PHONY: sphere
 sphere:
 	go run ./cmd/sphere
-	open sphere.ppm
+	open sphere.png
 
 .PHONY: shade
 shade:
