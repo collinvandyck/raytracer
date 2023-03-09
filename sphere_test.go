@@ -1,6 +1,9 @@
 package rt
 
-import "testing"
+import (
+	"math"
+	"testing"
+)
 
 func TestSphere(t *testing.T) {
 
@@ -50,6 +53,12 @@ func TestSphere(t *testing.T) {
 		s1 := NewSphere()
 		n1 := s1.NormalAt(NewPoint(0, 0, 1))
 		equalVector(t, NewVector(0, 0, 1), n1)
+	})
+
+	t.Run("The normal on a sphere at a non-axial point", func(t *testing.T) {
+		s1 := NewSphere()
+		n1 := s1.NormalAt(NewPoint(math.Sqrt(3)/3, math.Sqrt(3)/3, math.Sqrt(3)/3))
+		equalVector(t, NewVector(math.Sqrt(3)/3, math.Sqrt(3)/3, math.Sqrt(3)/3), n1)
 	})
 
 }
