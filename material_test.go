@@ -60,4 +60,16 @@ func TestMaterial(t *testing.T) {
 		color := Lighting(mat, light, position, eyev, normalv)
 		equalColor(t, NewColor(1.6364, 1.6364, 1.6364), color)
 	})
+
+	t.Run("Lighting with the light behind the surface", func(t *testing.T) {
+		var (
+			mat      = DefaultMaterial()
+			position = NewPoint(0, 0, 0)
+			eyev     = NewVector(0, 0, -1)
+			normalv  = NewVector(0, 0, -1)
+			light    = NewPointLight(NewPoint(0, 0, 10), NewColor(1, 1, 1))
+		)
+		color := Lighting(mat, light, position, eyev, normalv)
+		equalColor(t, NewColor(0.1, 0.1, 0.1), color)
+	})
 }
