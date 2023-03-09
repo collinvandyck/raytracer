@@ -36,4 +36,28 @@ func TestMaterial(t *testing.T) {
 		color := Lighting(mat, light, position, eyev, normalv)
 		equalColor(t, NewColor(1, 1, 1), color)
 	})
+
+	t.Run("Lighting with eye opposite surface, light offset 45°", func(t *testing.T) {
+		var (
+			mat      = DefaultMaterial()
+			position = NewPoint(0, 0, 0)
+			eyev     = NewVector(0, 0, -1)
+			normalv  = NewVector(0, 0, -1)
+			light    = NewPointLight(NewPoint(0, 10, -10), NewColor(1, 1, 1))
+		)
+		color := Lighting(mat, light, position, eyev, normalv)
+		equalColor(t, NewColor(0.7364, 0.7364, 0.7364), color)
+	})
+
+	t.Run("Lighting with eye in the path of the reflection vector", func(t *testing.T) {
+		var (
+			mat      = DefaultMaterial()
+			position = NewPoint(0, 0, 0)
+			eyev     = NewVector(0, -Sqrt2/2, -Sqrt2/2)
+			normalv  = NewVector(0, 0, -1)
+			light    = NewPointLight(NewPoint(0, 10, -10), NewColor(1, 1, 1))
+		)
+		color := Lighting(mat, light, position, eyev, normalv)
+		equalColor(t, NewColor(1.6364, 1.6364, 1.6364), color)
+	})
 }
