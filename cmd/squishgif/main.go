@@ -5,24 +5,23 @@ import (
 	"log"
 	"rt"
 	"rt/image"
-	"time"
 )
 
 func main() {
 	const canvasPixels = 1024
-	start := time.Now()
-	canvas := render(canvasPixels)
-	dur := time.Since(start)
-	durPixel := dur / time.Duration(canvasPixels*canvasPixels)
-	fmt.Printf("Total time: %s\n", dur.Truncate(time.Millisecond))
-	fmt.Printf("Per pixel : %s\n", durPixel)
-	err := image.WritePNGTo(canvas, "shade.png")
-	if err != nil {
-		log.Fatal(err)
+	const scale = 0.1
+	for s := 1.0; s >= 0; s -= scale {
+		canvas := render(canvasPixels, s)
+		err := image.WritePNGTo(canvas, fmt.Sprintf("squish-%0.2f.png", s))
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 }
 
-func render(canvasPixels int) *rt.Canvas {
+type Canvas *rt.Canvas
+
+func render(canvasPixels int, scale rt.Value) Canvas {
 	var (
 		worldWallSize = rt.Value(7)                              // how big the wall is
 		pixelSize     = worldWallSize / rt.Value(canvasPixels)   // pixel size in world coordinates
@@ -37,6 +36,7 @@ func render(canvasPixels int) *rt.Canvas {
 
 	material.SetColor(rt.NewColor(1, 0.2, 1))
 	sphere.SetMaterial(material)
+	sphere.SetTransform(rt.Scaling(scale, scale, scale))
 
 	for y := 0; y < canvasPixels; y++ {
 		// compute worldY (top = +half, bottom = -half)

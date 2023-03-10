@@ -43,6 +43,10 @@ shade:
 	go run ./cmd/shade
 	open shade.png
 
+.PHONY: shade
+squishgif:
+	go run ./cmd/squishgif
+
 .PHONY: table
 table:
 	go run ./cmd/table

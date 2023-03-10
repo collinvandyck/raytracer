@@ -3,6 +3,7 @@ package image
 import (
 	"image"
 	"image/color"
+	"image/gif"
 	"image/png"
 	"io"
 	"os"
@@ -27,9 +28,38 @@ func WritePNGTo(c *rt.Canvas, file string) error {
 	return WritePNG(c, f)
 }
 
+func WriteGIFTo(delay int, cvs []*rt.Canvas, file string) error {
+	f, err := os.Create(file)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	return WriteGIF(delay, cvs, f)
+}
+
 func WritePNG(c *rt.Canvas, w io.Writer) error {
 	rgb := CanvasToRGBA(c)
 	return png.Encode(w, rgb)
+}
+
+func WriteGIF(delay int, cvs []*rt.Canvas, w io.Writer) error {
+	res := CanvasesToGIF(delay, cvs)
+	return gif.EncodeAll(w, &res)
+}
+
+func CanvasesToGIF(delay int, cvs []*rt.Canvas) gif.GIF {
+	var pals []*image.Paletted
+	var dels []int
+	for _, cv := range cvs {
+		rgb := CanvasToRGBA(cv)
+		pal := convertRGBAtoPaletted(rgb)
+		pals = append(pals, pal)
+		dels = append(dels, delay)
+	}
+	return gif.GIF{
+		Image: pals,
+		Delay: dels,
+	}
 }
 
 func CanvasToRGBA(c *rt.Canvas) *image.RGBA {
@@ -49,4 +79,16 @@ func CanvasToRGBA(c *rt.Canvas) *image.RGBA {
 		}
 	}
 	return res
+}
+
+// Helper function to convert an RGBA image to a paletted image
+func convertRGBAtoPaletted(img *image.RGBA) *image.Paletted {
+	bounds := img.Bounds()
+	paletted := image.NewPaletted(bounds, nil)
+	for x := bounds.Min.X; x < bounds.Max.X; x++ {
+		for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
+			paletted.Set(x, y, img.At(x, y))
+		}
+	}
+	return paletted
 }
