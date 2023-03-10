@@ -58,9 +58,7 @@ func CanvasesToGIF(delay int, cvs []*rt.Canvas) gif.GIF {
 	pals := []*image.Paletted{}
 	var dels []int
 	for _, cv := range cvs {
-		fmt.Println("Creating RGBA")
 		rgb := CanvasToRGBA(cv)
-		fmt.Println("Converting to palleted")
 		pal := convertRGBAtoPaletted(rgb, palette)
 		pals = append(pals, pal)
 		dels = append(dels, delay)

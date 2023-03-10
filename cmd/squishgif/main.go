@@ -8,13 +8,16 @@ import (
 
 func main() {
 	const canvasPixels = 1024
-	const scale = 0.1
+	const scale = 0.015
 	var cvs []*rt.Canvas
 	for s := 1.0; s >= 0; s -= scale {
 		canvas := render(canvasPixels, s)
 		cvs = append(cvs, canvas)
 	}
-	err := image.WriteGIFTo(10, cvs, "squish.gif")
+	for i := len(cvs) - 1; i >= 0; i-- {
+		cvs = append(cvs, cvs[i])
+	}
+	err := image.WriteGIFTo(0, cvs, "squish.gif")
 	if err != nil {
 		log.Fatal(err)
 	}

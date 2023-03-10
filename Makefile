@@ -46,7 +46,7 @@ shade:
 .PHONY: shade
 squishgif:
 	go run ./cmd/squishgif
-	open squish.gif
+	open -a Firefox squish.gif
 
 .PHONY: table
 table:
