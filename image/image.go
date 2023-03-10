@@ -1,6 +1,7 @@
 package image
 
 import (
+	"fmt"
 	"image"
 	"image/color"
 	"image/gif"
@@ -48,21 +49,23 @@ func WriteGIF(delay int, cvs []*rt.Canvas, w io.Writer) error {
 }
 
 func CanvasesToGIF(delay int, cvs []*rt.Canvas) gif.GIF {
-	colors := make(rt.Colors)
-	for _, cv := range cvs {
-		colors.AddAll(cv.Colors())
+	palette := make(color.Palette, 256)
+	for i := 0; i < 256; i++ {
+		c := color.RGBA{uint8(i), uint8(i), uint8(i), 255}
+		palette[i] = c
 	}
-	pal := colors.ToPallete()
-
-	var pals []*image.Paletted
+	palette = palette[:255]
+	pals := []*image.Paletted{}
 	var dels []int
 	for _, cv := range cvs {
-		colors.AddAll(cv.Colors())
+		fmt.Println("Creating RGBA")
 		rgb := CanvasToRGBA(cv)
-		pal := convertRGBAtoPaletted(rgb, pal)
+		fmt.Println("Converting to palleted")
+		pal := convertRGBAtoPaletted(rgb, palette)
 		pals = append(pals, pal)
 		dels = append(dels, delay)
 	}
+	fmt.Println("Returning GIF")
 	return gif.GIF{
 		Image: pals,
 		Delay: dels,
@@ -75,7 +78,6 @@ func CanvasToRGBA(c *rt.Canvas) *image.RGBA {
 	for x := 0; x < c.Width(); x++ {
 		for y := 0; y < c.Height(); y++ {
 			cc := c.PixelAt(x, y)
-			cc.Red()
 			color := color.RGBA{
 				R: scaleRGB(cc.Red()),
 				G: scaleRGB(cc.Green()),
