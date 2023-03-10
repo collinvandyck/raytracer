@@ -48,11 +48,18 @@ func WriteGIF(delay int, cvs []*rt.Canvas, w io.Writer) error {
 }
 
 func CanvasesToGIF(delay int, cvs []*rt.Canvas) gif.GIF {
+	colors := make(rt.Colors)
+	for _, cv := range cvs {
+		colors.AddAll(cv.Colors())
+	}
+	pal := colors.ToPallete()
+
 	var pals []*image.Paletted
 	var dels []int
 	for _, cv := range cvs {
+		colors.AddAll(cv.Colors())
 		rgb := CanvasToRGBA(cv)
-		pal := convertRGBAtoPaletted(rgb)
+		pal := convertRGBAtoPaletted(rgb, pal)
 		pals = append(pals, pal)
 		dels = append(dels, delay)
 	}
@@ -82,9 +89,9 @@ func CanvasToRGBA(c *rt.Canvas) *image.RGBA {
 }
 
 // Helper function to convert an RGBA image to a paletted image
-func convertRGBAtoPaletted(img *image.RGBA) *image.Paletted {
+func convertRGBAtoPaletted(img *image.RGBA, p color.Palette) *image.Paletted {
 	bounds := img.Bounds()
-	paletted := image.NewPaletted(bounds, nil)
+	paletted := image.NewPaletted(bounds, p)
 	for x := bounds.Min.X; x < bounds.Max.X; x++ {
 		for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
 			paletted.Set(x, y, img.At(x, y))

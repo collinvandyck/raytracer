@@ -1,8 +1,44 @@
 package rt
 
-import "fmt"
+import (
+	"fmt"
+	"image/color"
+)
 
 var black = NewColor(0, 0, 0)
+
+type Colors map[Color]bool
+
+func (c Colors) Add(color Color) {
+	c[color] = true
+}
+
+func (c Colors) AddAll(o Colors) {
+	for oc := range o {
+		c.Add(oc)
+	}
+}
+
+func (c Colors) ToPallete() color.Palette {
+	scale := func(v Value) uint8 {
+		v *= 255
+		if v > 255 {
+			v = 255
+		}
+		return uint8(v)
+	}
+	res := make(color.Palette, 0, len(c))
+	for cc := range c {
+		pc := color.RGBA{
+			R: scale(cc.Red()),
+			G: scale(cc.Green()),
+			B: scale(cc.Blue()),
+			A: 255,
+		}
+		res = append(res, pc)
+	}
+	return res
+}
 
 type Color Tuple4
 

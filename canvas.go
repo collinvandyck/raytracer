@@ -21,6 +21,18 @@ func NewCanvas(width int, height int) *Canvas {
 	return res
 }
 
+// Returns a unique set of colors for this canvas
+func (c *Canvas) Colors() Colors {
+	res := make(Colors)
+	for x := 0; x < c.Width(); x++ {
+		for y := 0; y < c.Height(); y++ {
+			color := c.PixelAt(x, y)
+			res[color] = true
+		}
+	}
+	return res
+}
+
 func (c *Canvas) SetPointSize(val int) {
 	if val < 1 {
 		panic(fmt.Sprintf("invalid point size: %v", val))

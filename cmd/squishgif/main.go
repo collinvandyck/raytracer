@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"rt"
 	"rt/image"
@@ -10,12 +9,14 @@ import (
 func main() {
 	const canvasPixels = 1024
 	const scale = 0.1
+	var cvs []*rt.Canvas
 	for s := 1.0; s >= 0; s -= scale {
 		canvas := render(canvasPixels, s)
-		err := image.WritePNGTo(canvas, fmt.Sprintf("squish-%0.2f.png", s))
-		if err != nil {
-			log.Fatal(err)
-		}
+		cvs = append(cvs, canvas)
+	}
+	err := image.WriteGIFTo(10, cvs, "squish.gif")
+	if err != nil {
+		log.Fatal(err)
 	}
 }
 
