@@ -15,11 +15,10 @@ type Computations struct {
 }
 
 func PrepareComputations(i Intersection, ray Ray) *Computations {
-	res := &Computations{}
-
-	// copy the intersection's properties, for convenience
-	res.value = i.Value()
-	res.shape = i.Shape()
+	res := &Computations{
+		value: i.Value(),
+		shape: i.Shape(),
+	}
 
 	// precompute useful values
 	res.point = ray.Position(res.value)
