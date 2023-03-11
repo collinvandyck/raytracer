@@ -55,4 +55,15 @@ func TestWorld(t *testing.T) {
 		equalColor(t, NewColor(0.38066, 0.47583, 0.2855), c1)
 	})
 
+	t.Run("Shading an intersection from the inside", func(t *testing.T) {
+		w1 := NewDefaultWorld()
+		w1.SetLight(NewPointLight(NewPoint(0, 0.25, 0), NewColor(1, 1, 1)))
+		r1 := NewRay(NewPoint(0, 0, 0), NewVector(0, 0, 1))
+		s1 := w1.Shape(1)
+		i1 := NewIntersection(0.5, s1)
+		cs := PrepareComputations(i1, r1)
+		c1 := ShadeHit(w1, cs)
+		equalColor(t, NewColor(0.90498, 0.90498, 0.90498), c1)
+	})
+
 }

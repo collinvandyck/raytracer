@@ -40,3 +40,7 @@ func (w *World) Shape(i int) Shape {
 func (w *World) Light() *PointLight {
 	return w.light
 }
+
+func (w *World) SetLight(pl *PointLight) {
+	w.light = pl
+}
