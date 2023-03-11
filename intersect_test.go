@@ -120,4 +120,23 @@ func TestIntersect(t *testing.T) {
 		equalVector(t, NewVector(0, 0, -1), p1.Normal())
 	})
 
+	t.Run("The hit, when an intersection occurs on the outside", func(t *testing.T) {
+		r1 := NewRay(NewPoint(0, 0, -5), NewVector(0, 0, 1))
+		s1 := NewSphere()
+		i1 := NewIntersection(4, s1)
+		p1 := PrepareComputations(i1, r1)
+		require.False(t, p1.Inside())
+	})
+
+	t.Run("The hit, when an intersection occurs on the inside", func(t *testing.T) {
+		r1 := NewRay(NewPoint(0, 0, 0), NewVector(0, 0, 1))
+		s1 := NewSphere()
+		i1 := NewIntersection(1, s1)
+		p1 := PrepareComputations(i1, r1)
+		equalPoint(t, NewPoint(0, 0, 1), p1.Point())
+		equalVector(t, NewVector(0, 0, -1), p1.Eye())
+		require.True(t, p1.Inside())
+		equalVector(t, NewVector(0, 0, -1), p1.Normal())
+	})
+
 }
