@@ -1,10 +1,14 @@
 package rt
 
+func IntersectWorld(world *World, ray Ray) Intersections {
+	return NewIntersections()
+}
+
 func NewWorld() *World {
 	return &World{}
 }
 
-func DefaultWorld() *World {
+func NewDefaultWorld() *World {
 	l1 := NewPointLight(NewPoint(-10, 10, -10), NewColor(1, 1, 1))
 	s1 := NewSphere()
 	m1 := NewBlankMaterial()

@@ -25,6 +25,14 @@ func NewIntersections(xs ...Intersection) Intersections {
 	return xs
 }
 
+func (i Intersections) Len() int {
+	return len(i)
+}
+
+func (i Intersections) Get(idx int) Intersection {
+	return i[idx]
+}
+
 func (i Intersections) Values() []Value {
 	res := make([]Value, len(i))
 	for x := range i {

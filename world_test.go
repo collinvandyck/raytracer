@@ -25,11 +25,19 @@ func TestWorld(t *testing.T) {
 		s2 := NewSphere()
 		s2.SetTransform(Scaling(0.5, 0.5, 0.5))
 
-		w1 := DefaultWorld()
+		w1 := NewDefaultWorld()
 		equalLight(t, l1, w1.Light())
 		require.Len(t, w1.Shapes(), 2)
 		require.Contains(t, w1.Shapes(), s1)
 		require.Contains(t, w1.Shapes(), s2)
+	})
+
+	t.Run("Intersect a world with  a ray", func(t *testing.T) {
+		w1 := NewDefaultWorld()
+		r1 := NewRay(NewPoint(0, 0, -5), NewVector(0, 0, 1))
+		xs := IntersectWorld(w1, r1)
+
+		require.EqualValues(t, 4, xs.Len())
 	})
 
 }
