@@ -1,7 +1,15 @@
 package rt
 
 func ShadeHit(world *World, computations *Computations) Color {
-	return NewColor(0, 0, 0)
+	var (
+		material = computations.Shape().Material()
+		light    = world.Light()
+		position = computations.Point()
+		eye      = computations.Eye()
+		normal   = computations.Normal()
+	)
+	color := Lighting(material, light, position, eye, normal)
+	return color
 }
 
 func NewWorld() *World {
