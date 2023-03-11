@@ -48,6 +48,10 @@ func Lighting(m Material, light PointLight, position Point, eye Vector, normal V
 	return ambient.Add(diffuse).Add(specular)
 }
 
+func NewBlankMaterial() Material {
+	return Material{}
+}
+
 func NewMaterial(color Color, ambient, diffuse, specular, shininess Value) Material {
 	return Material{
 		color:     color,

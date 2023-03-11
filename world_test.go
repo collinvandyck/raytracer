@@ -11,7 +11,25 @@ func TestWorld(t *testing.T) {
 	t.Run("Creating a world", func(t *testing.T) {
 		w1 := NewWorld()
 		require.Len(t, w1.Shapes(), 0)
-		require.Len(t, w1.Lights(), 0)
+		require.Nil(t, w1.Light())
+	})
+
+	t.Run("The default world", func(t *testing.T) {
+		l1 := NewPointLight(NewPoint(-10, 10, -10), NewColor(1, 1, 1))
+		s1 := NewSphere()
+		m1 := NewBlankMaterial()
+		m1.SetColor(NewColor(0.8, 1.0, 0.6))
+		m1.SetDiffuse(0.7)
+		m1.SetSpecular(0.2)
+		s1.SetMaterial(m1)
+		s2 := NewSphere()
+		s2.SetTransform(Scaling(0.5, 0.5, 0.5))
+
+		w1 := DefaultWorld()
+		equalLight(t, l1, w1.Light())
+		require.Len(t, w1.Shapes(), 2)
+		require.Contains(t, w1.Shapes(), s1)
+		require.Contains(t, w1.Shapes(), s2)
 	})
 
 }

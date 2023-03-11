@@ -75,3 +75,8 @@ func equalMaterial(t *testing.T, m1, m2 Material) {
 	t.Helper()
 	require.True(t, m1.Equal(m2), "Expected %s to equal %s", m2, m1)
 }
+
+func equalLight(t *testing.T, l1, l2 *PointLight) {
+	t.Helper()
+	require.True(t, l1.Equal(l2), "Expected %s to equal %s", l2, l1)
+}
