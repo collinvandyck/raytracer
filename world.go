@@ -1,17 +1,5 @@
 package rt
 
-func IntersectWorld(world *World, ray Ray) Intersections {
-	res := NewIntersections()
-	shapes := world.Shapes()
-	for i := 0; i < len(shapes); i++ {
-		shape := shapes[i]
-		xs := shape.Intersect(ray)
-		res.AddAll(xs)
-	}
-	res.Sort()
-	return res
-}
-
 func NewWorld() *World {
 	return &World{}
 }

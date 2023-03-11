@@ -2,8 +2,78 @@ package rt
 
 import (
 	"fmt"
+	"math"
 	"sort"
 )
+
+type Computations struct {
+	shape   Shape
+	point   Point
+	eyev    Vector
+	normalv Vector
+	value   Value
+}
+
+func PrepareComputations(i Intersection, ray Ray) Computations {
+	return Computations{}
+}
+
+func (c *Computations) Value() Value {
+	return c.value
+}
+
+func (c *Computations) Shape() Shape {
+	return c.shape
+}
+
+func (c *Computations) Point() Point {
+	return c.point
+}
+
+func (c *Computations) Eye() Vector {
+	return c.eyev
+}
+
+func (c *Computations) Normal() Vector {
+	return c.normalv
+}
+
+func IntersectWorld(world *World, ray Ray) Intersections {
+	res := NewIntersections()
+	shapes := world.Shapes()
+	for i := 0; i < len(shapes); i++ {
+		shape := shapes[i]
+		xs := shape.Intersect(ray)
+		res.AddAll(xs)
+	}
+	res.Sort()
+	return res
+}
+
+func IntersectSphere(sphere *Sphere, ray Ray) Intersections {
+	// transform the ray into object coordinates
+	ray = ray.Transform(sphere.GetInverseTransform())
+
+	// the vector from the sphere's center to the ray origin
+	sphereToRay := ray.Origin().SubtractPoint(sphere.Point())
+
+	a := ray.Direction().Dot(ray.Direction())
+	b := 2 * ray.Direction().Dot(sphereToRay)
+	c := sphereToRay.Dot(sphereToRay) - 1
+
+	discriminant := b*b - 4*a*c
+	if discriminant < 0 {
+		// there was no intersection
+		return nil
+	}
+
+	t1 := (-b - math.Sqrt(discriminant)) / (2 * a)
+	t2 := (-b + math.Sqrt(discriminant)) / (2 * a)
+
+	i1 := NewIntersection(t1, sphere)
+	i2 := NewIntersection(t2, sphere)
+	return NewIntersections(i1, i2)
+}
 
 var noIntersection Intersection
 

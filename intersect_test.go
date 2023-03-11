@@ -107,4 +107,17 @@ func TestIntersect(t *testing.T) {
 		equalIntersection(t, i4, h1)
 	})
 
+	t.Run("Precomputing the state of an intersection", func(t *testing.T) {
+		r1 := NewRay(NewPoint(0, 0, -5), NewVector(0, 0, 1))
+		s1 := NewSphere()
+		i1 := NewIntersection(4, s1)
+		p1 := PrepareComputations(i1, r1)
+
+		equalValue(t, i1.Value(), p1.Value())
+		equalShape(t, s1, p1.Shape())
+		equalPoint(t, NewPoint(0, 0, -1), p1.Point())
+		equalVector(t, NewVector(0, 0, -1), p1.Eye())
+		equalVector(t, NewVector(0, 0, -1), p1.Normal())
+	})
+
 }
