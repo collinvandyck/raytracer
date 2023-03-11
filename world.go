@@ -1,5 +1,9 @@
 package rt
 
+func ShadeHit(world *World, computations *Computations) Color {
+	return NewColor(0, 0, 0)
+}
+
 func NewWorld() *World {
 	return &World{}
 }
@@ -27,6 +31,10 @@ type World struct {
 
 func (w *World) Shapes() []Shape {
 	return w.shapes
+}
+
+func (w *World) Shape(i int) Shape {
+	return w.shapes[i]
 }
 
 func (w *World) Light() *PointLight {

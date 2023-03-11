@@ -30,6 +30,7 @@ func TestWorld(t *testing.T) {
 		require.Len(t, w1.Shapes(), 2)
 		require.Contains(t, w1.Shapes(), s1)
 		require.Contains(t, w1.Shapes(), s2)
+		require.EqualValues(t, []Shape{s1, s2}, w1.Shapes())
 	})
 
 	t.Run("Intersect a world with  a ray", func(t *testing.T) {
@@ -42,6 +43,16 @@ func TestWorld(t *testing.T) {
 		require.EqualValues(t, 4.5, xs.Get(1).Value())
 		require.EqualValues(t, 5.5, xs.Get(2).Value())
 		require.EqualValues(t, 6, xs.Get(3).Value())
+	})
+
+	t.Run("Shading an intersection", func(t *testing.T) {
+		w1 := NewDefaultWorld()
+		r1 := NewRay(NewPoint(0, 0, -5), NewVector(0, 0, 1))
+		s1 := w1.Shape(0)
+		i1 := NewIntersection(4, s1)
+		cs := PrepareComputations(i1, r1)
+		c1 := ShadeHit(w1, cs)
+		equalColor(t, NewColor(0.38066, 0.47583, 0.2855), c1)
 	})
 
 }
