@@ -26,6 +26,12 @@ func PrepareComputations(i Intersection, ray Ray) *Computations {
 	res.eyev = ray.Direction().Negate()
 	res.normalv = res.shape.NormalAt(res.point)
 
+	if res.normalv.Dot(res.eyev) < 0 {
+		// the normal is pointing away from the eye
+		res.inside = true
+		res.normalv = res.normalv.Negate()
+	}
+
 	return res
 }
 
