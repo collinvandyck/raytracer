@@ -12,6 +12,7 @@ type Computations struct {
 	eyev    Vector
 	normalv Vector
 	value   Value
+	inside  bool
 }
 
 func PrepareComputations(i Intersection, ray Ray) *Computations {
@@ -46,6 +47,10 @@ func (c *Computations) Eye() Vector {
 
 func (c *Computations) Normal() Vector {
 	return c.normalv
+}
+
+func (c *Computations) Inside() bool {
+	return c.inside
 }
 
 func IntersectWorld(world *World, ray Ray) Intersections {
