@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"rt"
 	"rt/image"
@@ -9,14 +10,18 @@ import (
 func main() {
 	const canvasPixels = 1024
 	const scale = 0.015
+	count := 0
 	var cvs []*rt.Canvas
 	for s := 1.0; s >= 0; s -= scale {
+		count++
 		canvas := render(canvasPixels, s)
 		cvs = append(cvs, canvas)
 	}
 	for i := len(cvs) - 1; i >= 0; i-- {
+		count++
 		cvs = append(cvs, cvs[i])
 	}
+	fmt.Println("Count:", count)
 	err := image.WriteGIFTo(0, cvs, "squish.gif")
 	if err != nil {
 		log.Fatal(err)
