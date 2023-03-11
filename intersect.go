@@ -14,8 +14,19 @@ type Computations struct {
 	value   Value
 }
 
-func PrepareComputations(i Intersection, ray Ray) Computations {
-	return Computations{}
+func PrepareComputations(i Intersection, ray Ray) *Computations {
+	res := &Computations{}
+
+	// copy the intersection's properties, for convenience
+	res.value = i.Value()
+	res.shape = i.Shape()
+
+	// precompute useful values
+	res.point = ray.Position(res.value)
+	res.eyev = ray.Direction().Negate()
+	res.normalv = res.shape.NormalAt(res.point)
+
+	return res
 }
 
 func (c *Computations) Value() Value {
