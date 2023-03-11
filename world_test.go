@@ -17,7 +17,7 @@ func TestWorld(t *testing.T) {
 	t.Run("The default world", func(t *testing.T) {
 		l1 := NewPointLight(NewPoint(-10, 10, -10), NewColor(1, 1, 1))
 		s1 := NewSphere()
-		m1 := NewBlankMaterial()
+		m1 := DefaultMaterial()
 		m1.SetColor(NewColor(0.8, 1.0, 0.6))
 		m1.SetDiffuse(0.7)
 		m1.SetSpecular(0.2)
