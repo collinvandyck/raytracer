@@ -10,7 +10,7 @@ type Material struct {
 	shininess Value
 }
 
-func Lighting(m Material, light PointLight, position Point, eye Vector, normal Vector) Color {
+func Lighting(m Material, light *PointLight, position Point, eye Vector, normal Vector) Color {
 	// combine the material color with the light's color/intensity
 	effectiveColor := m.Color().Multiply(light.Intensity())
 
