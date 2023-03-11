@@ -19,10 +19,26 @@ func Hit(xs Intersections) (Intersection, bool) {
 type Intersections []Intersection
 
 func NewIntersections(xs ...Intersection) Intersections {
+	res := Intersections(xs)
+	res.Sort()
+	return res
+}
+
+func (xs Intersections) Sort() {
+	if len(xs) == 0 {
+		return
+	}
 	sort.Slice(xs, func(i, j int) bool {
 		return xs[i].Value() < xs[j].Value()
 	})
-	return xs
+}
+
+func (i *Intersections) Add(x Intersection) {
+	*i = append(*i, x)
+}
+
+func (i *Intersections) AddAll(xs Intersections) {
+	*i = append(*i, xs...)
 }
 
 func (i Intersections) Len() int {

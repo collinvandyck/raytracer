@@ -38,6 +38,10 @@ func TestWorld(t *testing.T) {
 		xs := IntersectWorld(w1, r1)
 
 		require.EqualValues(t, 4, xs.Len())
+		require.EqualValues(t, 4, xs.Get(0).Value())
+		require.EqualValues(t, 4.5, xs.Get(1).Value())
+		require.EqualValues(t, 5.5, xs.Get(2).Value())
+		require.EqualValues(t, 6, xs.Get(3).Value())
 	})
 
 }

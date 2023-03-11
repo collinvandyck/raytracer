@@ -52,6 +52,10 @@ func NewSphere() *Sphere {
 	}
 }
 
+func (s *Sphere) Intersect(r Ray) Intersections {
+	return IntersectSphere(s, r)
+}
+
 func (s *Sphere) NormalAt(point Point) Vector {
 	return NormalAtSphere(s, point)
 }
