@@ -1,5 +1,7 @@
 package rt
 
+import "fmt"
+
 // from: where you want the eye to be in the scene
 // to  : where you want to look
 // up  : which direction is "up"
@@ -23,6 +25,8 @@ func ViewTransform(from Point, to Point, up Vector) Matrix {
 	o.Set(2, 1, -forward.Y())
 	o.Set(2, 2, -forward.Z())
 	o.Set(3, 3, 1)
+
+	fmt.Printf("orientation:\n%s", o)
 
 	// translate to move the scene into place
 	res := o.Multiply(Translation(-from.X(), -from.Y(), -from.Z()))
