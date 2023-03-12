@@ -1,19 +1,39 @@
 package rt
 
+import "math"
+
 type Camera struct {
-	hsize     int
-	vsize     int
-	fov       Value
-	transform Matrix
-	pixelSize Value
+	hsize      int
+	vsize      int
+	fov        Value
+	transform  Matrix
+	pixelSize  Value
+	halfWidth  Value
+	halfHeight Value
 }
 
 func NewCamera(hsize, vsize int, fov Value) *Camera {
+	var (
+		halfView   = math.Tan(fov / 2)
+		aspect     = Value(hsize) / Value(vsize)
+		halfWidth  = halfView
+		halfHeight = halfView
+	)
+	if hsize > vsize {
+		halfHeight = halfView / aspect
+	}
+	if vsize > hsize {
+		halfWidth = halfView / aspect
+	}
+	pixelSize := (halfWidth * 2) / Value(hsize)
 	return &Camera{
-		hsize:     hsize,
-		vsize:     vsize,
-		fov:       fov,
-		transform: MatrixIdentity4x4,
+		hsize:      hsize,
+		vsize:      vsize,
+		fov:        fov,
+		transform:  MatrixIdentity4x4,
+		halfWidth:  halfWidth,
+		halfHeight: halfHeight,
+		pixelSize:  pixelSize,
 	}
 }
 
