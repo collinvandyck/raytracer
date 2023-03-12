@@ -69,7 +69,7 @@ func TestWorld(t *testing.T) {
 	t.Run("The color when a ray misses", func(t *testing.T) {
 		w1 := NewDefaultWorld()
 		r1 := NewRay(NewPoint(0, 0, -5), NewVector(0, 1, 0))
-		c1 := ColorAt(w1, r1)
+		c1 := w1.ColorAt(r1)
 		equalColor(t, NewColor(0, 0, 0), c1)
 	})
 

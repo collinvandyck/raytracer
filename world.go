@@ -41,6 +41,10 @@ type World struct {
 	light  *PointLight
 }
 
+func (w *World) ColorAt(ray Ray) Color {
+	return ColorAt(w, ray)
+}
+
 func (w *World) Shapes() []Shape {
 	return w.shapes
 }
