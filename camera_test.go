@@ -38,4 +38,20 @@ func TestCamera(t *testing.T) {
 		equalVector(t, NewVector(0, 0, -1), ray.Direction())
 	})
 
+	t.Run("Constructing a ray through a corner of the canvas", func(t *testing.T) {
+		c := NewCamera(201, 101, Pi/2)
+		ray := c.RayForPixel(0, 0)
+		equalPoint(t, NewPoint(0, 0, 0), ray.Origin())
+		equalVector(t, NewVector(0.66519, 0.33259, -0.66851), ray.Direction())
+	})
+
+	t.Run("Constructing a ray when the camera is transformed", func(t *testing.T) {
+		c := NewCamera(201, 101, Pi/2)
+		xf := RotationY(Pi / 4).Multiply(Translation(0, -2, 5))
+		c.SetTransform(xf)
+		ray := c.RayForPixel(100, 50)
+		equalPoint(t, NewPoint(0, 2, -5), ray.Origin())
+		equalVector(t, NewVector(Sqrt2/2, 0, -Sqrt2/2), ray.Direction())
+	})
+
 }

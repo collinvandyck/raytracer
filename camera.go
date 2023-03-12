@@ -60,6 +60,10 @@ func (c *Camera) Transform() Matrix {
 	return c.transform
 }
 
+func (c *Camera) SetTransform(m Matrix) {
+	c.transform = m
+}
+
 func (c *Camera) PixelSize() Value {
 	return c.pixelSize
 }
