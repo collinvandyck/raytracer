@@ -52,6 +52,10 @@ func (w *World) ColorAt(ray Ray) Color {
 	return ColorAt(w, ray)
 }
 
+func (w *World) AddShapes(shapes ...Shape) {
+	w.shapes = append(w.shapes, shapes...)
+}
+
 func (w *World) Shapes() []Shape {
 	return w.shapes
 }
