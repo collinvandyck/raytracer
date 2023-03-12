@@ -12,6 +12,7 @@ func main() {
 	floor.SetTransform(rt.Scaling(10, 0.01, 10))
 	floor.Material().SetColor(rt.NewColor(1, 0.9, 0.9))
 	floor.Material().SetSpecular(0)
+	floor.Material().SetColor(rt.NewColor(0, 0.7, 1))
 
 	// the wall on the left has the same scale and color as the
 	// floor but is also rotated and translated.
@@ -46,7 +47,7 @@ func main() {
 	middle.SetTransform(rt.Translation(-0.5, 1, 0.5))
 	middle.Material().SetColor(rt.NewColor(0.1, 1, 0.5))
 	middle.Material().SetDiffuse(0.7)
-	middle.Material().SetSpecular(0.3)
+	middle.Material().SetSpecular(0.9)
 
 	// the smaller green sphere on the right is scaled in half
 	right := rt.NewSphere()
@@ -55,6 +56,7 @@ func main() {
 	))
 	right.Material().SetDiffuse(0.7)
 	right.Material().SetSpecular(0.3)
+	right.Material().SetColor(rt.NewColor(1, 0, 0))
 
 	// the smallest sphere is scaled by a third, before being translated
 	left := rt.NewSphere()
@@ -75,7 +77,7 @@ func main() {
 	world.SetLight(rt.NewPointLight(rt.NewPoint(-10, 10, -10), rt.NewColor(1, 1, 1)))
 
 	// set up our camera
-	cam := rt.NewCamera(1024, 1024, rt.Pi/3)
+	cam := rt.NewCamera(1024, 768, rt.Pi/3)
 	camFrom := rt.NewPoint(0, 1.5, -5)
 	camTo := rt.NewPoint(0, 1, 0)
 	camUp := rt.NewVector(0, 1, 0)
