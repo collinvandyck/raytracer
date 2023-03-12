@@ -1,7 +1,14 @@
 package rt
 
 func ColorAt(world *World, ray Ray) Color {
-	return NewColor(0, 0, 0)
+	xs := IntersectWorld(world, ray)
+	hit, ok := Hit(xs)
+	if !ok {
+		return black
+	}
+	comps := PrepareComputations(hit, ray)
+	color := ShadeHit(world, comps)
+	return color
 }
 
 func ShadeHit(world *World, computations *Computations) Color {
