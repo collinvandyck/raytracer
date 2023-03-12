@@ -54,4 +54,18 @@ func TestCamera(t *testing.T) {
 		equalVector(t, NewVector(Sqrt2/2, 0, -Sqrt2/2), ray.Direction())
 	})
 
+	t.Run("Rendering a world with a camera", func(t *testing.T) {
+		var (
+			w    = NewDefaultWorld()
+			c    = NewCamera(11, 11, Pi/2)
+			from = NewPoint(0, 0, -5)
+			to   = NewPoint(0, 0, 0)
+			up   = NewVector(0, 1, 0)
+		)
+		c.SetTransform(ViewTransform(from, to, up))
+		image := c.Render(w)
+		pixel := image.PixelAt(5, 5)
+		equalColor(t, NewColor(0.38066, 0.47583, 0.2855), pixel)
+	})
+
 }

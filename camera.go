@@ -41,6 +41,10 @@ func NewCamera(hsize, vsize int, fov Value) *Camera {
 	}
 }
 
+func (c *Camera) Render(world *World) *Canvas {
+	return NewCanvas(0, 0)
+}
+
 // Compute the ray from the camera to the (x,y) pixel on the canvas
 func (c *Camera) RayForPixel(px, py int) Ray {
 	var (
