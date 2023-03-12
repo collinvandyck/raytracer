@@ -26,4 +26,9 @@ func TestCamera(t *testing.T) {
 		equalValue(t, 0.01, c.PixelSize())
 	})
 
+	t.Run("The pixel size for a vertical canvas", func(t *testing.T) {
+		c := NewCamera(125, 200, Pi/2)
+		equalValue(t, 0.01, c.PixelSize())
+	})
+
 }
