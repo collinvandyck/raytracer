@@ -10,14 +10,14 @@ func ViewTransform(from Point, to Point, up Vector) Matrix {
 	fmt.Printf("VT to:        %s\n", to)
 	fmt.Printf("VT up:        %s\n", up)
 	var (
-		forward  = to.SubtractPoint(from).Normalize()
-		normalUp = up.Normalize()
-		left     = forward.Cross(normalUp)
-		trueUp   = left.Cross(forward)
+		forward = to.SubtractPoint(from).Normalize()
+		upn     = up.Normalize()
+		left    = forward.Cross(upn)
+		trueUp  = left.Cross(forward)
 	)
 
 	fmt.Printf("VT forward:   %s\n", forward)
-	fmt.Printf("VT normalup:  %s\n", normalUp)
+	fmt.Printf("VT upn:       %s\n", upn)
 	fmt.Printf("VT left:      %s\n", left)
 	fmt.Printf("VT trueup:    %s\n", trueUp)
 
@@ -38,5 +38,7 @@ func ViewTransform(from Point, to Point, up Vector) Matrix {
 
 	// translate to move the scene into place
 	res := o.Multiply(Translation(-from.X(), -from.Y(), -from.Z()))
+
+	fmt.Printf("Res:\n%s", res)
 	return res
 }

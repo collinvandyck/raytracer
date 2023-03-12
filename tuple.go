@@ -185,18 +185,10 @@ func (v Vector) Dot(o Vector) Value {
 	return Tuple4(v).dot(Tuple4(o))
 }
 
-func fixNegativeZero(v Value) Value {
-	if v == -0.0 {
-		fmt.Println("Fixed negative zero")
-		v = 0
-	}
-	return v
-}
-
 func (v Vector) Cross(o Vector) Vector {
-	x1 := fixNegativeZero(v.y*o.z - v.z*o.y)
-	y1 := fixNegativeZero(v.z*o.x - v.x*o.z)
-	z1 := fixNegativeZero(v.x*o.y - v.y*o.x)
+	x1 := (v.y*o.z - v.z*o.y)
+	y1 := (v.z*o.x - v.x*o.z)
+	z1 := (v.x*o.y - v.y*o.x)
 	return NewVector(x1, y1, z1)
 }
 
