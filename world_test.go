@@ -85,7 +85,12 @@ func TestWorld(t *testing.T) {
 	t.Run("The color with an intersection behind the ray", func(t *testing.T) {
 		w1 := NewDefaultWorld()
 		outer := w1.Shape(0)
-		_ = outer
+		outer.Material().SetAmbient(1)
+		inner := w1.Shape(1)
+		inner.Material().SetAmbient(1)
+		ray := NewRay(NewPoint(0, 0, 0.75), NewVector(0, 0, -1))
+		c1 := w1.ColorAt(ray)
+		equalColor(t, inner.Material().Color(), c1)
 	})
 
 }
