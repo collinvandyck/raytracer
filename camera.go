@@ -9,6 +9,7 @@ type Camera struct {
 	vsize      int
 	fov        Value
 	transform  Matrix
+	inverse    Matrix
 	pixelSize  Value
 	halfWidth  Value
 	halfHeight Value
@@ -41,8 +42,27 @@ func NewCamera(hsize, vsize int, fov Value) *Camera {
 }
 
 // Compute the ray from the camera to the (x,y) pixel on the canvas
-func (c *Camera) RayForPixel(x, y int) Ray {
-	return Ray{}
+func (c *Camera) RayForPixel(px, py int) Ray {
+	var (
+		pxVal   = Value(px)
+		pyVal   = Value(py)
+		xOffset = (pxVal + 0.5) * c.pixelSize // x offset from edge of canvas to pixel center
+		yOffset = (pyVal + 0.5) * c.pixelSize // y offset from edge of canvas to pixel center
+		worldX  = c.halfWidth - xOffset       // cam looks toward -z so +x is to the left
+		worldY  = c.halfHeight - yOffset      // y still operates normally
+		canvasZ = Value(-1)                   // canvas is positioned at z-1
+		inverse = c.InverseTransform()        // we use this to move the camera
+	)
+
+	// tranform the canvas point
+	pixel := inverse.MultiplyPoint(NewPoint(worldX, worldY, canvasZ))
+
+	// transform the camera origin
+	origin := inverse.MultiplyPoint(Origin)
+
+	direction := pixel.SubtractPoint(origin).Normalize()
+	ray := NewRay(origin, direction)
+	return ray
 }
 
 func (c *Camera) HSize() int {
@@ -63,6 +83,14 @@ func (c *Camera) Transform() Matrix {
 
 func (c *Camera) SetTransform(m Matrix) {
 	c.transform = m
+	c.inverse = emptyMatrix
+}
+
+func (c *Camera) InverseTransform() Matrix {
+	if c.inverse.Empty() {
+		c.inverse = c.Transform().Inverse()
+	}
+	return c.inverse
 }
 
 func (c *Camera) PixelSize() Value {
