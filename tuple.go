@@ -186,7 +186,6 @@ func (v Vector) Dot(o Vector) Value {
 }
 
 func fixNegativeZero(v Value) Value {
-	return v
 	if v == -0.0 {
 		fmt.Println("Fixed negative zero")
 		v = 0
