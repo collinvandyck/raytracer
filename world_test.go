@@ -73,4 +73,11 @@ func TestWorld(t *testing.T) {
 		equalColor(t, NewColor(0, 0, 0), c1)
 	})
 
+	t.Run("The color when a ray hits", func(t *testing.T) {
+		w1 := NewDefaultWorld()
+		r1 := NewRay(NewPoint(0, 0, -5), NewVector(0, 0, 1))
+		c1 := w1.ColorAt(r1)
+		equalColor(t, NewColor(0.38066, 0.47583, 0.2855), c1)
+	})
+
 }
