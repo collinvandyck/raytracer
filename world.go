@@ -1,5 +1,9 @@
 package rt
 
+func ColorAt(world *World, ray Ray) Color {
+	return NewColor(0, 0, 0)
+}
+
 func ShadeHit(world *World, computations *Computations) Color {
 	var (
 		material = computations.Shape().Material()
