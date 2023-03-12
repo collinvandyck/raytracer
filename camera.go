@@ -43,6 +43,13 @@ func NewCamera(hsize, vsize int, fov Value) *Camera {
 
 func (c *Camera) Render(world *World) *Canvas {
 	canvas := NewCanvas(c.hsize, c.vsize)
+	for y := 0; y < c.vsize-1; y++ {
+		for x := 0; x < c.hsize-1; x++ {
+			ray := c.RayForPixel(x, y)
+			color := world.ColorAt(ray)
+			canvas.WritePixel(x, y, color)
+		}
+	}
 	return canvas
 }
 
