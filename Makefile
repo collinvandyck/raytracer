@@ -43,10 +43,15 @@ shade:
 	go run ./cmd/shade
 	open shade.png
 
-.PHONY: shade
+.PHONY: squishgif
 squishgif:
 	go run ./cmd/squishgif
 	open -a Firefox squish.gif
+
+.PHONY: camera
+camera:
+	go run ./cmd/camera
+	open -a Firefox camera.png
 
 .PHONY: table
 table:
