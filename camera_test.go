@@ -21,4 +21,9 @@ func TestCamera(t *testing.T) {
 		equalMatrix(t, MatrixIdentity4x4, c.Transform())
 	})
 
+	t.Run("The pixel size for a horizontal canvas", func(t *testing.T) {
+		c := NewCamera(200, 125, Pi/2)
+		equalValue(t, 0.01, c.PixelSize())
+	})
+
 }

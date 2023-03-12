@@ -5,6 +5,7 @@ type Camera struct {
 	vsize     int
 	fov       Value
 	transform Matrix
+	pixelSize Value
 }
 
 func NewCamera(hsize, vsize int, fov Value) *Camera {
@@ -30,4 +31,8 @@ func (c *Camera) FOV() Value {
 
 func (c *Camera) Transform() Matrix {
 	return c.transform
+}
+
+func (c *Camera) PixelSize() Value {
+	return c.pixelSize
 }
