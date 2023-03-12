@@ -6,9 +6,12 @@ import "fmt"
 // to  : where you want to look
 // up  : which direction is "up"
 func ViewTransform(from Point, to Point, up Vector) Matrix {
-	fmt.Printf("VT from:      %s\n", from)
-	fmt.Printf("VT to:        %s\n", to)
-	fmt.Printf("VT up:        %s\n", up)
+	debug := false
+	if debug {
+		fmt.Printf("VT from:      %s\n", from)
+		fmt.Printf("VT to:        %s\n", to)
+		fmt.Printf("VT up:        %s\n", up)
+	}
 	var (
 		forward = to.SubtractPoint(from).Normalize()
 		upn     = up.Normalize()
@@ -16,10 +19,12 @@ func ViewTransform(from Point, to Point, up Vector) Matrix {
 		trueUp  = left.Cross(forward)
 	)
 
-	fmt.Printf("VT forward:   %s\n", forward)
-	fmt.Printf("VT upn:       %s\n", upn)
-	fmt.Printf("VT left:      %s\n", left)
-	fmt.Printf("VT trueup:    %s\n", trueUp)
+	if debug {
+		fmt.Printf("VT forward:   %s\n", forward)
+		fmt.Printf("VT upn:       %s\n", upn)
+		fmt.Printf("VT left:      %s\n", left)
+		fmt.Printf("VT trueup:    %s\n", trueUp)
+	}
 
 	// orientation
 	o := NewMatrix(4, 4)
@@ -34,11 +39,15 @@ func ViewTransform(from Point, to Point, up Vector) Matrix {
 	o.Set(2, 2, -forward.Z())
 	o.Set(3, 3, 1)
 
-	fmt.Printf("Orientation:\n%s", o)
+	if debug {
+		fmt.Printf("Orientation:\n%s", o)
+	}
 
 	// translate to move the scene into place
 	res := o.Multiply(Translation(-from.X(), -from.Y(), -from.Z()))
 
-	fmt.Printf("Res:\n%s", res)
+	if debug {
+		fmt.Printf("Res:\n%s", res)
+	}
 	return res
 }

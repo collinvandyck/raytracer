@@ -23,7 +23,7 @@ func TestTransformations(t *testing.T) {
 		to := NewPoint(0, 0, 1)
 		up := NewVector(0, 1, 0)
 		m1 := ViewTransform(from, to, up)
-		equalMatrix(t, Scaling(-1, -1, -1), m1)
+		equalMatrix(t, Scaling(-1, 1, -1), m1)
 	})
 
 	// Eye at a point +8 on the z axis looking at the origin translates the world
