@@ -31,4 +31,11 @@ func TestCamera(t *testing.T) {
 		equalValue(t, 0.01, c.PixelSize())
 	})
 
+	t.Run("Constructing a ray through the center of the canvas", func(t *testing.T) {
+		c := NewCamera(201, 101, Pi/2)
+		ray := c.RayForPixel(100, 50)
+		equalPoint(t, NewPoint(0, 0, 0), ray.Origin())
+		equalVector(t, NewVector(0, 0, -1), ray.Direction())
+	})
+
 }

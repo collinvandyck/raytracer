@@ -40,6 +40,10 @@ func NewCamera(hsize, vsize int, fov Value) *Camera {
 	}
 }
 
+func (c *Camera) RayForPixel(x, y int) Ray {
+	return Ray{}
+}
+
 func (c *Camera) HSize() int {
 	return c.hsize
 }

@@ -137,6 +137,9 @@ func (p Point) Z() Value {
 }
 
 func (p Point) String() string {
+	if p.w != 1 {
+		return fmt.Sprintf("InvalidPoint(%s %s %s)", formatFloat(p.x), formatFloat(p.y), formatFloat(p.z))
+	}
 	return fmt.Sprintf("Point(%s %s %s)", formatFloat(p.x), formatFloat(p.y), formatFloat(p.z))
 }
 
