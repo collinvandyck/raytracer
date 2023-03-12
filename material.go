@@ -10,7 +10,7 @@ type Material struct {
 	shininess Value
 }
 
-func Lighting(m Material, light *PointLight, position Point, eye Vector, normal Vector) Color {
+func Lighting(m *Material, light *PointLight, position Point, eye Vector, normal Vector) Color {
 	// combine the material color with the light's color/intensity
 	effectiveColor := m.Color().Multiply(light.Intensity())
 
@@ -52,8 +52,8 @@ func NewBlankMaterial() Material {
 	return Material{}
 }
 
-func NewMaterial(color Color, ambient, diffuse, specular, shininess Value) Material {
-	return Material{
+func NewMaterial(color Color, ambient, diffuse, specular, shininess Value) *Material {
+	return &Material{
 		color:     color,
 		ambient:   ambient,
 		diffuse:   diffuse,
@@ -62,7 +62,7 @@ func NewMaterial(color Color, ambient, diffuse, specular, shininess Value) Mater
 	}
 }
 
-func DefaultMaterial() Material {
+func DefaultMaterial() *Material {
 	color := NewColor(1, 1, 1)
 	ambient := 0.1
 	diffuse := 0.9
@@ -111,7 +111,7 @@ func (m *Material) SetShininess(v Value) {
 	m.shininess = v
 }
 
-func (m Material) Equal(o Material) bool {
+func (m Material) Equal(o *Material) bool {
 	if !m.Color().Equal(o.Color()) {
 		return false
 	}

@@ -80,4 +80,12 @@ func TestWorld(t *testing.T) {
 		equalColor(t, NewColor(0.38066, 0.47583, 0.2855), c1)
 	})
 
+	// ray is inside the outer sphere, but outside the inner sphere, and pointing
+	// at the inner sphere
+	t.Run("The color with an intersection behind the ray", func(t *testing.T) {
+		w1 := NewDefaultWorld()
+		outer := w1.Shape(0)
+		_ = outer
+	})
+
 }

@@ -14,7 +14,7 @@ type Sphere struct {
 	transform         Matrix
 	inverse           Matrix
 	transposedInverse Matrix
-	material          Material
+	material          *Material
 }
 
 func NewSphere() *Sphere {
@@ -76,11 +76,11 @@ func (s *Sphere) Point() Point {
 	return NewPoint(0, 0, 0)
 }
 
-func (s *Sphere) Material() Material {
+func (s *Sphere) Material() *Material {
 	return s.material
 }
 
-func (s *Sphere) SetMaterial(m Material) {
+func (s *Sphere) SetMaterial(m *Material) {
 	s.material = m
 }
 
