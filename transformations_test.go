@@ -33,7 +33,7 @@ func TestTransformations(t *testing.T) {
 		to := NewPoint(0, 0, 0)
 		up := NewVector(0, 1, 0)
 		m1 := ViewTransform(from, to, up)
-		equalMatrix(t, Scaling(0, 0, -8), m1)
+		equalMatrix(t, Translation(0, 0, -8), m1)
 	})
 
 	t.Run("An arbitrary view transformation", func(t *testing.T) {
