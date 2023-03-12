@@ -1,16 +1,18 @@
 package rt
 
 type Camera struct {
-	hsize int
-	vsize int
-	fov   Value
+	hsize     int
+	vsize     int
+	fov       Value
+	transform Matrix
 }
 
 func NewCamera(hsize, vsize int, fov Value) *Camera {
 	return &Camera{
-		hsize: hsize,
-		vsize: vsize,
-		fov:   fov,
+		hsize:     hsize,
+		vsize:     vsize,
+		fov:       fov,
+		transform: MatrixIdentity4x4,
 	}
 }
 
@@ -24,4 +26,8 @@ func (c *Camera) VSize() int {
 
 func (c *Camera) FOV() Value {
 	return c.fov
+}
+
+func (c *Camera) Transform() Matrix {
+	return c.transform
 }

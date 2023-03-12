@@ -18,6 +18,7 @@ func TestCamera(t *testing.T) {
 		require.Equal(t, 160, c.HSize())
 		require.Equal(t, 120, c.VSize())
 		equalValue(t, Pi/2, c.FOV())
+		equalMatrix(t, MatrixIdentity4x4, c.Transform())
 	})
 
 }
