@@ -81,7 +81,7 @@ func main() {
 	// set up our camera
 	cam := rt.NewCamera(1024, 768, rt.Pi/3)
 	camFrom := rt.NewPoint(0, 1.5, -5)
-	//camFrom = rt.NewPoint(0, 7.5, -15)
+	//camFrom = rt.NewPoint(10, 15.5, -25)
 	camTo := rt.NewPoint(0, 1, 0)
 	camUp := rt.NewVector(0, 1, 0)
 	cam.SetTransform(rt.ViewTransform(camFrom, camTo, camUp))
