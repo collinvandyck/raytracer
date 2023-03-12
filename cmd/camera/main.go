@@ -75,7 +75,7 @@ func main() {
 	world.SetLight(rt.NewPointLight(rt.NewPoint(-10, 10, -10), rt.NewColor(1, 1, 1)))
 
 	// set up our camera
-	cam := rt.NewCamera(500, 250, rt.Pi/3)
+	cam := rt.NewCamera(1024, 1024, rt.Pi/3)
 	camFrom := rt.NewPoint(0, 1.5, -5)
 	camTo := rt.NewPoint(0, 1, 0)
 	camUp := rt.NewVector(0, 1, 0)
