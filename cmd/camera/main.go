@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"rt"
 	"rt/image"
+	"time"
 )
 
 func main() {
@@ -79,11 +81,19 @@ func main() {
 	// set up our camera
 	cam := rt.NewCamera(1024, 768, rt.Pi/3)
 	camFrom := rt.NewPoint(0, 1.5, -5)
+	//camFrom = rt.NewPoint(0, 7.5, -15)
 	camTo := rt.NewPoint(0, 1, 0)
 	camUp := rt.NewVector(0, 1, 0)
 	cam.SetTransform(rt.ViewTransform(camFrom, camTo, camUp))
 
+	start := time.Now()
 	canvas := cam.Render(world)
+	dur := time.Since(start)
+	fmt.Printf("Total time: %s\n", dur.Truncate(time.Millisecond))
+	pixels := cam.HSize() * cam.VSize()
+	durPixel := float64(dur) / float64(pixels)
+	fmt.Printf("Per pixel : %s\n", time.Duration(durPixel))
+
 	err := image.WritePNGTo(canvas, "camera.png")
 	if err != nil {
 		log.Fatal(err)
